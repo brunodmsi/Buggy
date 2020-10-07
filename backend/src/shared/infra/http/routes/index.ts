@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 
+import usersRouter from '@modules/users/infra/http/routes/users.routes';
+
 const router = Router();
 
-router.get('/', async (request: Request, response: Response) => {
-  return response.send('hello');
-});
+router.use('/users', usersRouter);
 
 export default router;

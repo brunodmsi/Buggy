@@ -1,0 +1,24 @@
+{
+  "name": "buggy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/brunodmsi/Buggy.git",
+  "author": "Bruno De Masi <brunodemasi1@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^4.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test",
+      "...": "..."
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
