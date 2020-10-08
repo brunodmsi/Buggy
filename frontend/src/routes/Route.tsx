@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { 
   Route as ReactDOMRoute,
@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import DefaultLayout from '../pages/_layouts/Default';
+import AuthLayout from '../pages/_layouts/Auth';
 
 interface RouteProps extends ReactDOMRouteProps {
   isPrivate?: boolean;
@@ -18,23 +19,24 @@ const RouteWrapper: React.FC<RouteProps> = ({
   isPrivate = false,
   ...rest
 }) => {
-  const user = true;
+  const user = false;
+
+  if (!user && isPrivate)
+    return <Redirect to="/login"/>
+
+  if (user && !isPrivate)
+    return <Redirect to="/"/>
+
+  const Layout = user ? DefaultLayout : AuthLayout;
 
   return (
     <ReactDOMRoute
       {...rest}
-      render={({ location }) => {
-        return isPrivate === !!user ? (
-          <DefaultLayout>
-            <Component />
-          </DefaultLayout>
-        ) : (
-          <Redirect to={{ 
-            pathname: isPrivate ? '/error' : '/', 
-            state: { from: location } 
-          }} />
-        )
-      }}
+      render={props => (
+        <Layout>
+          <Component />
+        </Layout>
+      )}
     />
   )
 }
