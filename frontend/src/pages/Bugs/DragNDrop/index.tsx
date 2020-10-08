@@ -45,9 +45,11 @@ const DragNDrop: React.FC<DragNDropProps & OtherProps> = ({ data, openModal }) =
   const dragItem = useRef<ItemParams>();
   const dragNode = useRef();
 
+  useEffect(() => { console.log(dragging); console.log() })
+
   const handleDragEnter = (event: React.DragEvent, targetItem: ItemParams) => {
     const currentItem = dragItem.current as ItemParams;
-    console.log(currentItem);
+    // console.log(currentItem);
 
     if (event.target !== dragNode.current) {
       setList(oldList => {
