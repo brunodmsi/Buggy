@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { shade, darken } from 'polished';
+import { shade } from 'polished';
 
 export const Container = styled.div`
   display: flex;

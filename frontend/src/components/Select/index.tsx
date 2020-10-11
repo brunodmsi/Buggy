@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 
 import { Container, Option } from './styles';
 
@@ -13,10 +13,10 @@ interface SelectProps {
   backgroundAffectsColor?: boolean;
 }
 
-const Select: React.FC<SelectProps> = ({ 
-  name, 
-  options, 
-  backgroundAffectsColor = false 
+const Select: React.FC<SelectProps> = ({
+  name,
+  options,
+  backgroundAffectsColor = false
 }) => {
   const [selected, setSelected] = useState(() => {
     const defaultSelected = options.find(option => option.selected);
@@ -28,18 +28,18 @@ const Select: React.FC<SelectProps> = ({
   const selectedColor = options.find(option => option.value === selected)?.backColor;
 
   return (
-    <Container 
-      backgroundColor={selectedColor} 
+    <Container
+      backgroundColor={selectedColor}
       backgroundAffectsColor={backgroundAffectsColor}
     >
-      <select 
-        name={name} 
+      <select
+        name={name}
         defaultValue={selected}
         onChange={(e) => setSelected(e.target.value)}
       >
         {options.map(option => (
-          <Option 
-            value={option.value} 
+          <Option
+            value={option.value}
             backgroundColor={option.backColor}
           >
             {option.label}
