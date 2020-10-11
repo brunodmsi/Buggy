@@ -24,6 +24,9 @@ export const SideContent = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 
   background-color: #5F30E2;
   h1, h2 { color: #fff; }
@@ -74,5 +77,21 @@ export const SideContent = styled.div`
     bottom: 0;
     position: absolute;
     z-index: -1;
+  }
+
+  @media (max-width: 1050px) {
+    padding: 60px;
+
+    h1 {
+      font-size: 40px;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+  }
+
+  @media (max-width: 850px) {
+    display: none;
   }
 `;
