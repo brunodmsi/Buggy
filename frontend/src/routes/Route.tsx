@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { 
+import {
   Route as ReactDOMRoute,
   RouteProps as ReactDOMRouteProps,
   Redirect
@@ -21,15 +21,15 @@ const RouteWrapper: React.FC<RouteProps> = ({
   isPrivate = false,
   ...rest
 }) => {
-  const { user } = useAuth();
+  const { isSigned } = useAuth();
 
-  if (!user && isPrivate)
+  if (!isSigned && isPrivate)
     return <Redirect to="/login"/>
 
-  if (user && !isPrivate)
+  if (isSigned && !isPrivate)
     return <Redirect to="/"/>
 
-  const Layout = user ? DefaultLayout : AuthLayout;
+  const Layout = isSigned ? DefaultLayout : AuthLayout;
 
   return (
     <ReactDOMRoute
