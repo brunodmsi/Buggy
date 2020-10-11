@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { 
   Route as ReactDOMRoute,
   RouteProps as ReactDOMRouteProps,
   Redirect
 } from 'react-router-dom';
+
+import { useAuth } from '../hooks/auth';
 
 import DefaultLayout from '../pages/_layouts/Default';
 import AuthLayout from '../pages/_layouts/Auth';
@@ -19,7 +21,7 @@ const RouteWrapper: React.FC<RouteProps> = ({
   isPrivate = false,
   ...rest
 }) => {
-  const user = false;
+  const { user } = useAuth();
 
   if (!user && isPrivate)
     return <Redirect to="/login"/>
