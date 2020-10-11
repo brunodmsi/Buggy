@@ -4,15 +4,18 @@ import { shade } from 'polished';
 export const Container = styled.nav`
   display: flex;
   height: 100vh;
-  min-width: 200px;
+  /* min-width: 200px; */
   width: 200px;
-  position: relative;
+  position: fixed;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  margin-right: 200px;
+  z-index: 1;
+  overflow: hidden;
 
   background-color: #fff;
   flex-direction: column;
   color: #fefefe;
-  
+
   header {
     display: flex;
     align-items: center;
@@ -48,7 +51,7 @@ export const Container = styled.nav`
         svg, p {
           color: #fff;
         }
-        
+
         &::before {
           content: '';
           position: absolute;
@@ -63,7 +66,7 @@ export const Container = styled.nav`
       p {
         font-weight: 500;
       }
-      
+
       svg {
         /* background-color: #fefefe; */
         color: #5F30E2;
