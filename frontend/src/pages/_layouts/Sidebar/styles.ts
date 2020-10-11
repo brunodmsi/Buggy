@@ -4,7 +4,8 @@ import { shade } from 'polished';
 export const Container = styled.nav`
   display: flex;
   height: 100vh;
-  width: 300px;
+  min-width: 200px;
+  width: 200px;
   position: relative;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 
