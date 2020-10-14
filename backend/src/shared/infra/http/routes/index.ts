@@ -5,7 +5,11 @@ import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
 import profileRouter from '@modules/users/infra/http/routes/profile.routes';
 import passwordRouter from '@modules/users/infra/http/routes/password.routes';
 
+import projectsRouter from '@modules/projects/infra/http/routes/projects.routes';
+
 const router = Router();
+
+router.use('/projects', projectsRouter);
 
 router.use('/users', usersRouter);
 router.use('/sessions', sessionsRouter);
