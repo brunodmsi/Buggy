@@ -5,7 +5,7 @@ import crypto from 'crypto';
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
 interface IUploadConfig {
-  driver: 'disk';
+  driver: 's3' | 'disk';
 
   tmpFolder: string;
   uploadsFolder: string;
@@ -16,6 +16,9 @@ interface IUploadConfig {
 
   config: {
     disk: unknown;
+    aws: {
+      bucket: string;
+    };
   };
 }
 
@@ -39,5 +42,8 @@ export default {
 
   config: {
     disk: {},
+    aws: {
+      bucket: 'buggy-demasi',
+    },
   },
 } as IUploadConfig;
