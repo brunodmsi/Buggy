@@ -1,10 +1,9 @@
 import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
+import User from '@modules/users/infra/typeorm/entities/User';
 import IProjectsRepository from '../repositories/IProjectsRepository';
 import IUserProjectsRepository from '../repositories/IUserProjectsRepository';
-
-import UserProject from '../infra/typeorm/entities/UserProject';
 
 interface IRequest {
   project_id: string;
@@ -19,7 +18,7 @@ class ListUsersInProjectService {
     private userProjectsRepository: IUserProjectsRepository,
   ) {}
 
-  public async execute({ project_id }: IRequest): Promise<UserProject[]> {
+  public async execute({ project_id }: IRequest): Promise<User[]> {
     const project = await this.projectsRepository.findById(project_id);
 
     if (!project) {
@@ -30,7 +29,9 @@ class ListUsersInProjectService {
       project.id,
     );
 
-    return listUsers;
+    const users = listUsers.map(item => item.user);
+
+    return users;
   }
 }
 

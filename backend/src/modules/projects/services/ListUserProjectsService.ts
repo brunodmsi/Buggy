@@ -4,21 +4,21 @@ import AppError from '@shared/errors/AppError';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IUserProjectsRepository from '../repositories/IUserProjectsRepository';
 
-import UserProject from '../infra/typeorm/entities/UserProject';
+import Project from '../infra/typeorm/entities/Project';
 
 interface IRequest {
   user_id: string;
 }
 
 @injectable()
-class ListUsersInProjectService {
+class ListUserProjectsService {
   constructor(
     @inject('UsersRepository') private usersRepository: IUsersRepository,
     @inject('UserProjectsRepository')
     private userProjectsRepository: IUserProjectsRepository,
   ) {}
 
-  public async execute({ user_id }: IRequest): Promise<UserProject[]> {
+  public async execute({ user_id }: IRequest): Promise<Project[]> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
@@ -29,8 +29,10 @@ class ListUsersInProjectService {
       user.id,
     );
 
-    return listProjects;
+    const projects = listProjects.map(item => item.project);
+
+    return projects;
   }
 }
 
-export default ListUsersInProjectService;
+export default ListUserProjectsService;
