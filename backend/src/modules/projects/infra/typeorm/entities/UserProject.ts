@@ -4,7 +4,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToMany,
+  ManyToOne,
   JoinColumn,
 } from 'typeorm';
 
@@ -22,13 +22,13 @@ class UserProject {
   @Column()
   project_id: string;
 
-  @ManyToMany(() => User)
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToMany(() => Project)
+  @ManyToOne(() => Project)
   @JoinColumn({ name: 'project_id' })
-  project: User;
+  project: Project;
 
   @CreateDateColumn()
   created_at: Date;

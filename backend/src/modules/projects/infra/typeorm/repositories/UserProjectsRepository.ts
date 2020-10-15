@@ -19,7 +19,7 @@ class UserProjectsRepository implements IUserProjectsRepository {
   ): Promise<UserProject[]> {
     const users = await this.ormRepository.find({
       where: { project_id },
-      relations: ['ProjectUser'],
+      relations: ['user'],
     });
 
     return users;
@@ -28,7 +28,7 @@ class UserProjectsRepository implements IUserProjectsRepository {
   public async findUserProjectsById(user_id: string): Promise<UserProject[]> {
     const projects = await this.ormRepository.find({
       where: { user_id },
-      relations: ['UserProject'],
+      relations: ['project'],
     });
 
     return projects;
