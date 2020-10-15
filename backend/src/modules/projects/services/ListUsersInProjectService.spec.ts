@@ -31,7 +31,6 @@ describe('ListUsersInProject', () => {
     );
     listUsersInProject = new ListUsersInProjectService(
       fakeProjectsRepository,
-      fakeUsersRepository,
       fakeUserProjectsRepository,
     );
   });

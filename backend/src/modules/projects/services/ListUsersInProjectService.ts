@@ -16,7 +16,6 @@ class ListUsersInProjectService {
   constructor(
     @inject('ProjectsRepository')
     private projectsRepository: IProjectsRepository,
-    @inject('UsersRepository') private usersRepository: IUsersRepository,
     @inject('UserProjectsRepository')
     private userProjectsRepository: IUserProjectsRepository,
   ) {}
