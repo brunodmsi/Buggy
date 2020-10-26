@@ -24,6 +24,8 @@ class FakeBugsRepository implements IBugsRepository {
 
     Object.assign(bug, { id: uuid() }, bugData);
 
+    this.bugs.push(bug);
+
     return bug;
   }
 
