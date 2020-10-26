@@ -14,7 +14,7 @@ class BugDevelopersRepository implements IBugDevelopersRepository {
   public async listDeveloperBugsById(user_id: string): Promise<BugDeveloper[]> {
     const users = await this.ormRepository.find({
       where: { user_id },
-      relations: ['user'],
+      relations: ['bug'],
     });
 
     return users;
@@ -23,7 +23,7 @@ class BugDevelopersRepository implements IBugDevelopersRepository {
   public async listBugDevelopersById(bug_id: string): Promise<BugDeveloper[]> {
     const bugs = await this.ormRepository.find({
       where: { bug_id },
-      relations: ['bug'],
+      relations: ['user'],
     });
 
     return bugs;
