@@ -154,4 +154,39 @@ describe('AddUserToProject', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+
+  it('should not be able to add new user unless you are the owner', async () => {
+    const owner = await fakeUsersRepository.create({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123123',
+    });
+
+    const project = await createProject.execute({
+      name: 'Scient',
+      description: 'A new way of opening a bank account',
+      url: 'https://scient.demasi.dev',
+      owner_id: owner.id,
+    });
+
+    const user = await fakeUsersRepository.create({
+      name: 'John One',
+      email: 'johnone@example.com',
+      password: '123123',
+    });
+
+    await addUserToProject.execute({
+      user_email: user.email,
+      project_id: project.id,
+      auth_user_id: owner.id,
+    });
+
+    await expect(
+      addUserToProject.execute({
+        user_email: user.email,
+        project_id: project.id,
+        auth_user_id: user.id,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

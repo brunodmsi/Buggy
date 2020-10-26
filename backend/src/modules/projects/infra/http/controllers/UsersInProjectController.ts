@@ -13,7 +13,9 @@ class UsersInProjectController {
       project_id,
     });
 
-    return response.json(userProject);
+    const users = userProject.map(item => item.user);
+
+    return response.json(users);
   }
 }
 

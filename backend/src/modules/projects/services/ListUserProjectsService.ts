@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IUserProjectsRepository from '../repositories/IUserProjectsRepository';
 
-import Project from '../infra/typeorm/entities/Project';
+import UserProject from '../infra/typeorm/entities/UserProject';
 
 interface IRequest {
   user_id: string;
@@ -18,7 +18,7 @@ class ListUserProjectsService {
     private userProjectsRepository: IUserProjectsRepository,
   ) {}
 
-  public async execute({ user_id }: IRequest): Promise<Project[]> {
+  public async execute({ user_id }: IRequest): Promise<UserProject[]> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
@@ -29,9 +29,7 @@ class ListUserProjectsService {
       user.id,
     );
 
-    const projects = listProjects.map(item => item.project);
-
-    return projects;
+    return listProjects;
   }
 }
 
