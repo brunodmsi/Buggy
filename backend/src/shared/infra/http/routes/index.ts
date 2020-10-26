@@ -6,7 +6,7 @@ import profileRouter from '@modules/users/infra/http/routes/profile.routes';
 import passwordRouter from '@modules/users/infra/http/routes/password.routes';
 
 import projectsRouter from '@modules/projects/infra/http/routes';
-import bugsRouter from '@modules/bugs/infra/http/routes/bugs.routes';
+import bugsRouter from '@modules/bugs/infra/http/routes';
 
 const router = Router();
 
