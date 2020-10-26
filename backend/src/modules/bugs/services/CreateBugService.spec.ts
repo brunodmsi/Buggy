@@ -8,7 +8,7 @@ let fakeBugsRepository: FakeBugsRepository;
 let fakeProjectsRepository: FakeProjectsRepository;
 let createBug: CreateBugService;
 
-describe('CreateProject', () => {
+describe('CreateBug', () => {
   beforeEach(() => {
     fakeBugsRepository = new FakeBugsRepository();
     fakeProjectsRepository = new FakeProjectsRepository();
