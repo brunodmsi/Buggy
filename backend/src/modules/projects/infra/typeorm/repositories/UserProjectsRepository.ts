@@ -38,11 +38,11 @@ class UserProjectsRepository implements IUserProjectsRepository {
     project_id,
     user_id,
   }: IUserProjectDTO): Promise<boolean> {
-    const userInProject = await this.ormRepository.find({
+    const userInProject = await this.ormRepository.findOne({
       where: { project_id, user_id },
     });
 
-    return userInProject.length > 0;
+    return !!userInProject;
   }
 
   public async create(addUserData: IUserProjectDTO): Promise<UserProject> {
