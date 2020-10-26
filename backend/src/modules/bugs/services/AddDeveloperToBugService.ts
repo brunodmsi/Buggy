@@ -19,7 +19,7 @@ class AddDeveloperToBugService {
     private bugsRepository: IBugsRepository,
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
-    @inject('BugDevelopers')
+    @inject('BugDevelopersRepository')
     private bugDevelopersRepository: IBugDevelopersRepository,
   ) {}
 
