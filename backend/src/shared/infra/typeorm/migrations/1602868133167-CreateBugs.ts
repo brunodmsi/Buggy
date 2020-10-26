@@ -26,8 +26,17 @@ export default class CreateBugs1602868133167 implements MigrationInterface {
             type: 'varchar',
           },
           {
+            name: 'group',
+            type: 'integer',
+          },
+          {
+            name: 'status',
+            type: 'integer',
+          },
+          {
             name: 'date_limit',
             type: 'timestamp with time zone',
+            isNullable: true,
           },
           {
             name: 'project_id',

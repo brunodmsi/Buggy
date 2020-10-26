@@ -20,6 +20,12 @@ class Bug {
   @Column()
   type: string;
 
+  @Column('integer')
+  group: number;
+
+  @Column('integer')
+  status: number;
+
   @Column('timestamp with time zone')
   date_limit: Date;
 
