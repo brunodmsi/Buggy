@@ -19,7 +19,7 @@ class BugChecklist {
   title: string;
 
   @Column('simple-json')
-  items?: { text: string; done: boolean };
+  items?: Array<{ text: string; done: boolean }>;
 
   @Column()
   bug_id: string;
