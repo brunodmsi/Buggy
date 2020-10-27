@@ -39,6 +39,12 @@ class FakeBugFilesRepository implements IBugFilesRepository {
 
     return bugFile;
   }
+
+  public async deleteById(id: string): Promise<void> {
+    const findIndex = this.bugFiles.findIndex(bugFile => bugFile.id === id);
+
+    this.bugFiles.splice(findIndex, 1);
+  }
 }
 
 export default FakeBugFilesRepository;

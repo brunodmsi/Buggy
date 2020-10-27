@@ -36,6 +36,10 @@ class BugFilesRepository implements IBugFilesRepository {
   public async save(bugFile: BugFile): Promise<BugFile> {
     return this.ormRepository.save(bugFile);
   }
+
+  public async deleteById(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
 }
 
 export default BugFilesRepository;
