@@ -12,7 +12,9 @@ class FakeBugsRepository implements IBugsRepository {
   }
 
   public async findById(id: string): Promise<Bug | undefined> {
-    const bug = await this.ormRepository.findOne(id);
+    const bug = await this.ormRepository.findOne(id, {
+      relations: ['bug_developers', 'bug_files'],
+    });
 
     return bug;
   }

@@ -4,7 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+
+import BugDeveloper from './BugDeveloper';
+import BugFile from './BugFile';
 
 @Entity('bugs')
 class Bug {
@@ -31,6 +35,12 @@ class Bug {
 
   @Column()
   project_id: string;
+
+  @OneToMany(() => BugDeveloper, bugDeveloper => bugDeveloper.bug)
+  bug_developers: BugDeveloper[];
+
+  @OneToMany(() => BugFile, bugFile => bugFile.bug)
+  bug_files: Bug[];
 
   @CreateDateColumn()
   created_at: Date;
