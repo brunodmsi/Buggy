@@ -4,6 +4,6 @@ export default interface ICreateBugDTO {
   type: string;
   group: number;
   status: number;
-  date_limit: Date;
+  date_limit?: Date;
   project_id: string;
 }
