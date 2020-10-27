@@ -16,6 +16,14 @@ class FakeBugCommentsRepository implements IBugCommentsRepository {
     return findBugComment;
   }
 
+  public async findAllByBugId(id: string): Promise<BugComment[]> {
+    const findBugComments = this.bugComments.filter(
+      bugComment => bugComment.bug_id === id,
+    );
+
+    return findBugComments;
+  }
+
   public async deleteById(id: string): Promise<void> {
     const findIndex = this.bugComments.findIndex(
       bugComment => bugComment.id === id,
