@@ -36,6 +36,17 @@ class AddDeveloperToBugService {
       throw new AppError('User not found');
     }
 
+    const checkAddedDeveloper = await this.bugDevelopersRepository.checkIfDeveloperIsAlreadyAddedToBug(
+      {
+        bug_id,
+        user_id,
+      },
+    );
+
+    if (checkAddedDeveloper) {
+      throw new AppError('User is already added');
+    }
+
     const bugDeveloper = await this.bugDevelopersRepository.create({
       user_id: user.id,
       bug_id: bug.id,
