@@ -4,7 +4,10 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+
+import Bug from '@modules/bugs/infra/typeorm/entities/Bug';
 
 @Entity('projects')
 class Project {
@@ -22,6 +25,9 @@ class Project {
 
   @Column()
   owner_id: string;
+
+  @OneToMany(() => Bug, bug => bug.project)
+  bugs: Bug[];
 
   @CreateDateColumn()
   created_at: Date;
