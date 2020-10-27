@@ -16,4 +16,6 @@ bugFilesRouter.post(
   bugFileController.create,
 );
 
+bugFilesRouter.delete('/files/:bug_file_id', bugFileController.delete);
+
 export default bugFilesRouter;
