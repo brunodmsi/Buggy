@@ -47,6 +47,6 @@ export default class CreateBugFiles1603817311963 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('user_projects');
+    await queryRunner.dropTable('bug_files');
   }
 }

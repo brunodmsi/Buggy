@@ -48,6 +48,6 @@ export default class CreateBugDevelopers1603727874470
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('user_projects');
+    await queryRunner.dropTable('bug_developers');
   }
 }

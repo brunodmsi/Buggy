@@ -60,6 +60,6 @@ export default class CreateBugComments1603830726527
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('user_projects');
+    await queryRunner.dropTable('bug_comments');
   }
 }
