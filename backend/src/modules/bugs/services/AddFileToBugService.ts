@@ -31,8 +31,6 @@ class AddFileToBugService {
 
     const filename = await this.storageProvider.saveFile(bugFilename);
 
-    console.log(filename);
-
     const bugFile = await this.bugFilesRepository.create({ bug_id, filename });
 
     return bugFile;
