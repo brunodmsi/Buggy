@@ -2,7 +2,7 @@ import BugDeveloper from '../infra/typeorm/entities/BugDeveloper';
 
 import IBugDeveloperDTO from '../dtos/IBugDeveloperDTO';
 
-export default interface IBugsRepository {
+export default interface IBugDevelopersRepository {
   listDeveloperBugsById(id: string): Promise<BugDeveloper[]>;
   listBugDevelopersById(id: string): Promise<BugDeveloper[]>;
 

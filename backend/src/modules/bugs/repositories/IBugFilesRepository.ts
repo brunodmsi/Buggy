@@ -2,7 +2,7 @@ import BugFile from '../infra/typeorm/entities/BugFile';
 
 import IBugFileDTO from '../dtos/IBugFileDTO';
 
-export default interface IBugsRepository {
+export default interface IBugFilesRepository {
   findById(id: string): Promise<BugFile | undefined>;
   findAllByBugId(id: string): Promise<BugFile[]>;
 
