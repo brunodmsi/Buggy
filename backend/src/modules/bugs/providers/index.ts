@@ -9,6 +9,9 @@ import BugDevelopersRepository from '../infra/typeorm/repositories/BugDevelopers
 import IBugFilesRepository from '../repositories/IBugFilesRepository';
 import BugFilesRepository from '../infra/typeorm/repositories/BugFilesRepository';
 
+import IBugCommentsRepository from '../repositories/IBugCommentsRepository';
+import BugCommentsRepository from '../infra/typeorm/repositories/BugCommentsRepository';
+
 container.registerSingleton<IBugsRepository>('BugsRepository', BugsRepository);
 
 container.registerSingleton<IBugDevelopersRepository>(
@@ -19,4 +22,9 @@ container.registerSingleton<IBugDevelopersRepository>(
 container.registerSingleton<IBugFilesRepository>(
   'BugFilesRepository',
   BugFilesRepository,
+);
+
+container.registerSingleton<IBugCommentsRepository>(
+  'BugCommentsRepository',
+  BugCommentsRepository,
 );
