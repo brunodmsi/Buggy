@@ -34,7 +34,7 @@ class BugFile {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Expose({ name: 'filename' })
+  @Expose({ name: 'filename_url' })
   getFilenameUrl(): string | null {
     switch (uploadConfig.driver) {
       case 'disk':
