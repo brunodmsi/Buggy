@@ -20,10 +20,7 @@ describe('ListProjectBugs', () => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeBugsRepository = new FakeBugsRepository();
 
-    listProjectBugs = new ListProjectBugsService(
-      fakeBugsRepository,
-      fakeProjectsRepository,
-    );
+    listProjectBugs = new ListProjectBugsService(fakeProjectsRepository);
 
     createProject = new CreateProjectService(
       fakeProjectsRepository,
@@ -59,6 +56,8 @@ describe('ListProjectBugs', () => {
       status: 0,
       date_limit: new Date(2020, 8, 20, 11, 0),
     });
+
+    Object.assign(project, { bugs: [bug] });
 
     const listBugs = await listProjectBugs.execute({
       project_id: project.id,
