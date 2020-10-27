@@ -14,6 +14,12 @@ class FakeProjectsRepository implements IProjectsRepository {
     return findProject;
   }
 
+  public async findByIdWithBugs(id: string): Promise<Project | undefined> {
+    const findProjects = this.projects.find(project => project.id === id);
+
+    return findProjects;
+  }
+
   public async create(projectData: ICreateProjectDTO): Promise<Project> {
     const project = new Project();
 

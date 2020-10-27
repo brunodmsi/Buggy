@@ -18,6 +18,14 @@ class ProjectsRepository implements IProjectsRepository {
     return project;
   }
 
+  public async findByIdWithBugs(id: string): Promise<Project | undefined> {
+    const project = await this.ormRepository.findOne(id, {
+      relations: ['bugs'],
+    });
+
+    return project;
+  }
+
   public async create(projectData: ICreateProjectDTO): Promise<Project> {
     const project = this.ormRepository.create(projectData);
 
