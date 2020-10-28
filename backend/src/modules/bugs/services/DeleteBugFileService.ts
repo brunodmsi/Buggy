@@ -10,7 +10,7 @@ interface IRequest {
 }
 
 @injectable()
-class AddFileToBugService {
+class DeleteBugFileService {
   constructor(
     @inject('BugsRepository')
     private bugsRepository: IBugsRepository,
@@ -31,4 +31,4 @@ class AddFileToBugService {
   }
 }
 
-export default AddFileToBugService;
+export default DeleteBugFileService;
