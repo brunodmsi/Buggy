@@ -2,7 +2,7 @@ import BugChecklist from '../infra/typeorm/entities/BugChecklist';
 
 import IBugChecklistDTO from '../dtos/IBugChecklistDTO';
 
-export default interface IBugCommentsRepository {
+export default interface IBugChecklistsRepository {
   findById(id: string): Promise<BugChecklist | undefined>;
   findAllByBugId(id: string): Promise<BugChecklist[]>;
   deleteById(id: string): Promise<void>;

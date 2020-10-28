@@ -18,6 +18,7 @@ bugsRouter.post(
       type: Joi.string().required(),
       group: Joi.number().required(),
       status: Joi.number().required(),
+      project_id: Joi.string().uuid().required(),
     },
   }),
   bugController.create,

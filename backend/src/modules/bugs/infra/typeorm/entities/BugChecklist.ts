@@ -6,9 +6,11 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 import Bug from './Bug';
+import BugChecklistItem from './BugChecklistItem';
 
 @Entity('bug_checklists')
 class BugChecklist {
@@ -18,15 +20,18 @@ class BugChecklist {
   @Column()
   title: string;
 
-  @Column('simple-json')
-  items?: Array<{ text: string; done: boolean }>;
-
   @Column()
   bug_id: string;
 
   @ManyToOne(() => Bug)
   @JoinColumn({ name: 'bug_id' })
   bug: Bug;
+
+  @OneToMany(
+    () => BugChecklistItem,
+    bugChecklistItem => bugChecklistItem.bugChecklist,
+  )
+  bugChecklistItem: BugChecklistItem;
 
   @CreateDateColumn()
   created_at: Date;
