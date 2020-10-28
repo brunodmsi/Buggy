@@ -42,6 +42,14 @@ export default class CreateBugDevelopers1603727874470
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
+          {
+            name: 'UserBug',
+            referencedTableName: 'bugs',
+            referencedColumnNames: ['id'],
+            columnNames: ['bug_id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE',
+          },
         ],
       }),
     );
