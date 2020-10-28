@@ -1,11 +1,11 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateBugChecklists1603836918412
+export default class CreateBugChecklistItems1603848763908
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'bug_checklists',
+        name: 'bug_checklist_items',
         columns: [
           {
             name: 'id',
@@ -15,12 +15,17 @@ export default class CreateBugChecklists1603836918412
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'bug_id',
+            name: 'checklist_id',
             type: 'uuid',
           },
           {
-            name: 'title',
+            name: 'text',
             type: 'varchar',
+          },
+          {
+            name: 'done',
+            type: 'boolean',
+            default: false,
           },
           {
             name: 'created_at',
@@ -35,10 +40,10 @@ export default class CreateBugChecklists1603836918412
         ],
         foreignKeys: [
           {
-            name: 'BugChecklist',
-            referencedTableName: 'bugs',
+            name: 'BugChecklistItem',
+            referencedTableName: 'bug_checklists',
             referencedColumnNames: ['id'],
-            columnNames: ['bug_id'],
+            columnNames: ['checklist_id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
@@ -48,6 +53,6 @@ export default class CreateBugChecklists1603836918412
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('bug_checklists');
+    await queryRunner.dropTable('bug_checklist_items');
   }
 }
