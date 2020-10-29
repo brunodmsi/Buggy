@@ -27,8 +27,6 @@ const ResetPassword: React.FC = () => {
   const history = useHistory();
   const params = useParams<{ token: string }>();
 
-  console.log('hmm')
-
   const { addToast } = useToast();
 
   const handleSubmit = useCallback(async (data: ResetPasswordFormData) => {
@@ -48,12 +46,18 @@ const ResetPassword: React.FC = () => {
       });
 
       const { password, password_confirmation } = data;
-      const { token } = params;
+      const token = params.token.split('=')[1];
 
       await api.post('/password/reset', {
         password,
         password_confirmation,
         token
+      })
+
+      addToast({
+        title: 'Senha resetada com sucesso',
+        description: 'Sua senha foi resetada, agora você pode entrar no Buggy novamente ;)',
+        type: 'success'
       })
 
       history.push('/login');
@@ -62,6 +66,8 @@ const ResetPassword: React.FC = () => {
         const errors = getValidationErrors(err);
         formRef.current?.setErrors(errors);
       }
+
+      console.log(err);
 
       addToast({
         title: 'Erro ao resetar senha',

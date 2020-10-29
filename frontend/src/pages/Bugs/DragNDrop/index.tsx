@@ -1,5 +1,3 @@
-/* tslint:disable */
-
 import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
@@ -41,7 +39,7 @@ const DragNDrop: React.FC<DragNDropProps & OtherProps> = ({ data, openModal }) =
   useEffect(() => {
     setList(data);
   }, [setList, data])
-  
+
   const dragItem = useRef<ItemParams>();
   const dragNode = useRef();
 
@@ -55,7 +53,7 @@ const DragNDrop: React.FC<DragNDropProps & OtherProps> = ({ data, openModal }) =
       setList(oldList => {
         let newList = JSON.parse(JSON.stringify(oldList));
         newList[targetItem.groupIndex].items.splice(
-          targetItem.itemIndex, 0, 
+          targetItem.itemIndex, 0,
           newList[currentItem.groupIndex].items.splice(
             currentItem.itemIndex, 1
           )[0]
@@ -86,10 +84,10 @@ const DragNDrop: React.FC<DragNDropProps & OtherProps> = ({ data, openModal }) =
     }, 0);
   }, [handleDragEnd])
 
-  const isDraggingCurrent = 
+  const isDraggingCurrent =
     (groupIndex: number, itemIndex: number) => {
       return  dragging &&
-              dragItem.current?.groupIndex === groupIndex && 
+              dragItem.current?.groupIndex === groupIndex &&
               dragItem.current?.itemIndex === itemIndex;
     };
 
@@ -102,20 +100,20 @@ const DragNDrop: React.FC<DragNDropProps & OtherProps> = ({ data, openModal }) =
           <Group
             key={groupIndex + 'group'}
             onDragEnter={
-              dragging && !group.items.length ? 
-              e => handleDragEnter(e, { groupIndex, itemIndex: 0 }) : 
+              dragging && !group.items.length ?
+              e => handleDragEnter(e, { groupIndex, itemIndex: 0 }) :
               undefined
             }
           >
             {group.items.map((item, itemIndex) => (
-              <Item 
+              <Item
                 dragging={isDraggingCurrent(groupIndex, itemIndex)}
-                onDragStart={(e: React.DragEvent) => handleDragStart(e, { groupIndex, itemIndex })} 
+                onDragStart={(e: React.DragEvent) => handleDragStart(e, { groupIndex, itemIndex })}
                 onDragEnter={
-                  dragging ? (e: React.DragEvent) => handleDragEnter(e, { groupIndex, itemIndex }) 
+                  dragging ? (e: React.DragEvent) => handleDragEnter(e, { groupIndex, itemIndex })
                   : undefined
                 }
-                draggable 
+                draggable
                 key={`${groupIndex}-${itemIndex}`}
                 to="/bug"
               >

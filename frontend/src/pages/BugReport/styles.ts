@@ -13,7 +13,7 @@ export const Information = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 25px;
-    
+
     gap: 20px;
   }
 
@@ -62,7 +62,7 @@ export const Options = styled.div`
     font-weight: 900;
     font-size: 20px;
     max-width: 235px;
-    
+
     & + button {
       margin-top: 8px;
     }

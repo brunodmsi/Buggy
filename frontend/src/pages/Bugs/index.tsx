@@ -109,7 +109,7 @@ const Bugs: React.FC = () => {
       setData(defaultData as []);
     }
   }, [setData])
-  
+
   return (
     <Container>
       <header>
@@ -128,13 +128,13 @@ const Bugs: React.FC = () => {
         <div className="modal-row">
           <label>
             Tipo de bug
-            
+
             <Select name="bug" options={bugOptions} />
           </label>
 
           <label>
             Prioridade
-            
+
             <Select name="bug" options={priorityOptions} />
           </label>
         </div>
@@ -146,16 +146,16 @@ const Bugs: React.FC = () => {
 
         <label>
           Descrição
-          <textarea 
-            name="description" 
+          <textarea
+            name="description"
             placeholder="ex: Quando uma requisição é feita na rota /hotel, o nome do hotel não é retornado na chamada."
           ></textarea>
         </label>
 
         <div className="modal-row space">
-          <button 
-            type="button" 
-            className="cancel" 
+          <button
+            type="button"
+            className="cancel"
             onClick={() => setModalOpen(!modalOpen)}
           >
             CANCELAR

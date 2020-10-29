@@ -4,15 +4,15 @@ import { FaUserAlt, FaFile, FaClock, FaCheck, FaRegArrowAltCircleDown } from 're
 
 import { Link } from 'react-router-dom';
 
-import { 
+import {
   Container,
   Information,
-  Options, 
-  Developers, 
-  LimitDate, 
-  Description, 
+  Options,
+  Developers,
+  LimitDate,
+  Description,
   Files,
-  Comments 
+  Comments
 } from './styles';
 
 import Tag from '../../components/Tag';
@@ -69,9 +69,9 @@ const BugReport: React.FC = () => (
         <h2>Descrição</h2>
 
         <p>
-          Quando o projeto em ReactJS é criado, os arquivos de bundle criados 
+          Quando o projeto em ReactJS é criado, os arquivos de bundle criados
           pelo script de deploy, quebram e todas as estilizações ficam comprometidas.
-          Todas as funcionalidades do sistema funcionam normalmente, mas apenas o 
+          Todas as funcionalidades do sistema funcionam normalmente, mas apenas o
           CSS fica isolado na criação do "index.html" e por isso, ele quebra.
         </p>
       </Description>
@@ -81,8 +81,8 @@ const BugReport: React.FC = () => (
 
         <section>
           <img src="https://camo.githubusercontent.com/3d158b667fb02c1984b3351797cec153df225944/68747470733a2f2f692e696d6775722e636f6d2f766334437965692e706e67" alt=""/>
-          <img src="https://avatars1.githubusercontent.com/u/26263398?s=400&u=fa874fc285753b1ac4c3172db7733e3b8b1513d3&v=4" alt=""/>      
-          <img src="https://www.syncfusion.com/products/react-js2/control/images/kanban/rtl.png" alt=""/>   
+          <img src="https://avatars1.githubusercontent.com/u/26263398?s=400&u=fa874fc285753b1ac4c3172db7733e3b8b1513d3&v=4" alt=""/>
+          <img src="https://www.syncfusion.com/products/react-js2/control/images/kanban/rtl.png" alt=""/>
         </section>
       </Files>
 

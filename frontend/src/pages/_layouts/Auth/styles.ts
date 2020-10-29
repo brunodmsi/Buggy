@@ -30,7 +30,7 @@ export const SideContent = styled.div`
 
   background-color: #5F30E2;
   h1, h2 { color: #fff; }
-  
+
   place-content: center;
   justify-content: center;
   align-items: center;

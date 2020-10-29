@@ -2,14 +2,13 @@ import React from 'react';
 
 import { Container, Content, SideContent } from './styles';
 
-const Login: React.FC = ({children}) => {
-
+const Auth: React.FC = ({children}) => {
   return (
     <Container>
       <Content>
         {children}
       </Content>
-      
+
       <SideContent>
         <div>
           <h1>Gerencie os bugs da sua aplicação.</h1>
@@ -21,4 +20,4 @@ const Login: React.FC = ({children}) => {
   )
 }
 
-export default Login;
+export default Auth;

@@ -5,7 +5,7 @@ import { Container, Content } from './styles';
 import Sidebar from '../Sidebar';
 
 const Default: React.FC = ({ children }) => (
-  <Container>    
+  <Container>
     <Sidebar />
 
     <Content>
