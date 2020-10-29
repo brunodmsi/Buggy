@@ -4,11 +4,11 @@ import { shade } from 'polished';
 export const Container = styled.nav`
   display: flex;
   height: 100vh;
-  /* min-width: 200px; */
   width: 200px;
   position: fixed;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
   margin-right: 200px;
+  justify-content: space-between;
   z-index: 1;
   overflow: hidden;
 
@@ -75,6 +75,21 @@ export const Container = styled.nav`
         margin-left: 20px;
         margin-right: 10px;
       }
+    }
+  }
+
+  footer {
+    display: flex;
+    margin-bottom: 40px;
+    padding: 20px;
+    justify-content: center;
+
+    button {
+      width: 100%;
+      background-color: #ff3333;
+      color: #fff;
+      border: 0;
+      border-radius: 5px;
     }
   }
 `;
