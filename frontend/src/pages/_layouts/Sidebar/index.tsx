@@ -20,7 +20,7 @@ const Sidebar: React.FC = ({ children, ...rest }) => {
           <p>Dashboard</p>
         </Link>
 
-        <Link to="/">
+        <Link to="/projects">
           <FiFolder size={20} />
           <p>Projetos</p>
         </Link>
