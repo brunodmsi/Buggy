@@ -11,6 +11,7 @@ const Projects: React.FC = () => {
 
   useEffect(() => {
     api.get(`/projects/users/${user.id}`).then(({ data }) => {
+      console.log(data);
       setProjects(data);
     });
   }, []);
