@@ -48,28 +48,30 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.setItem('@Buggy:token', token);
     localStorage.setItem('@Buggy:user', JSON.stringify(user));
 
-    setData({ token, user })
+    setData({ token, user });
   }, []);
 
   const signUp = useCallback(async ({ name, email, password }: SignUpData) => {
     await api.post('/users', { name, email, password });
-  }, [])
+  }, []);
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@Buggy:token');
     localStorage.removeItem('@Buggy:user');
 
     setData({} as AuthState);
-  }, [])
+  }, []);
 
   const isSigned = !!data.user;
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut, signUp, isSigned }}>
+    <AuthContext.Provider
+      value={{ user: data.user, signIn, signOut, signUp, isSigned }}
+    >
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
 function useAuth(): AuthContextData {
   const context = useContext(AuthContext);

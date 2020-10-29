@@ -20,7 +20,6 @@ const Routes: React.FC = () => (
 
     <Route path="/" exact component={Bugs} isPrivate />
     <Route path="/bug" component={BugReport} isPrivate />
-
   </Switch>
 );
 

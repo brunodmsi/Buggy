@@ -8,9 +8,7 @@ interface TagProps {
 }
 
 const Tag: React.FC<TagProps> = ({ name, backgroundColor }) => (
-  <Container backgroundColor={backgroundColor}>
-    {name.toUpperCase()}
-  </Container>
+  <Container backgroundColor={backgroundColor}>{name.toUpperCase()}</Container>
 );
 
 export default Tag;

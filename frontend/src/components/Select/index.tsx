@@ -16,16 +16,17 @@ interface SelectProps {
 const Select: React.FC<SelectProps> = ({
   name,
   options,
-  backgroundAffectsColor = false
+  backgroundAffectsColor = false,
 }) => {
   const [selected, setSelected] = useState(() => {
     const defaultSelected = options.find(option => option.selected);
 
     if (defaultSelected) return defaultSelected.value;
-    else return ''
+    return '';
   });
 
-  const selectedColor = options.find(option => option.value === selected)?.backColor;
+  const selectedColor = options.find(option => option.value === selected)
+    ?.backColor;
 
   return (
     <Container
@@ -35,19 +36,16 @@ const Select: React.FC<SelectProps> = ({
       <select
         name={name}
         defaultValue={selected}
-        onChange={(e) => setSelected(e.target.value)}
+        onChange={e => setSelected(e.target.value)}
       >
         {options.map(option => (
-          <Option
-            value={option.value}
-            backgroundColor={option.backColor}
-          >
+          <Option value={option.value} backgroundColor={option.backColor}>
             {option.label}
           </Option>
         ))}
       </select>
     </Container>
-  )
-}
+  );
+};
 
 export default Select;

@@ -46,10 +46,10 @@ export const Container = styled.div`
       font-size: 15px;
       cursor: pointer;
       text-decoration: none;
-      transition: color .2s;
+      transition: color 0.2s;
 
       span {
-        color: #5F30E2;
+        color: #5f30e2;
       }
 
       &:hover {

@@ -1,22 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {
-  FiLayout,
-  FiFolder
-} from 'react-icons/fi';
+import { FiLayout, FiFolder } from 'react-icons/fi';
 
 import { Container } from './styles';
 
 import buggyLogo from '../../../assets/logo_roxa.png';
 
-const Sidebar: React.FC = ({
-  children,
-  ...rest
-}) => {
+const Sidebar: React.FC = ({ children, ...rest }) => {
   return (
     <Container {...rest}>
       <header>
-        <img src={buggyLogo} alt="Buggy"/>
+        <img src={buggyLogo} alt="Buggy" />
         <h1>Buggy</h1>
       </header>
 

@@ -27,64 +27,76 @@ const Login: React.FC = () => {
   const { signIn } = useAuth();
   const { addToast } = useToast();
 
-  const handleSubmit = useCallback(async (data: SignInFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSubmit = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('E-mail obrigatório')
-          .email('Digite um e-mail válido'),
-        password: Yup.string()
-          .required('Senha obrigatória')
-          .min(6, 'No mínimo 6 dígitos')
-      });
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido'),
+          password: Yup.string()
+            .required('Senha obrigatória')
+            .min(6, 'No mínimo 6 dígitos'),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      await signIn({
-        email: data.email,
-        password: data.password,
-      });
-    } catch (err) {
-      if(err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-        formRef.current?.setErrors(errors);
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+        }
+
+        addToast({
+          title: 'Erro na autenticação',
+          description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
+          type: 'error',
+        });
       }
-
-      addToast({
-        title: 'Erro na autenticação',
-        description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
-        type: 'error'
-      })
-    }
-  }, [addToast, signIn])
+    },
+    [addToast, signIn],
+  );
 
   return (
     <Container>
       <header>
-        <img src={logoRoxa} alt="Buggy"/>
+        <img src={logoRoxa} alt="Buggy" />
       </header>
 
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Entre no <strong>Buggy</strong></h1>
+        <h1>
+          Entre no <strong>Buggy</strong>
+        </h1>
         <p>GERENCIE SEU TIME</p>
 
         <Input icon={FiMail} name="email" placeholder="Insira seu e-mail" />
-        <Input icon={FiLock} name="password" type="password" placeholder="Insira sua senha" />
+        <Input
+          icon={FiLock}
+          name="password"
+          type="password"
+          placeholder="Insira sua senha"
+        />
 
         <Link to="/forgot-password">Esqueci minha senha</Link>
 
         <Button type="submit">Entrar agora</Button>
 
-        <Link to="/register">Não tem uma conta? <span>Crie agora</span></Link>
+        <Link to="/register">
+          Não tem uma conta? <span>Crie agora</span>
+        </Link>
       </Form>
 
       <a href="https://github.com/brunodmsi">Desenvolvido por Bruno De Masi</a>
     </Container>
-  )
-}
+  );
+};
 
 export default Login;

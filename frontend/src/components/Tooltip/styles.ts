@@ -7,7 +7,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     width: 160px;
-    background: #5F30E2;
+    background: #5f30e2;
     padding: 8px;
     border-radius: 4px;
     font-size: 14px;
@@ -22,10 +22,10 @@ export const Container = styled.div`
     left: 50%;
     transform: translateX(-50%);
 
-    &::before { 
+    &::before {
       content: '';
       border-style: solid;
-      border-color: #5F30E2 transparent;
+      border-color: #5f30e2 transparent;
       border-width: 6px 6px 0 6px;
       top: 100%;
       position: absolute;

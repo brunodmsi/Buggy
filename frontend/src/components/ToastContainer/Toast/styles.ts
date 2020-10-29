@@ -18,8 +18,8 @@ const toastTypeVariations = {
   error: css`
     background: #fddede;
     color: #c53030;
-  `
-}
+  `,
+};
 
 export const Container = styled(animated.div)<ToastProps>`
   width: 360px;
@@ -61,11 +61,13 @@ export const Container = styled(animated.div)<ToastProps>`
     color: inherit;
   }
 
-  ${props => !props.hasDescription && css`
-    align-items: center;
+  ${props =>
+    !props.hasDescription &&
+    css`
+      align-items: center;
 
-    svg {
-      margin-top: 0;
-    }
-  `};
+      svg {
+        margin-top: 0;
+      }
+    `};
 `;

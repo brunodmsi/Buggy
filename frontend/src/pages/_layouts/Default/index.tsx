@@ -8,10 +8,8 @@ const Default: React.FC = ({ children }) => (
   <Container>
     <Sidebar />
 
-    <Content>
-      {children}
-    </Content>
+    <Content>{children}</Content>
   </Container>
-)
+);
 
 export default Default;

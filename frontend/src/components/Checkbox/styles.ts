@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 export const Container = styled.label`
   --background: #fff;
-  --border: #D1D6EE;
-  --border-hover: #BBC1E1;
-  --border-active: #1E2235;
+  --border: #d1d6ee;
+  --border-hover: #bbc1e1;
+  --border-active: #1e2235;
   --tick: #fff;
   position: relative;
 
-  input, svg {
+  input,
+  svg {
     width: 21px;
     height: 21px;
     display: block;
@@ -25,9 +26,9 @@ export const Container = styled.label`
     padding: 0;
     cursor: pointer;
     border-radius: 4px;
-    transition: box-shadow .3s;
+    transition: box-shadow 0.3s;
     box-shadow: inset 0 0 0 var(--s, 1px) var(--b, var(--border));
-    
+
     &:hover {
       --s: 2px;
       --b: var(--border-hover);
@@ -52,28 +53,27 @@ export const Container = styled.label`
     height: 21px;
     transform: scale(var(--scale, 1)) translateZ(0);
   }
-  
+
   --stroke: var(--tick);
   input {
     &:checked {
       --s: 11px;
       & + svg {
-        animation: bounce .4s linear forwards .2s;
+        animation: bounce 0.4s linear forwards 0.2s;
       }
     }
   }
-  
+
   svg {
     --scale: 0;
   }
-  
 
   @keyframes bounce {
     50% {
       transform: scale(1.2);
     }
     75% {
-      transform: scale(.9);
+      transform: scale(0.9);
     }
     100% {
       transform: scale(1);

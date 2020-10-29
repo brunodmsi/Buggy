@@ -10,7 +10,7 @@ interface ItemProps {
 }
 
 export const Container = styled.div`
-  padding: .5rem;
+  padding: 0.5rem;
   display: grid;
   gap: 2rem;
   min-width: 100%;
@@ -29,27 +29,27 @@ export const GroupWrapper = styled.div`
 `;
 
 export const Group = styled.div`
-  background: #F2F4F9;
+  background: #f2f4f9;
   border-radius: 12px;
-  padding: .5rem;
+  padding: 0.5rem;
 
   button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #E5ECF8;
+    background-color: #e5ecf8;
     border: 0;
     margin-top: 10px;
     width: 100%;
     height: 50px;
-    color: #2A60E4;
+    color: #2a60e4;
     font-weight: 900;
     font-size: 18px;
     border-radius: 5px;
 
     svg {
       margin-right: 10px;
-      background-color: #2A60E4;
+      background-color: #2a60e4;
       border-radius: 50%;
       padding: 2px;
       color: #fff;
@@ -70,9 +70,11 @@ export const Item = styled(Link)<ItemProps>`
   text-decoration: none;
 
   background-color: white;
-  ${({ dragging }) => dragging && css`
-    background-color: #F2F4F9;
-  `}
+  ${({ dragging }) =>
+    dragging &&
+    css`
+      background-color: #f2f4f9;
+    `}
 
   p {
     font-size: 16px;
@@ -80,10 +82,9 @@ export const Item = styled(Link)<ItemProps>`
   }
 
   &:not(:last-of-type) {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 `;
-
 
 export const Footer = styled.footer<FooterProps>`
   display: flex;

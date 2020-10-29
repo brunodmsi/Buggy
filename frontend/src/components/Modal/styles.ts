@@ -15,10 +15,14 @@ export const Container = styled.div<ContainerProps>`
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
 
-  ${({ isOpen }) => isOpen
-    ? css`visibility: visible`
-    : css`visibility: hidden`
-  };
+  ${({ isOpen }) =>
+    isOpen
+      ? css`
+          visibility: visible;
+        `
+      : css`
+          visibility: hidden;
+        `};
 `;
 
 export const Content = styled.div`

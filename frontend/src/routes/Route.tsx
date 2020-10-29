@@ -3,7 +3,7 @@ import React from 'react';
 import {
   Route as ReactDOMRoute,
   RouteProps as ReactDOMRouteProps,
-  Redirect
+  Redirect,
 } from 'react-router-dom';
 
 import { useAuth } from '../hooks/auth';
@@ -23,11 +23,9 @@ const RouteWrapper: React.FC<RouteProps> = ({
 }) => {
   const { isSigned } = useAuth();
 
-  if (!isSigned && isPrivate)
-    return <Redirect to="/login"/>
+  if (!isSigned && isPrivate) return <Redirect to="/login" />;
 
-  if (isSigned && !isPrivate)
-    return <Redirect to="/"/>
+  if (isSigned && !isPrivate) return <Redirect to="/" />;
 
   const Layout = isSigned ? DefaultLayout : AuthLayout;
 
@@ -40,7 +38,7 @@ const RouteWrapper: React.FC<RouteProps> = ({
         </Layout>
       )}
     />
-  )
-}
+  );
+};
 
 export default RouteWrapper;

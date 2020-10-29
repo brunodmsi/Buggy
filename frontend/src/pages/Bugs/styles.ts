@@ -23,7 +23,7 @@ export const Container = styled.div`
 `;
 
 export const Modal = styled(ModalComponent)`
-  color: #27334D;
+  color: #27334d;
   width: 700px;
   overflow-y: auto;
 
@@ -34,7 +34,7 @@ export const Modal = styled(ModalComponent)`
 
     input {
       padding: 10px;
-      border: 1px solid #D5D5D5;
+      border: 1px solid #d5d5d5;
       border-radius: 10px;
       /* width: 100%; */
     }
@@ -42,7 +42,7 @@ export const Modal = styled(ModalComponent)`
     textarea {
       resize: vertical;
       padding: 10px;
-      border: 1px solid #D5D5D5;
+      border: 1px solid #d5d5d5;
       border-radius: 10px;
       height: 200px;
     }
@@ -72,8 +72,8 @@ export const Modal = styled(ModalComponent)`
   }
 
   .report {
-    background-color: #5751FF;
-    transition: background .2s;
+    background-color: #5751ff;
+    transition: background 0.2s;
 
     &:hover {
       background-color: ${shade(0.1, '#5751FF')};
@@ -81,8 +81,8 @@ export const Modal = styled(ModalComponent)`
   }
 
   .cancel {
-    background-color: #D25454;
-    transition: background .2s;
+    background-color: #d25454;
+    transition: background 0.2s;
 
     &:hover {
       background-color: ${shade(0.1, '#D25454')};

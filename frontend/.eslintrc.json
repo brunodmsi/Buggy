@@ -37,6 +37,12 @@
     "import/prefer-default-export": "off",
     "react/jsx-props-no-spreading": "off",
     "react/prop-types": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/ban-types": "off",
+    "camelcase": "off",
+    "react/no-array-index-key": "off",
+    "react/jsx-curly-newline": "off",
+    "jsx-a11y/label-has-associated-control": "off",
     "no-unused-expressions": "off",
     "@typescript-eslint/explicit-function-return-type": [
       "error",

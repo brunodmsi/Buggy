@@ -25,8 +25,8 @@ const toastTypeVariations = {
   error: css`
     background: #fddede;
     color: #c53030;
-  `
-}
+  `,
+};
 
 export const Toast = styled.div<ToastProps>`
   width: 360px;
@@ -34,7 +34,7 @@ export const Toast = styled.div<ToastProps>`
   padding: 16px 30px 16px 16px;
   border-radius: 10px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
-  
+
   display: flex;
 
   & + div {
@@ -68,11 +68,13 @@ export const Toast = styled.div<ToastProps>`
     color: inherit;
   }
 
-  ${props => !props.hasDescription && css`
-    align-items: center;
+  ${props =>
+    !props.hasDescription &&
+    css`
+      align-items: center;
 
-    svg {
-      margin-top: 0;
-    }
-  `};
+      svg {
+        margin-top: 0;
+      }
+    `};
 `;

@@ -28,8 +28,11 @@ export const SideContent = styled.div`
   text-overflow: ellipsis;
   min-width: 0;
 
-  background-color: #5F30E2;
-  h1, h2 { color: #fff; }
+  background-color: #5f30e2;
+  h1,
+  h2 {
+    color: #fff;
+  }
 
   place-content: center;
   justify-content: center;
@@ -47,7 +50,8 @@ export const SideContent = styled.div`
   div {
     max-width: 400px;
 
-    h1, h2 {
+    h1,
+    h2 {
       text-shadow: 2px 5px rgba(0, 0, 0, 0.2);
     }
 
@@ -61,13 +65,13 @@ export const SideContent = styled.div`
     background-color: #fff;
     border: 0;
     border-radius: 5px;
-    color: #5751FF;
+    color: #5751ff;
     font-weight: 700;
     margin-top: 20px;
   }
 
   &::after {
-    content: "";
+    content: '';
     background: url(${backgroundImage});
     background-size: cover;
     opacity: 0.1;

@@ -48,7 +48,8 @@ export const Container = styled.nav`
       &:hover {
         background-color: ${shade(0.15, '#5F30E2')};
 
-        svg, p {
+        svg,
+        p {
           color: #fff;
         }
 
@@ -69,7 +70,7 @@ export const Container = styled.nav`
 
       svg {
         /* background-color: #fefefe; */
-        color: #5F30E2;
+        color: #5f30e2;
         border-radius: 4px;
         margin-left: 20px;
         margin-right: 10px;

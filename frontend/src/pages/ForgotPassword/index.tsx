@@ -26,68 +26,77 @@ const ForgotPassword: React.FC = () => {
 
   const { addToast } = useToast();
 
-  const handleSubmit = useCallback(async (data: ForgotPasswordFormData) => {
-    try {
-      setLoading(true);
+  const handleSubmit = useCallback(
+    async (data: ForgotPasswordFormData) => {
+      try {
+        setLoading(true);
 
-      formRef.current?.setErrors({});
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        // name: Yup.string().required'Nome obrigatório'),
-        email: Yup.string()
-          .required('E-mail obrigatório')
-          .email('Digite um e-mail válido')
-      });
+        const schema = Yup.object().shape({
+          // name: Yup.string().required'Nome obrigatório'),
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido'),
+        });
 
-      await schema.validate(data, {
-        abortEarly: false
-      });
+        await schema.validate(data, {
+          abortEarly: false,
+        });
 
-      await api.post('/password/forgot', {
-        email: data.email,
-      })
+        await api.post('/password/forgot', {
+          email: data.email,
+        });
 
-      addToast({
-        title: 'E-mail de recuperação enviado',
-        description: 'Enviamos um e-mail para confirmar a recuperação de senha, cheque sua caixa de entrada',
-        type: 'success'
-      })
-    } catch (err) {
-      if(err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
-        formRef.current?.setErrors(errors);
+        addToast({
+          title: 'E-mail de recuperação enviado',
+          description:
+            'Enviamos um e-mail para confirmar a recuperação de senha, cheque sua caixa de entrada',
+          type: 'success',
+        });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+        }
+
+        addToast({
+          title: 'Erro na recuperação de senha',
+          description:
+            'Ocorreu um erro ao tentar realizar a recuperação de senha, tente novamente',
+          type: 'error',
+        });
+      } finally {
+        setLoading(false);
       }
-
-      addToast({
-        title: 'Erro na recuperação de senha',
-        description: 'Ocorreu um erro ao tentar realizar a recuperação de senha, tente novamente',
-        type: 'error'
-      })
-    } finally {
-      setLoading(false);
-    }
-  }, [addToast])
+    },
+    [addToast],
+  );
 
   return (
     <Container>
       <header>
-        <img src={logoRoxa} alt="Buggy"/>
+        <img src={logoRoxa} alt="Buggy" />
       </header>
 
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Recupere a sua <strong>senha</strong></h1>
+        <h1>
+          Recupere a sua <strong>senha</strong>
+        </h1>
         <p>UH OH... PERDEU A CHAVE?</p>
 
         <Input icon={FiMail} name="email" placeholder="Insira seu e-mail" />
 
-        <Button loading={loading} type="submit">Recuperar</Button>
+        <Button loading={loading} type="submit">
+          Recuperar
+        </Button>
 
         <Link to="/login">Voltar ao login</Link>
       </Form>
 
       <a href="https://github.com/brunodmsi">Desenvolvido por Bruno De Masi</a>
     </Container>
-  )
-}
+  );
+};
 
 export default ForgotPassword;

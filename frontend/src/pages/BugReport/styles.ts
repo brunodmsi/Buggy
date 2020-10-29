@@ -9,7 +9,7 @@ export const Information = styled.div`
   display: flex;
   flex-direction: column;
 
-  >header {
+  > header {
     display: flex;
     align-items: center;
     margin-bottom: 25px;
@@ -17,11 +17,11 @@ export const Information = styled.div`
     gap: 20px;
   }
 
-  >p {
+  > p {
     margin-bottom: 25px;
   }
 
-  >section {
+  > section {
     display: flex;
     font-size: 20px;
     font-weight: 800;
@@ -32,7 +32,7 @@ export const Information = styled.div`
     }
   }
 
-  >p {
+  > p {
     font-size: 30px;
     font-weight: 300;
   }
@@ -55,10 +55,10 @@ export const Options = styled.div`
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color: #E5ECF8;
+    background-color: #e5ecf8;
     border: 0;
     border-radius: 5px;
-    color: #2A60E4;
+    color: #2a60e4;
     font-weight: 900;
     font-size: 20px;
     max-width: 235px;
@@ -73,13 +73,12 @@ export const Options = styled.div`
   }
 
   .bottom {
-    background-color: #FF3333;
+    background-color: #ff3333;
     color: #fff;
     align-items: center;
     justify-content: center;
     margin-top: 40px;
   }
-
 
   &::before {
     content: '';
@@ -110,9 +109,9 @@ export const Developers = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #E5ECF8;
+      background-color: #e5ecf8;
       border: 0;
-      background-color: #5F30E2;
+      background-color: #5f30e2;
       border-radius: 50%;
       height: 35px;
       width: 35px;
@@ -179,7 +178,7 @@ export const Comments = styled.div`
       padding: 5px 15px;
       border-radius: 10px;
       width: 500px;
-      border: 1px solid #D5D5D5;
+      border: 1px solid #d5d5d5;
     }
   }
 
@@ -192,11 +191,11 @@ export const Comments = styled.div`
         margin-top: 15px;
       }
 
-      >p {
+      > p {
         font-size: 18px;
         font-weight: 400;
         background-color: #fff;
-        border: 1px solid #D5D5D5;
+        border: 1px solid #d5d5d5;
         padding: 5px 15px;
         border-radius: 10px;
         margin-left: 35px;
