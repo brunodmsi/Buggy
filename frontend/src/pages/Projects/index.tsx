@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/auth';
 import api from '../../services/api';
 
-import { Container } from './styles';
+import { Container, NoProjects } from './styles';
 
 const Projects: React.FC = () => {
   const { user } = useAuth();
@@ -18,7 +18,16 @@ const Projects: React.FC = () => {
 
   return (
     <Container>
-      <h1>Projects</h1>
+      <header>
+        <h1>Projetos</h1>
+      </header>
+
+      {projects.length === 0 && (
+        <NoProjects>
+          <h2>Você ainda não está em nenhum projeto :(</h2>
+          <button type="button">Crie o seu agora mesmo!</button>
+        </NoProjects>
+      )}
     </Container>
   );
 };
