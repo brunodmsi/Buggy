@@ -3,4 +3,5 @@ export default interface ICreateProjectDTO {
   description: string;
   url: string;
   owner_id: string;
+  logo?: string;
 }
