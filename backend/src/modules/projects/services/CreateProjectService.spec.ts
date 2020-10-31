@@ -2,20 +2,24 @@ import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeProjectsRepository from '../repositories/fakes/FakeProjectsRepository';
+import FakeUserProjectsRepository from '../repositories/fakes/FakeUserProjectsRepository';
 import CreateProjectService from './CreateProjectService';
 
 let fakeProjectsRepository: FakeProjectsRepository;
 let fakeUsersRepository: FakeUsersRepository;
 let createProject: CreateProjectService;
+let fakeUserProjectsRepository: FakeUserProjectsRepository;
 
 describe('CreateProject', () => {
   beforeEach(() => {
     fakeProjectsRepository = new FakeProjectsRepository();
     fakeUsersRepository = new FakeUsersRepository();
+    fakeUserProjectsRepository = new FakeUserProjectsRepository();
 
     createProject = new CreateProjectService(
       fakeProjectsRepository,
       fakeUsersRepository,
+      fakeUserProjectsRepository,
     );
   });
 
