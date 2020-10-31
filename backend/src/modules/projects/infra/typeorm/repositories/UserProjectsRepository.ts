@@ -3,9 +3,7 @@ import { Repository, getRepository } from 'typeorm';
 import IUserProjectsRepository from '@modules/projects/repositories/IUserProjectsRepository';
 import IUserProjectDTO from '@modules/projects/dtos/IUserProjectDTO';
 
-// import User from '@modules/users/infra/typeorm/entities/User';
 import UserProject from '../entities/UserProject';
-// import Project from '../entities/Project';
 
 class UserProjectsRepository implements IUserProjectsRepository {
   private ormRepository: Repository<UserProject>;
