@@ -1,7 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { darken } from 'polished';
 
-export const Container = styled.button`
+interface ButtonProps {
+  backgroundColor?: string;
+}
+
+export const Container = styled.button<ButtonProps>`
   margin-top: 25px;
   padding: 15px;
   height: 55px;
@@ -16,4 +20,14 @@ export const Container = styled.button`
   &:hover {
     background-color: ${darken(0.05, '#5F30E2')};
   }
+
+  ${props =>
+    props.backgroundColor &&
+    css`
+      background-color: ${props.backgroundColor};
+
+      &:hover {
+        background-color: ${darken(0.05, props.backgroundColor)};
+      }
+    `}
 `;
