@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import ListUserProjectsService from '@modules/projects/services/ListUserProjectsService';
 
@@ -15,7 +16,7 @@ class UserProjectsController {
 
     const projects = userProject.map(item => item.project);
 
-    return response.json(projects);
+    return response.json(classToClass(projects));
   }
 }
 
