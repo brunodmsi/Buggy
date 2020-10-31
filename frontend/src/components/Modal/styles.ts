@@ -5,7 +5,7 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  z-index: 999;
+  z-index: 400;
   position: fixed;
   right: 0;
   bottom: 0;
