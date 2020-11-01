@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { FiMail, FiLock } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
@@ -23,6 +23,7 @@ interface SignInFormData {
 
 const Login: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const [loading, setLoading] = useState(false);
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
@@ -30,6 +31,8 @@ const Login: React.FC = () => {
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
       try {
+        setLoading(true);
+
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
@@ -49,6 +52,8 @@ const Login: React.FC = () => {
           email: data.email,
           password: data.password,
         });
+
+        setLoading(false);
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -60,6 +65,8 @@ const Login: React.FC = () => {
           description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
           type: 'error',
         });
+
+        setLoading(false);
       }
     },
     [addToast, signIn],
@@ -87,7 +94,9 @@ const Login: React.FC = () => {
 
         <Link to="/forgot-password">Esqueci minha senha</Link>
 
-        <Button type="submit">Entrar agora</Button>
+        <Button type="submit">
+          {loading ? 'Carregando...' : 'Entrar agora'}
+        </Button>
 
         <Link to="/register">
           Não tem uma conta? <span>Crie agora</span>
