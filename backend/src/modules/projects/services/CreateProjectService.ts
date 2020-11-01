@@ -2,6 +2,7 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import IStorageProvider from '@shared/container/providers/StorageProvider/models/IStorageProvider';
 import IProjectsRepository from '../repositories/IProjectsRepository';
 import IUserProjectsRepository from '../repositories/IUserProjectsRepository';
 
@@ -23,6 +24,7 @@ class CreateProjectService {
     @inject('UsersRepository') private usersRepository: IUsersRepository,
     @inject('UserProjectsRepository')
     private userProjectsRepository: IUserProjectsRepository,
+    @inject('StorageProvider') private storageProvider: IStorageProvider,
   ) {}
 
   public async execute({
@@ -45,6 +47,8 @@ class CreateProjectService {
       owner_id: user.id,
       logo,
     });
+
+    if (logo) await this.storageProvider.saveFile(logo);
 
     await this.userProjectsRepository.create({
       project_id: project.id,
