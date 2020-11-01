@@ -23,32 +23,35 @@ const FileInput: React.FC<InputProps> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { addToast } = useToast();
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const { fieldName, registerField, defaultValue } = useField(name);
   const [preview, setPreview] = useState(defaultValue);
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
 
-    const imagePattern = /image-*/;
-    if (accepted === 'image' && !file?.type.match(imagePattern)) {
-      e.target.value = '';
+      const imagePattern = /image-*/;
+      if (accepted === 'image' && !file?.type.match(imagePattern)) {
+        e.target.value = '';
 
-      addToast({
-        title: 'Apenas imagens',
-        description: `O campo ${fieldName} aceita apenas imagens`,
-        type: 'error',
-      });
+        addToast({
+          title: 'Apenas imagens',
+          description: `O campo arquivo aceita apenas imagens`,
+          type: 'error',
+        });
 
-      return;
-    }
+        return;
+      }
 
-    if (!file) {
-      setPreview(null);
-    }
+      if (!file) {
+        setPreview(null);
+      }
 
-    const previewURL = URL.createObjectURL(file);
-    setPreview(previewURL);
-  }, []);
+      const previewURL = URL.createObjectURL(file);
+      setPreview(previewURL);
+    },
+    [accepted, addToast],
+  );
 
   useEffect(() => {
     registerField({
