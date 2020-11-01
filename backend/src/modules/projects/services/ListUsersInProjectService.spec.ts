@@ -1,6 +1,7 @@
 import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
+import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import FakeProjectsRepository from '../repositories/fakes/FakeProjectsRepository';
 import AddUserToProjectService from './AddUserToProjectService';
 import CreateProjectService from './CreateProjectService';
@@ -9,6 +10,7 @@ import FakeUserProjectsRepository from '../repositories/fakes/FakeUserProjectsRe
 
 let fakeProjectsRepository: FakeProjectsRepository;
 let fakeUsersRepository: FakeUsersRepository;
+let fakeStorageProvider: FakeStorageProvider;
 let addUserToProject: AddUserToProjectService;
 let createProject: CreateProjectService;
 let listUsersInProject: ListUsersInProjectService;
@@ -19,10 +21,13 @@ describe('ListUsersInProject', () => {
     fakeProjectsRepository = new FakeProjectsRepository();
     fakeUsersRepository = new FakeUsersRepository();
     fakeUserProjectsRepository = new FakeUserProjectsRepository();
+    fakeStorageProvider = new FakeStorageProvider();
 
     createProject = new CreateProjectService(
       fakeProjectsRepository,
       fakeUsersRepository,
+      fakeUserProjectsRepository,
+      fakeStorageProvider,
     );
     addUserToProject = new AddUserToProjectService(
       fakeProjectsRepository,

@@ -3,6 +3,8 @@ import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeProjectsRepository from '@modules/projects/repositories/fakes/FakeProjectsRepository';
 import CreateProjectService from '@modules/projects/services/CreateProjectService';
+import FakeUserProjectsRepository from '@modules/projects/repositories/fakes/FakeUserProjectsRepository';
+import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import FakeBugsRepository from '../repositories/fakes/FakeBugsRepository';
 import FakeBugChecklistsRepository from '../repositories/fakes/FakeBugChecklistsRepository';
 import AddChecklistToBugService from './AddChecklistToBugService';
@@ -12,6 +14,8 @@ let fakeBugsRepository: FakeBugsRepository;
 let fakeUsersRepository: FakeUsersRepository;
 let fakeProjectsRepository: FakeProjectsRepository;
 let fakeBugChecklistsRepository: FakeBugChecklistsRepository;
+let fakeUserProjectsRepository: FakeUserProjectsRepository;
+let fakeStorageProvider: FakeStorageProvider;
 let addChecklistToBug: AddChecklistToBugService;
 let createBug: CreateBugService;
 let createProject: CreateProjectService;
@@ -22,10 +26,14 @@ describe('AddCommentToBug', () => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeProjectsRepository = new FakeProjectsRepository();
     fakeBugChecklistsRepository = new FakeBugChecklistsRepository();
+    fakeUserProjectsRepository = new FakeUserProjectsRepository();
+    fakeStorageProvider = new FakeStorageProvider();
 
     createProject = new CreateProjectService(
       fakeProjectsRepository,
       fakeUsersRepository,
+      fakeUserProjectsRepository,
+      fakeStorageProvider,
     );
 
     createBug = new CreateBugService(

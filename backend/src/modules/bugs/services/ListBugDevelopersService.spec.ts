@@ -3,6 +3,8 @@ import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeProjectsRepository from '@modules/projects/repositories/fakes/FakeProjectsRepository';
 import CreateProjectService from '@modules/projects/services/CreateProjectService';
+import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
+import FakeUserProjectsRepository from '@modules/projects/repositories/fakes/FakeUserProjectsRepository';
 import FakeBugsRepository from '../repositories/fakes/FakeBugsRepository';
 import FakeBugDevelopersRepository from '../repositories/fakes/FakeBugDevelopersRepository';
 import CreateBugService from './CreateBugService';
@@ -14,6 +16,8 @@ let fakeUsersRepository: FakeUsersRepository;
 let createProject: CreateProjectService;
 let fakeBugsRepository: FakeBugsRepository;
 let fakeBugDevelopersRepository: FakeBugDevelopersRepository;
+let fakeStorageProvider: FakeStorageProvider;
+let fakeUserProjectsRepository: FakeUserProjectsRepository;
 let createBug: CreateBugService;
 let addDeveloperToBug: AddDeveloperToBugService;
 let listBugDevelopers: ListBugDevelopersService;
@@ -24,6 +28,8 @@ describe('ListDeveloperBugs', () => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeBugsRepository = new FakeBugsRepository();
     fakeBugDevelopersRepository = new FakeBugDevelopersRepository();
+    fakeUserProjectsRepository = new FakeUserProjectsRepository();
+    fakeStorageProvider = new FakeStorageProvider();
 
     listBugDevelopers = new ListBugDevelopersService(
       fakeBugDevelopersRepository,
@@ -33,6 +39,8 @@ describe('ListDeveloperBugs', () => {
     createProject = new CreateProjectService(
       fakeProjectsRepository,
       fakeUsersRepository,
+      fakeUserProjectsRepository,
+      fakeStorageProvider,
     );
 
     createBug = new CreateBugService(

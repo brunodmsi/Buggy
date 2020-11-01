@@ -3,6 +3,8 @@ import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeProjectsRepository from '@modules/projects/repositories/fakes/FakeProjectsRepository';
 import CreateProjectService from '@modules/projects/services/CreateProjectService';
+import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
+import FakeUserProjectsRepository from '@modules/projects/repositories/fakes/FakeUserProjectsRepository';
 import FakeBugsRepository from '../repositories/fakes/FakeBugsRepository';
 import FakeBugDevelopersRepository from '../repositories/fakes/FakeBugDevelopersRepository';
 import CreateBugService from './CreateBugService';
@@ -11,12 +13,14 @@ import ListDeveloperBugsService from './ListDeveloperBugsService';
 
 let fakeProjectsRepository: FakeProjectsRepository;
 let fakeUsersRepository: FakeUsersRepository;
-let createProject: CreateProjectService;
 let fakeBugsRepository: FakeBugsRepository;
 let fakeBugDevelopersRepository: FakeBugDevelopersRepository;
-let createBug: CreateBugService;
+let fakeStorageProvider: FakeStorageProvider;
+let fakeUserProjectsRepository: FakeUserProjectsRepository;
 let addDeveloperToBug: AddDeveloperToBugService;
 let listDeveloperBugs: ListDeveloperBugsService;
+let createProject: CreateProjectService;
+let createBug: CreateBugService;
 
 describe('ListDeveloperBugs', () => {
   beforeEach(() => {
@@ -24,6 +28,8 @@ describe('ListDeveloperBugs', () => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeBugsRepository = new FakeBugsRepository();
     fakeBugDevelopersRepository = new FakeBugDevelopersRepository();
+    fakeUserProjectsRepository = new FakeUserProjectsRepository();
+    fakeStorageProvider = new FakeStorageProvider();
 
     listDeveloperBugs = new ListDeveloperBugsService(
       fakeBugDevelopersRepository,
@@ -33,6 +39,8 @@ describe('ListDeveloperBugs', () => {
     createProject = new CreateProjectService(
       fakeProjectsRepository,
       fakeUsersRepository,
+      fakeUserProjectsRepository,
+      fakeStorageProvider,
     );
 
     createBug = new CreateBugService(

@@ -4,6 +4,7 @@ import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepo
 import FakeProjectsRepository from '@modules/projects/repositories/fakes/FakeProjectsRepository';
 import CreateProjectService from '@modules/projects/services/CreateProjectService';
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
+import FakeUserProjectsRepository from '@modules/projects/repositories/fakes/FakeUserProjectsRepository';
 import FakeBugsRepository from '../repositories/fakes/FakeBugsRepository';
 import FakeBugFilesRepository from '../repositories/fakes/FakeBugFilesRepository';
 import AddFileToBugService from './AddFileToBugService';
@@ -17,6 +18,7 @@ let fakeBugFilesRepository: FakeBugFilesRepository;
 let fakeStorageProvider: FakeStorageProvider;
 let addFileToBug: AddFileToBugService;
 let deleteBugFile: DeleteBugFileService;
+let fakeUserProjectsRepository: FakeUserProjectsRepository;
 let createBug: CreateBugService;
 let createProject: CreateProjectService;
 
@@ -27,10 +29,13 @@ describe('DeleteBugFile', () => {
     fakeProjectsRepository = new FakeProjectsRepository();
     fakeBugFilesRepository = new FakeBugFilesRepository();
     fakeStorageProvider = new FakeStorageProvider();
+    fakeUserProjectsRepository = new FakeUserProjectsRepository();
 
     createProject = new CreateProjectService(
       fakeProjectsRepository,
       fakeUsersRepository,
+      fakeUserProjectsRepository,
+      fakeStorageProvider,
     );
 
     createBug = new CreateBugService(
