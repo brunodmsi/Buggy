@@ -6,6 +6,7 @@ import CreateProjectService from '@modules/projects/services/CreateProjectServic
 class ProjectsController {
   async create(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
+    const logoFile = request.file;
 
     const { name, description, url } = request.body;
 
@@ -16,7 +17,7 @@ class ProjectsController {
       description,
       url,
       owner_id: user_id,
-      logo: request.file.filename,
+      logo: logoFile ? logoFile.filename : '',
     });
 
     return response.json(project);
