@@ -26,7 +26,7 @@ class BugChecklistItem {
 
   @ManyToOne(() => BugChecklist)
   @JoinColumn({ name: 'checklist_id' })
-  bugChecklist: BugChecklist;
+  checklist: BugChecklist;
 
   @CreateDateColumn()
   created_at: Date;

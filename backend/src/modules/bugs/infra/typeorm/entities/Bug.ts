@@ -49,7 +49,7 @@ class Bug {
   developers: BugDeveloper[];
 
   @OneToMany(() => BugFile, bugFile => bugFile.bug)
-  files: Bug[];
+  files: BugFile[];
 
   @OneToMany(() => BugChecklist, bugChecklist => bugChecklist.bug)
   checklists: BugChecklist[];

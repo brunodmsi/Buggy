@@ -29,9 +29,9 @@ class BugChecklist {
 
   @OneToMany(
     () => BugChecklistItem,
-    bugChecklistItem => bugChecklistItem.bugChecklist,
+    bugChecklistItem => bugChecklistItem.checklist,
   )
-  bugChecklistItem: BugChecklistItem;
+  checklistItems: BugChecklistItem[];
 
   @CreateDateColumn()
   created_at: Date;
