@@ -12,6 +12,7 @@ import {
 import Project from '@modules/projects/infra/typeorm/entities/Project';
 import BugDeveloper from './BugDeveloper';
 import BugFile from './BugFile';
+import BugChecklist from './BugChecklist';
 
 @Entity('bugs')
 class Bug {
@@ -44,10 +45,13 @@ class Bug {
   project: Project;
 
   @OneToMany(() => BugDeveloper, bugDeveloper => bugDeveloper.bug)
-  bug_developers: BugDeveloper[];
+  developers: BugDeveloper[];
 
   @OneToMany(() => BugFile, bugFile => bugFile.bug)
-  bug_files: Bug[];
+  files: Bug[];
+
+  @OneToMany(() => BugChecklist, bugChecklist => bugChecklist.bug)
+  checklists: BugChecklist[];
 
   @CreateDateColumn()
   created_at: Date;
