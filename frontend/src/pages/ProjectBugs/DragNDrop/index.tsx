@@ -137,24 +137,22 @@ const DragNDrop: React.FC<DragNDropProps> = ({ data, openModal }) => {
 
                           <Footer priorityBackColor="#c34343">
                             <div>
-                              {item.bug_developers.map(
-                                ({ user: developer }) => {
-                                  if (!developer.avatar)
-                                    return (
-                                      <img
-                                        src={avatarPlaceholder}
-                                        alt={developer.id}
-                                      />
-                                    );
-
+                              {item.developers.map(({ user: developer }) => {
+                                if (!developer.avatar)
                                   return (
                                     <img
-                                      src={developer.avatar_url}
+                                      src={avatarPlaceholder}
                                       alt={developer.id}
                                     />
                                   );
-                                },
-                              )}
+
+                                return (
+                                  <img
+                                    src={developer.avatar_url}
+                                    alt={developer.id}
+                                  />
+                                );
+                              })}
                             </div>
 
                             <p>

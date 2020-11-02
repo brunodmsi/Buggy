@@ -27,7 +27,7 @@ interface IBugData {
   type: string;
   group: number;
   status: number;
-  bug_developers: Array<{ user: IDeveloperData }>;
+  developers: Array<{ user: IDeveloperData }>;
 }
 
 export interface IDragAndDropDataProps {
