@@ -4,12 +4,16 @@ import { celebrate, Joi, Segments } from 'celebrate';
 import BugController from '../controllers/BugsController';
 import BugDateController from '../controllers/BugDateController';
 import BugGroupController from '../controllers/BugGroupController';
+import ListBugController from '../controllers/ListBugController';
 
 const bugsRouter = Router();
 
 const bugController = new BugController();
 const bugDateController = new BugDateController();
+const listBugController = new ListBugController();
 const bugGroupController = new BugGroupController();
+
+bugsRouter.get('/:bug_id', listBugController.index);
 
 bugsRouter.post(
   '/',
