@@ -41,6 +41,7 @@
     "@typescript-eslint/ban-types": "off",
     "camelcase": "off",
     "react/no-array-index-key": "off",
+    "import/no-duplicates": "off",
     "react/jsx-curly-newline": "off",
     "no-param-reassign": "off",
     "jsx-a11y/label-has-associated-control": "off",
