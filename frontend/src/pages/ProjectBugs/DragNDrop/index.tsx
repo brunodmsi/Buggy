@@ -126,7 +126,11 @@ const DragNDrop: React.FC<DragNDropProps> = ({ data, openModal }) => {
                                 option => option.value === item.type,
                               )?.value
                             }
-                            backgroundColor="#B080F8"
+                            backgroundColor={
+                              typeOptions.find(
+                                option => option.value === item.type,
+                              )?.backColor
+                            }
                           />
 
                           <p>{item.title}</p>
