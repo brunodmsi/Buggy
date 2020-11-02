@@ -7,8 +7,8 @@ import ForgotPassword from '../pages/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword';
 
 import Dashboard from '../pages/Dashboard';
-import Projects from '../pages/Projects';
-import Bugs from '../pages/Bugs';
+import AllProjects from '../pages/AllProjects';
+import ProjectBugs from '../pages/ProjectBugs';
 import BugReport from '../pages/BugReport';
 
 import Route from './Route';
@@ -21,8 +21,8 @@ const Routes: React.FC = () => (
     <Route path="/register" component={Register} />
 
     <Route path="/" exact component={Dashboard} isPrivate />
-    <Route path="/projects" exact component={Projects} isPrivate />
-    <Route path="/bugs" exact component={Bugs} isPrivate />
+    <Route path="/projects" exact component={AllProjects} isPrivate />
+    <Route path="/projects/:id" exact component={ProjectBugs} isPrivate />
     <Route path="/bugs/:id" component={BugReport} isPrivate />
   </Switch>
 );
