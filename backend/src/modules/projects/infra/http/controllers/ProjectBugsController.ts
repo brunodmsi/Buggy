@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import ListProjectBugsService from '@modules/projects/services/ListProjectBugsService';
 
@@ -9,9 +10,12 @@ class ProjectBugsController {
 
     const listProjectBugs = container.resolve(ListProjectBugsService);
 
-    const bugs = await listProjectBugs.execute({ project_id });
+    const { project, bugs } = await listProjectBugs.execute({ project_id });
 
-    return response.json(bugs);
+    return response.json({
+      project: classToClass(project),
+      bugs: classToClass(bugs),
+    });
   }
 }
 
