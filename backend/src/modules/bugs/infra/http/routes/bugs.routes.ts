@@ -3,11 +3,13 @@ import { celebrate, Joi, Segments } from 'celebrate';
 
 import BugController from '../controllers/BugsController';
 import BugDateController from '../controllers/BugDateController';
+import BugGroupController from '../controllers/BugGroupController';
 
 const bugsRouter = Router();
 
 const bugController = new BugController();
 const bugDateController = new BugDateController();
+const bugGroupController = new BugGroupController();
 
 bugsRouter.post(
   '/',
@@ -35,6 +37,19 @@ bugsRouter.patch(
     },
   }),
   bugDateController.update,
+);
+
+bugsRouter.patch(
+  '/:bug_id/group',
+  celebrate({
+    [Segments.BODY]: {
+      new_group: Joi.number().required(),
+    },
+    [Segments.PARAMS]: {
+      bug_id: Joi.string().uuid().required(),
+    },
+  }),
+  bugGroupController.update,
 );
 
 export default bugsRouter;
