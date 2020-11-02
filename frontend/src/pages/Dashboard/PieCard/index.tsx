@@ -44,7 +44,7 @@ const PieCard: React.FC<PieCardProps> = ({
 
       <footer>
         {pieChartData.map(data => (
-          <div>
+          <div key={data.name}>
             <FiSquare color={data.color} fill={data.color} size={10} />
             <p>{data.name}</p>
           </div>
