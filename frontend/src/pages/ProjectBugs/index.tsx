@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 import { useParams, useHistory } from 'react-router-dom';
 
@@ -40,12 +40,15 @@ export interface IDragAndDropDataProps {
 const Bugs: React.FC = () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
+
   const [project, setProject] = useState<IProjectDataProps>(
     {} as IProjectDataProps,
   );
   const [dragAndDropData, setDragAndDropData] = useState(
     {} as IDragAndDropDataProps,
   );
+  const [selectedBugGroup, setSelectedBugGroup] = useState('0');
+
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
@@ -54,6 +57,19 @@ const Bugs: React.FC = () => {
       setDragAndDropData(data.bugs);
     });
   }, [id]);
+
+  const handleNewBugModalClose = useCallback(
+    async (action?: string) => {
+      setModalOpen(false);
+
+      if (action === 'reload') {
+        const response = await api.get(`/projects/${id}/bugs`);
+
+        setDragAndDropData(response.data.bugs);
+      }
+    },
+    [id],
+  );
 
   return (
     <Container>
@@ -68,12 +84,17 @@ const Bugs: React.FC = () => {
 
       <DragNDrop
         data={dragAndDropData}
-        openModal={() => setModalOpen(!modalOpen)}
+        openModal={group => {
+          setSelectedBugGroup(group);
+          setModalOpen(!modalOpen);
+        }}
       />
 
       <CreateNewBugModal
+        project={project}
+        bugGroup={selectedBugGroup}
         openModal={modalOpen}
-        closeModal={() => setModalOpen(false)}
+        closeModal={(action?: string) => handleNewBugModalClose(action)}
       />
     </Container>
   );
