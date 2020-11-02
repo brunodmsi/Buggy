@@ -1,53 +1,63 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import ReactSelect, {
+  OptionTypeBase,
+  Props as SelectProps,
+} from 'react-select';
+import { useField } from '@unform/core';
 
-import { Container, Option } from './styles';
+import { Container, Error } from './styles';
 
-interface SelectProps {
+interface Props extends SelectProps<OptionTypeBase> {
   name: string;
-  options: {
-    label: string;
-    value: string;
-    backColor?: string;
-    selected?: boolean;
-  }[];
-  backgroundAffectsColor?: boolean;
 }
 
-const Select: React.FC<SelectProps> = ({
-  name,
-  options,
-  backgroundAffectsColor = false,
-}) => {
-  const [selected, setSelected] = useState(() => {
-    const defaultSelected = options.find(option => option.selected);
+const Select: React.FC<Props> = ({ name, ...rest }) => {
+  const selectRef = useRef(null);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
 
-    if (defaultSelected) return defaultSelected.value;
-    return '';
-  });
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: selectRef.current,
+      getValue: (ref: any) => {
+        if (rest.isMulti) {
+          if (!ref.state.value) {
+            return [];
+          }
 
-  const selectedColor = options.find(option => option.value === selected)
-    ?.backColor;
+          return ref.state.value.map((option: OptionTypeBase) => option.value);
+        }
+
+        if (!ref.state.value) {
+          return '';
+        }
+
+        return ref.state.value.value;
+      },
+      setValue: (ref, value) => {
+        ref.select.setValue(value || null);
+      },
+      clearValue: ref => {
+        ref.select.clearValue();
+      },
+    });
+  }, [registerField, fieldName, rest.isMulti]);
 
   return (
-    <Container
-      backgroundColor={selectedColor}
-      backgroundAffectsColor={backgroundAffectsColor}
-    >
-      <select
+    <Container>
+      <ReactSelect
         name={name}
-        defaultValue={selected}
-        onChange={e => setSelected(e.target.value)}
-      >
-        {options.map(option => (
-          <Option
-            key={option.label}
-            value={option.value}
-            backgroundColor={option.backColor}
-          >
-            {option.label}
-          </Option>
-        ))}
-      </select>
+        defaultValue={defaultValue}
+        ref={selectRef}
+        classNamePrefix="react-select"
+        {...rest}
+      />
+
+      {error && (
+        <Error>
+          <span>{error}</span>
+        </Error>
+      )}
     </Container>
   );
 };
