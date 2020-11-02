@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import ListBugCommentsService from '@modules/bugs/services/ListBugCommentsService';
 
@@ -13,7 +14,7 @@ class ListBugCommentsController {
       bug_id,
     });
 
-    return response.json(bugComments);
+    return response.json(classToClass(bugComments));
   }
 }
 
