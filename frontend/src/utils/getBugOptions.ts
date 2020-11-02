@@ -2,9 +2,28 @@ import { OptionTypeBase, GroupedOptionsType, OptionsType } from 'react-select';
 
 export interface IOption {
   label: string;
-  value: string;
-  backColor: string;
+  value: string | number;
+  backColor?: string;
 }
+
+export const groupOptions: Array<IOption> = [
+  {
+    label: 'Aberto',
+    value: 0,
+  },
+  {
+    label: 'Em progresso',
+    value: 1,
+  },
+  {
+    label: 'Em teste',
+    value: 2,
+  },
+  {
+    label: 'Fechado',
+    value: 3,
+  },
+];
 
 export const typeOptions: Array<IOption> = [
   {
