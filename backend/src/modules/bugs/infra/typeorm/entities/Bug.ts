@@ -11,8 +11,9 @@ import {
 
 import Project from '@modules/projects/infra/typeorm/entities/Project';
 import BugDeveloper from './BugDeveloper';
-import BugFile from './BugFile';
 import BugChecklist from './BugChecklist';
+import BugComment from './BugComment';
+import BugFile from './BugFile';
 
 @Entity('bugs')
 class Bug {
@@ -52,6 +53,9 @@ class Bug {
 
   @OneToMany(() => BugChecklist, bugChecklist => bugChecklist.bug)
   checklists: BugChecklist[];
+
+  @OneToMany(() => BugComment, bugComment => bugComment.bug)
+  comments: BugComment[];
 
   @CreateDateColumn()
   created_at: Date;
