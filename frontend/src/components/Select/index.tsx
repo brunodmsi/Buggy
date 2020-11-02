@@ -39,7 +39,11 @@ const Select: React.FC<SelectProps> = ({
         onChange={e => setSelected(e.target.value)}
       >
         {options.map(option => (
-          <Option value={option.value} backgroundColor={option.backColor}>
+          <Option
+            key={option.label}
+            value={option.value}
+            backgroundColor={option.backColor}
+          >
             {option.label}
           </Option>
         ))}
