@@ -11,21 +11,6 @@ export const Modal = styled(ModalContainer)`
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-
-    input {
-      padding: 10px;
-      border: 1px solid #d5d5d5;
-      border-radius: 10px;
-      /* width: 100%; */
-    }
-
-    textarea {
-      resize: vertical;
-      padding: 10px;
-      border: 1px solid #d5d5d5;
-      border-radius: 10px;
-      height: 200px;
-    }
   }
 
   .modal-row {

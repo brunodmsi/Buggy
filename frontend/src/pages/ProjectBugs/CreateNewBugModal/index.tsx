@@ -1,100 +1,137 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
+import * as Yup from 'yup';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
 
+import api from '../../../services/api';
+
+import { useToast } from '../../../hooks/toast';
+import getValidationErrors from '../../../utils/getValidationErrors';
+import { allTypeWithoutColors } from '../../../utils/getBugOptions';
+
+import Input from '../../../components/Input';
+import Textarea from '../../../components/Textarea';
 import Select from '../../../components/Select';
+import Button from '../../../components/Button';
 
 import { Modal } from './styles';
 
-const bugOptions = [
-  {
-    label: 'WEB',
-    value: 'web',
-    backColor: '#B080F8',
-    selected: true,
-  },
-  {
-    label: 'BACKEND',
-    value: 'backend',
-    backColor: '#8DD1FF',
-  },
-  {
-    label: 'DESIGN',
-    value: 'design',
-    backColor: '#DB6C6C',
-  },
-  {
-    label: 'OUTRO',
-    value: 'outro',
-    backColor: '#15D815',
-  },
-];
-
-const priorityOptions = [
-  {
-    label: 'ALTA',
-    value: 'alta',
-    backColor: '#FF3333',
-    selected: true,
-  },
-  {
-    label: 'MÉDIA',
-    value: 'media',
-    backColor: '#F1C73F',
-  },
-  {
-    label: 'BAIXA',
-    value: 'baixa',
-    backColor: '#5CD439',
-  },
-];
+interface IProjectData {
+  id: string;
+  name: string;
+}
 
 interface CreateNewBugModalProps {
+  project: IProjectData;
+  bugGroup: string;
   openModal: boolean;
-  closeModal: () => void;
+  closeModal: (action?: string) => void;
 }
 
 const CreateNewBugModal: React.FC<CreateNewBugModalProps> = ({
+  project,
+  bugGroup,
   openModal,
   closeModal,
 }) => {
+  const formRef = useRef<FormHandles>(null);
+  const { addToast } = useToast();
+
+  const handleSubmit = useCallback(
+    async data => {
+      try {
+        formRef.current?.setErrors({});
+
+        const schema = Yup.object().shape({
+          title: Yup.string().required('O bug precisa de um sumário'),
+          description: Yup.string().required('O bug precisa de uma descrição'),
+          type: Yup.string()
+            .oneOf(
+              ['backend', 'web', 'design', 'outro'],
+              'Tipo selecionado inválido',
+            )
+            .required('É obrigatório selecionar uma opção'),
+        });
+
+        await schema.validate(data, { abortEarly: false });
+
+        await api.post('/bugs', {
+          title: data.title,
+          description: data.description,
+          type: data.type,
+          group: bugGroup,
+          status: 0,
+          project_id: project.id,
+        });
+
+        addToast({
+          title: 'Bug criado',
+          description: 'O bug foi criado com sucesso!',
+          type: 'success',
+        });
+
+        closeModal('reload');
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+        }
+
+        addToast({
+          title: 'Erro no bug',
+          description: 'Ocorreu um erro na hora de criar o bug',
+          type: 'error',
+        });
+      }
+    },
+    [addToast, bugGroup, closeModal, project.id],
+  );
+
   return (
     <Modal isOpen={openModal}>
       <h2>Reportar um novo bug</h2>
-      <p>você está no projeto Scient</p>
+      <p>você está no projeto {project.name}</p>
 
-      <div className="modal-row">
+      <Form ref={formRef} onSubmit={handleSubmit}>
+        <div className="modal-row">
+          <label>
+            Tipo de bug
+            <Select
+              name="type"
+              placeholder="Selecione"
+              options={allTypeWithoutColors}
+            />
+          </label>
+
+          <label>
+            Prioridade
+            {/* <Select name="bug" options={priorityOptions} /> */}
+          </label>
+        </div>
+
         <label>
-          Tipo de bug
-          <Select name="bug" options={bugOptions} />
+          Sumário
+          <Input name="title" placeholder="ex: API retornando dados errados" />
         </label>
 
         <label>
-          Prioridade
-          <Select name="bug" options={priorityOptions} />
+          Descrição
+          <Textarea
+            name="description"
+            placeholder="ex: Quando uma requisição é feita na rota /hotel, o nome do hotel não é retornado na chamada."
+          />
         </label>
-      </div>
 
-      <label>
-        Sumário
-        <input type="text" placeholder="ex: API retornando dados errados" />
-      </label>
+        <div className="modal-row space">
+          <Button className="cancel" onClick={() => closeModal()}>
+            CANCELAR
+          </Button>
 
-      <label>
-        Descrição
-        <textarea
-          name="description"
-          placeholder="ex: Quando uma requisição é feita na rota /hotel, o nome do hotel não é retornado na chamada."
-        />
-      </label>
-
-      <div className="modal-row space">
-        <button type="button" className="cancel" onClick={() => closeModal()}>
-          CANCELAR
-        </button>
-
-        <button type="button" className="report">
-          REPORTAR
-        </button>
-      </div>
+          <Button type="submit" className="report">
+            REPORTAR
+          </Button>
+        </div>
+      </Form>
     </Modal>
   );
 };
