@@ -26,11 +26,13 @@ interface ProjectData {
 const Projects: React.FC = () => {
   const [projects, setProjects] = useState([] as ProjectData[]);
   const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { user } = useAuth();
 
   useEffect(() => {
     api.get(`/projects/users/${user.id}`).then(({ data }) => {
       setProjects(data);
+      setLoading(false);
     });
   }, [user.id]);
 
@@ -58,7 +60,7 @@ const Projects: React.FC = () => {
         closeModal={action => handleCloseModal(action)}
       />
 
-      {projects.length === 0 && (
+      {!loading && projects.length === 0 && (
         <>
           <NoProjects>
             <h2>Você ainda não está em nenhum projeto :(</h2>
