@@ -11,6 +11,8 @@ import { FiPlus } from 'react-icons/fi';
 
 import api from '../../../services/api';
 
+import { typeOptions } from '../../../utils/getBugOptions';
+
 import { Container, GroupWrapper, Group, Item, Footer } from './styles';
 
 import Tag from '../../../components/Tag';
@@ -20,16 +22,10 @@ import avatarPlaceholder from '../../../assets/avatar_placeholder.png';
 
 interface DragNDropProps {
   data: IDragAndDropDataProps;
+  openModal: (group: string) => void;
 }
 
-interface OtherProps {
-  openModal?: () => void;
-}
-
-const DragNDrop: React.FC<DragNDropProps & OtherProps> = ({
-  data,
-  openModal,
-}) => {
+const DragNDrop: React.FC<DragNDropProps> = ({ data, openModal }) => {
   const history = useHistory();
   const [list, setList] = useState(data);
 
@@ -124,7 +120,14 @@ const DragNDrop: React.FC<DragNDropProps & OtherProps> = ({
                           draggableStyle={providedDrag.draggableProps.style}
                           onClick={() => handleItemClick(item.id)}
                         >
-                          <Tag name={item.type} backgroundColor="#B080F8" />
+                          <Tag
+                            name={
+                              typeOptions.find(
+                                option => option.value === item.type,
+                              )?.value
+                            }
+                            backgroundColor="#B080F8"
+                          />
 
                           <p>{item.title}</p>
 
@@ -160,7 +163,7 @@ const DragNDrop: React.FC<DragNDropProps & OtherProps> = ({
                   ))}
                   {providedDrop.placeholder}
 
-                  <button type="button" onClick={openModal}>
+                  <button type="button" onClick={() => openModal(id)}>
                     <FiPlus size={25} /> Adicionar novo
                   </button>
                 </Group>
