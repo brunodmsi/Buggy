@@ -1,6 +1,6 @@
 import { Repository, getRepository } from 'typeorm';
 
-import IBugDeveloperDTO from '@modules/bugs/dtos/IBugDeveloperDTO';
+import IBugCommentDTO from '@modules/bugs/dtos/IBugCommentDTO';
 import BugComment from '@modules/bugs/infra/typeorm/entities/BugComment';
 import IBugCommentsRepository from '@modules/bugs/repositories/IBugCommentsRepository';
 
@@ -20,6 +20,8 @@ class BugCommentsRepository implements IBugCommentsRepository {
   public async findAllByBugId(bug_id: string): Promise<BugComment[]> {
     const bugComments = await this.ormRepository.find({
       where: { bug_id },
+      relations: ['user'],
+      order: { created_at: 'DESC' },
     });
 
     return bugComments;
@@ -29,12 +31,12 @@ class BugCommentsRepository implements IBugCommentsRepository {
     await this.ormRepository.delete(id);
   }
 
-  public async create(bugDeveloperData: IBugDeveloperDTO): Promise<BugComment> {
-    const bugDeveloper = this.ormRepository.create(bugDeveloperData);
+  public async create(bugCommentData: IBugCommentDTO): Promise<BugComment> {
+    const bugComment = this.ormRepository.create(bugCommentData);
 
-    await this.ormRepository.save(bugDeveloper);
+    await this.ormRepository.save(bugComment);
 
-    return bugDeveloper;
+    return bugComment;
   }
 
   public async save(bugComment: BugComment): Promise<BugComment> {

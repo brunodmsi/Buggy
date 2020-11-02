@@ -22,6 +22,12 @@ class ListBugService {
       throw new AppError('Bug not found');
     }
 
+    bug.comments = bug.comments.sort(
+      (first, second) =>
+        new Date(second.created_at).getTime() -
+        new Date(first.created_at).getTime(),
+    );
+
     return bug;
   }
 }
