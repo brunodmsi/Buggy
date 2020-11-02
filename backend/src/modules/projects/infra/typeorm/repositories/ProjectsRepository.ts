@@ -20,7 +20,7 @@ class ProjectsRepository implements IProjectsRepository {
 
   public async findByIdWithBugs(id: string): Promise<Project | undefined> {
     const project = await this.ormRepository.findOne(id, {
-      relations: ['bugs'],
+      relations: ['bugs', 'bugs.bug_developers', 'bugs.bug_developers.user'],
     });
 
     return project;
