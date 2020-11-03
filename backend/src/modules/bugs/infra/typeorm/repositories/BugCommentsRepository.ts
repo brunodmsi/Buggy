@@ -12,7 +12,9 @@ class BugCommentsRepository implements IBugCommentsRepository {
   }
 
   public async findById(id: string): Promise<BugComment | undefined> {
-    const bugComment = await this.ormRepository.findOne(id);
+    const bugComment = await this.ormRepository.findOne(id, {
+      relations: ['user', 'bug'],
+    });
 
     return bugComment;
   }
