@@ -24,4 +24,9 @@ bugCommentsRouter.post(
   bugCommentController.create,
 );
 
+bugCommentsRouter.delete(
+  '/:bug_id/comments/:bug_comment_id',
+  bugCommentController.destroy,
+);
+
 export default bugCommentsRouter;
