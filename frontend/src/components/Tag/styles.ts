@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 interface ContainerProps {
-  backgroundColor: string;
+  backgroundColor?: string;
 }
 
 export const Container = styled.span<ContainerProps>`
@@ -15,5 +15,5 @@ export const Container = styled.span<ContainerProps>`
   font-size: 15px;
   font-weight: 900;
   background-color: ${props => props.backgroundColor};
-  color: ${props => darken(0.5, props.backgroundColor)};
+  color: ${props => darken(0.5, props.backgroundColor || '')};
 `;
