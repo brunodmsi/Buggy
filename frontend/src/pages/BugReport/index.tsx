@@ -1,14 +1,12 @@
-import React from 'react';
-import { FiArrowLeft, FiPlus } from 'react-icons/fi';
-import {
-  FaUserAlt,
-  FaFile,
-  FaClock,
-  FaCheck,
-  FaRegArrowAltCircleDown,
-} from 'react-icons/fa';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Form } from '@unform/web';
+import { useHistory, useParams } from 'react-router-dom';
+import { FiArrowLeft, FiPlus } from 'react-icons/fi';
+import { FaUserAlt, FaFile, FaClock, FaCheck } from 'react-icons/fa';
+
+import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 
 import {
   Container,
@@ -18,163 +16,173 @@ import {
   LimitDate,
   Description,
   Files,
-  Comments,
 } from './styles';
 
 import Tag from '../../components/Tag';
 import Select from '../../components/Select';
 import Checkbox from '../../components/Checkbox';
+import Comments from './Comments';
+import { typeOptions, groupOptions } from '../../utils/getBugOptions';
 
-const statusOptions = [
-  {
-    label: 'Aberto',
-    value: 'aberto',
-    backColor: '#598EDE',
-    selected: true,
-  },
-  {
-    label: 'Fazendo',
-    value: 'fazendo',
-    backColor: '#2B2C2E',
-  },
-];
+export interface BugFileData {
+  id: string;
+  filename: string;
+  filename_url: string;
+}
 
-const BugReport: React.FC = () => (
-  <Container>
-    <Information>
-      <header>
-        <Link to="/">
-          <FiArrowLeft size={35} color="#27334D" />
-        </Link>
-        <h1>Bug report #1938</h1>
-        <Tag name="web" backgroundColor="#B080F8" />
-        <Select name="status" options={statusOptions} />
-      </header>
+export interface BugDeveloperData {
+  id: string;
+  name: string;
+  avatar: string;
+  avatar_url: string;
+}
 
-      <p>Styled Components quebrando na build de produção</p>
+export interface BugCommentData {
+  id: string;
+  message: string;
+  user: BugDeveloperData;
+  created_at: string;
+}
 
-      <section>
-        <Developers>
-          <p>Desenvolvedores</p>
+interface BugData {
+  id: string;
+  title: string;
+  description: string;
+  group: number;
+  status: number;
+  type: string;
+  date_limit: Date;
+  project_id: string;
+  developers: BugDeveloperData[];
+  comments: BugCommentData[];
+  files: BugFileData[];
+}
 
-          <section>
-            <img
-              src="https://jooinn.com/images/photo-of-woman-11.jpg"
-              alt="Profile"
+const BugReport: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const history = useHistory();
+
+  const { user } = useAuth();
+
+  const [bug, setBug] = useState({} as BugData);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api.get(`/bugs/${id}`).then(response => {
+      setBug(response.data);
+      setLoading(false);
+    });
+  }, [id]);
+
+  const goBack = useCallback(() => {
+    history.goBack();
+  }, [history]);
+
+  const handleStatusChange = useCallback(data => console.log(data), []);
+
+  return (
+    <Container>
+      {!loading && (
+        <Information>
+          <header>
+            <button type="button" onClick={goBack}>
+              <FiArrowLeft size={35} color="#27334D" />
+            </button>
+
+            <h1>Bug report #{bug.id.split('-')[0]}</h1>
+
+            <Tag
+              name={typeOptions.find(option => option.value === 'web')?.value}
+              backgroundColor={
+                typeOptions.find(option => option.value === 'web')?.backColor
+              }
             />
 
-            <button type="button">
-              <FiPlus size={30} />
-            </button>
-          </section>
-        </Developers>
+            <Form onSubmit={handleStatusChange}>
+              <Select name="status" options={groupOptions} />
+            </Form>
+          </header>
 
-        <LimitDate>
-          <p>Data limite</p>
+          <p>{bug.title}</p>
 
           <section>
-            <Checkbox />
-            <p>5 de outubro às 11:59</p>
+            <Developers>
+              <p>Desenvolvedores</p>
+
+              <section>
+                <img
+                  src="https://jooinn.com/images/photo-of-woman-11.jpg"
+                  alt="Profile"
+                />
+
+                <button type="button">
+                  <FiPlus size={30} />
+                </button>
+              </section>
+            </Developers>
+
+            {bug.date_limit && (
+              <LimitDate>
+                <p>Data limite</p>
+
+                <section>
+                  <Checkbox />
+                  <p>5 de outubro às 11:59</p>
+                </section>
+              </LimitDate>
+            )}
           </section>
-        </LimitDate>
-      </section>
 
-      <Description>
-        <h2>Descrição</h2>
+          <Description>
+            <h2>Descrição</h2>
 
-        <p>
-          Quando o projeto em ReactJS é criado, os arquivos de bundle criados
-          pelo script de deploy, quebram e todas as estilizações ficam
-          comprometidas. Todas as funcionalidades do sistema funcionam
-          normalmente, mas apenas o CSS fica isolado na criação do index.html e
-          por isso, ele quebra.
-        </p>
-      </Description>
+            <p>{bug.description}</p>
+          </Description>
 
-      <Files>
-        <h3>Anexos</h3>
+          {bug.files.length > 0 && (
+            <Files>
+              <h3>Anexos</h3>
 
-        <section>
-          <img
-            src="https://camo.githubusercontent.com/3d158b667fb02c1984b3351797cec153df225944/68747470733a2f2f692e696d6775722e636f6d2f766334437965692e706e67"
-            alt=""
-          />
-          <img
-            src="https://avatars1.githubusercontent.com/u/26263398?s=400&u=fa874fc285753b1ac4c3172db7733e3b8b1513d3&v=4"
-            alt=""
-          />
-          <img
-            src="https://www.syncfusion.com/products/react-js2/control/images/kanban/rtl.png"
-            alt=""
-          />
-        </section>
-      </Files>
+              <section>
+                {bug.files.map(file => (
+                  <>
+                    <img src={file.filename_url} alt={file.filename} />
+                  </>
+                ))}
+              </section>
+            </Files>
+          )}
 
-      <Comments>
-        <h3>Comentários</h3>
+          <Comments bugId={bug.id} comments={bug.comments} user={user} />
+        </Information>
+      )}
 
-        <label>
-          <img src="https://jooinn.com/images/photo-of-woman-11.jpg" alt="" />
+      <Options>
+        <p>Adicionar ao card</p>
 
-          <input type="text" placeholder="Escreva um comentário" />
-        </label>
+        <button type="button">
+          <FaCheck size={25} />
+          Checklist
+        </button>
+        <button type="button">
+          <FaUserAlt size={25} />
+          Desenvolvedor
+        </button>
+        <button type="button">
+          <FaFile size={25} />
+          Arquivo
+        </button>
+        <button type="button">
+          <FaClock size={25} />
+          Data de entrega
+        </button>
 
-        <section>
-          <div>
-            <header>
-              <img
-                src="https://jooinn.com/images/photo-of-woman-11.jpg"
-                alt=""
-              />
-              <p>
-                <strong>Campbell</strong> - 3 minutos atrás
-              </p>
-            </header>
-
-            <p>Olá, acho que vou fazer isso e isso no projeto.</p>
-          </div>
-          <div>
-            <header>
-              <img
-                src="https://jooinn.com/images/photo-of-woman-11.jpg"
-                alt=""
-              />
-              <p>
-                <strong>Campbell</strong> - 3 minutos atrás
-              </p>
-            </header>
-
-            <p>Olá, acho que vou fazer isso e isso no projeto.</p>
-          </div>
-        </section>
-      </Comments>
-    </Information>
-
-    <Options>
-      <p>Adicionar ao card</p>
-
-      <button type="button">
-        <FaCheck size={25} />
-        Checklist
-      </button>
-      <button type="button">
-        <FaUserAlt size={25} />
-        Desenvolvedor
-      </button>
-      <button type="button">
-        <FaFile size={25} />
-        Arquivo
-      </button>
-      <button type="button">
-        <FaClock size={25} />
-        Data de entrega
-      </button>
-
-      <button className="bottom" type="button">
-        EXCLUIR CARD
-      </button>
-    </Options>
-  </Container>
-);
+        <button className="bottom" type="button">
+          EXCLUIR CARD
+        </button>
+      </Options>
+    </Container>
+  );
+};
 
 export default BugReport;

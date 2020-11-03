@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 0.5fr;
+  width: 100%;
 `;
 
 export const Information = styled.div`
@@ -13,8 +14,12 @@ export const Information = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 25px;
-
     gap: 20px;
+
+    button {
+      border: 0;
+      background: none;
+    }
   }
 
   > p {
@@ -43,7 +48,10 @@ export const Options = styled.div`
   align-items: left;
   justify-content: center;
   flex-direction: column;
-  position: relative;
+  position: absolute;
+  right: 50px;
+  top: 200px;
+
   margin-left: 10rem;
 
   p {
@@ -152,66 +160,6 @@ export const Files = styled.div`
 
     & + img {
       margin-left: 5px;
-    }
-  }
-`;
-
-export const Comments = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-  font-weight: 800;
-
-  img {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-
-  label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-
-    input {
-      padding: 5px 15px;
-      border-radius: 10px;
-      width: 500px;
-      border: 1px solid #d5d5d5;
-    }
-  }
-
-  section {
-    display: flex;
-    flex-direction: column;
-
-    div {
-      & + div {
-        margin-top: 15px;
-      }
-
-      > p {
-        font-size: 18px;
-        font-weight: 400;
-        background-color: #fff;
-        border: 1px solid #d5d5d5;
-        padding: 5px 15px;
-        border-radius: 10px;
-        margin-left: 35px;
-        width: 500px;
-      }
-
-      header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 5px;
-
-        p {
-          font-size: 18px;
-          font-weight: 400;
-        }
-      }
     }
   }
 `;
