@@ -15,9 +15,20 @@ class FakeProjectsRepository implements IProjectsRepository {
   }
 
   public async findByIdWithBugs(id: string): Promise<Project | undefined> {
-    const findProjects = this.projects.find(project => project.id === id);
+    const findProject = this.projects.find(project => project.id === id);
 
-    return findProjects;
+    return findProject;
+  }
+
+  public async findByProjectAndOwnerId(
+    projectId: string,
+    ownerId: string,
+  ): Promise<Project | undefined> {
+    const findProject = this.projects.find(
+      project => project.id === projectId && project.owner_id === ownerId,
+    );
+
+    return findProject;
   }
 
   public async create(projectData: ICreateProjectDTO): Promise<Project> {

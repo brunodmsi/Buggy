@@ -26,6 +26,17 @@ class ProjectsRepository implements IProjectsRepository {
     return project;
   }
 
+  public async findByProjectAndOwnerId(
+    projectId: string,
+    ownerId: string,
+  ): Promise<Project | undefined> {
+    const project = await this.ormRepository.findOne({
+      where: { id: projectId, owner_id: ownerId },
+    });
+
+    return project;
+  }
+
   public async create(projectData: ICreateProjectDTO): Promise<Project> {
     const project = this.ormRepository.create(projectData);
 
