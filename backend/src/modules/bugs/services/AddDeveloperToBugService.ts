@@ -2,6 +2,7 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import IUserProjectsRepository from '@modules/projects/repositories/IUserProjectsRepository';
 import IBugsRepository from '../repositories/IBugsRepository';
 import IBugDevelopersRepository from '../repositories/IBugDevelopersRepository';
 
@@ -21,6 +22,8 @@ class AddDeveloperToBugService {
     private usersRepository: IUsersRepository,
     @inject('BugDevelopersRepository')
     private bugDevelopersRepository: IBugDevelopersRepository,
+    @inject('UserProjectsRepository')
+    private userProjectsRepository: IUserProjectsRepository,
   ) {}
 
   public async execute({ bug_id, user_id }: IRequest): Promise<BugDeveloper> {
@@ -34,6 +37,17 @@ class AddDeveloperToBugService {
 
     if (!user) {
       throw new AppError('User not found');
+    }
+
+    const checkIfIsRelatedToProject = await this.userProjectsRepository.checkIfUserIsAlreadyAddedToProject(
+      {
+        project_id: bug.project_id,
+        user_id,
+      },
+    );
+
+    if (!checkIfIsRelatedToProject) {
+      throw new AppError('User does not belong to project');
     }
 
     const checkAddedDeveloper = await this.bugDevelopersRepository.checkIfDeveloperIsAlreadyAddedToBug(
