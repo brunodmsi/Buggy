@@ -23,6 +23,13 @@ import Files from './Files';
 
 import { typeOptions, groupOptions } from '../../utils/getBugOptions';
 
+interface ProjectData {
+  id: string;
+  name: string;
+  logo: string;
+  logo_url: string;
+}
+
 export interface BugFileData {
   id: string;
   filename: string;
@@ -51,9 +58,11 @@ export interface BugData {
   group: number;
   status: number;
   type: string;
+  priority: string;
   date_limit: string;
   delivered: boolean;
   project_id: string;
+  project: ProjectData;
   developers: Array<{ user: BugDeveloperData }>;
   comments: BugCommentData[];
   files: BugFileData[];
@@ -102,9 +111,9 @@ const BugReport: React.FC = () => {
               }
             />
 
-            <Form onSubmit={handleStatusChange}>
+            {/* <Form onSubmit={handleStatusChange}>
               <Select name="status" options={groupOptions} />
-            </Form>
+            </Form> */}
           </header>
 
           <Summary bugId={bug.id} title={bug.title} />

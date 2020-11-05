@@ -2,7 +2,7 @@ import { OptionTypeBase, GroupedOptionsType, OptionsType } from 'react-select';
 
 export interface IOption {
   label: string;
-  value: string | number;
+  value: number | string;
   backColor?: string;
 }
 

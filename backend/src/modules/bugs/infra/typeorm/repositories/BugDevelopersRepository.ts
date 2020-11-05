@@ -14,7 +14,7 @@ class BugDevelopersRepository implements IBugDevelopersRepository {
   public async listDeveloperBugsById(user_id: string): Promise<BugDeveloper[]> {
     const users = await this.ormRepository.find({
       where: { user_id },
-      relations: ['bug'],
+      relations: ['bug', 'bug.project'],
     });
 
     return users;

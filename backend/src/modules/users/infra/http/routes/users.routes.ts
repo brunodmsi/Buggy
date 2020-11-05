@@ -6,13 +6,21 @@ import uploadConfig from '@config/upload';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 import UsersController from '../controllers/UsersController';
 import UserAvatarController from '../controllers/UserAvatarController';
+import UserDashboardController from '../controllers/UserDashboardController';
 
 const usersController = new UsersController();
 const userAvatarController = new UserAvatarController();
+const userDashboardController = new UserDashboardController();
 
 const upload = multer(uploadConfig.multer);
 
 const usersRouter = Router();
+
+usersRouter.get(
+  '/dashboard',
+  ensureAuthenticated,
+  userDashboardController.index,
+);
 
 usersRouter.post(
   '/',
