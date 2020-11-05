@@ -93,17 +93,3 @@ export const Description = styled.div`
   margin-bottom: 25px;
   font-size: 18px;
 `;
-
-export const Files = styled.div`
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 25px;
-
-  img {
-    height: 100px;
-
-    & + img {
-      margin-left: 5px;
-    }
-  }
-`;

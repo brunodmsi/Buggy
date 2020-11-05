@@ -13,14 +13,16 @@ import {
   Developers,
   LimitDate,
   Description,
-  Files,
 } from './styles';
 
 import Tag from '../../components/Tag';
 import Select from '../../components/Select';
 import Checkbox from '../../components/Checkbox';
+
 import AddToCardOptions from './AddToCardOptions';
 import Comments from './Comments';
+import Files from './Files';
+
 import { typeOptions, groupOptions } from '../../utils/getBugOptions';
 
 export interface BugFileData {
@@ -142,19 +144,7 @@ const BugReport: React.FC = () => {
             <p>{bug.description}</p>
           </Description>
 
-          {bug.files.length > 0 && (
-            <Files>
-              <h3>Anexos</h3>
-
-              <section>
-                {bug.files.map(file => (
-                  <>
-                    <img src={file.filename_url} alt={file.filename} />
-                  </>
-                ))}
-              </section>
-            </Files>
-          )}
+          <Files files={bug.files} />
 
           <Comments bugId={bug.id} comments={bug.comments} user={user} />
         </Information>

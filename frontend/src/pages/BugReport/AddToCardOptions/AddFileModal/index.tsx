@@ -9,7 +9,6 @@ import { useToast } from '../../../../hooks/toast';
 import api from '../../../../services/api';
 import FileInput from '../../../../components/FileInput';
 import Button from '../../../../components/Button';
-import Spinner from '../../../../components/Spinner';
 
 import { Modal } from './styles';
 
