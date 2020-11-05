@@ -40,7 +40,7 @@ bugsRouter.patch(
   '/:bug_id/date',
   celebrate({
     [Segments.BODY]: {
-      date: Joi.date().required(),
+      date_limit: Joi.date().required(),
     },
     [Segments.PARAMS]: {
       bug_id: Joi.string().uuid().required(),

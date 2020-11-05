@@ -6,11 +6,11 @@ import UpdateDateLimitService from '@modules/bugs/services/UpdateDateLimitServic
 class BugDateController {
   async update(request: Request, response: Response): Promise<Response> {
     const { bug_id } = request.params;
-    const { date } = request.body;
+    const { date_limit } = request.body;
 
     const updateDateLimit = container.resolve(UpdateDateLimitService);
 
-    const bug = await updateDateLimit.execute({ bug_id, date });
+    const bug = await updateDateLimit.execute({ bug_id, date: date_limit });
 
     return response.json(bug);
   }
