@@ -6,7 +6,7 @@ import {
   DropResult,
   DraggableLocation,
 } from 'react-beautiful-dnd';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 
 import api from '../../../services/api';
@@ -26,6 +26,8 @@ interface DragNDropProps {
 }
 
 const DragNDrop: React.FC<DragNDropProps> = ({ data, openModal }) => {
+  const { id: projectId } = useParams<{ id: string }>();
+
   const history = useHistory();
   const [list, setList] = useState(data);
 
@@ -34,10 +36,10 @@ const DragNDrop: React.FC<DragNDropProps> = ({ data, openModal }) => {
   }, [setList, data]);
 
   const handleItemClick = useCallback(
-    (id: string) => {
-      history.push(`/bugs/${id}`);
+    (bugId: string) => {
+      history.push(`/projects/${projectId}/bugs/${bugId}`);
     },
-    [history],
+    [history, projectId],
   );
 
   const onDragEnd = useCallback(
