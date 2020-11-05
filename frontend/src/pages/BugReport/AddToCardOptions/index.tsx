@@ -73,7 +73,6 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
       />
 
       <AddDateLimitModal
-        modalTitleText="Adicionar data limite de entrega"
         bugId={bugId}
         openModal={openDateLimitModal}
         closeModal={async (action?: string) => {

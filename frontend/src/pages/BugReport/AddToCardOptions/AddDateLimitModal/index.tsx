@@ -18,20 +18,14 @@ interface IAddDateLimitModalProps {
   openModal: boolean;
   closeModal: (action?: string) => void;
   bugId: string;
-  modalTitleText: string;
-  defaultValue?: string;
 }
 
 const AddDateLimitModal: React.FC<IAddDateLimitModalProps> = ({
   bugId,
   openModal,
   closeModal,
-  modalTitleText,
-  defaultValue,
 }) => {
   const formRef = useRef<FormHandles>(null);
-
-  const [dateLimit, setDateLimit] = useState(defaultValue);
 
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
@@ -82,7 +76,7 @@ const AddDateLimitModal: React.FC<IAddDateLimitModalProps> = ({
         <FiX size={20} color="#fff" />
       </button>
 
-      <h1>{modalTitleText}</h1>
+      <h1>Adicionar data de entrega</h1>
 
       <Form ref={formRef} onSubmit={handleSubmit}>
         <DatePicker
