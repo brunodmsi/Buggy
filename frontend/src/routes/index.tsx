@@ -23,7 +23,11 @@ const Routes: React.FC = () => (
     <Route path="/" exact component={Dashboard} isPrivate />
     <Route path="/projects" exact component={AllProjects} isPrivate />
     <Route path="/projects/:id" exact component={ProjectBugs} isPrivate />
-    <Route path="/bugs/:id" component={BugReport} isPrivate />
+    <Route
+      path="/projects/:projectId/bugs/:bugId"
+      component={BugReport}
+      isPrivate
+    />
   </Switch>
 );
 
