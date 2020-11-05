@@ -1,5 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react';
 
+import Spinner from '../Spinner';
+
 import { Container } from './styles';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -14,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => (
   <Container type="button" backgroundColor={backgroundColor} {...rest}>
-    {loading ? 'Carregando...' : children}
+    {loading ? <Spinner /> : children}
   </Container>
 );
 
