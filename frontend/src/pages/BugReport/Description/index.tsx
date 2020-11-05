@@ -6,7 +6,6 @@ import { FormHandles } from '@unform/core';
 import api from '../../../services/api';
 import { useToast } from '../../../hooks/toast';
 
-import Spinner from '../../../components/Spinner';
 import Textarea from '../../../components/Textarea';
 import Button from '../../../components/Button';
 import getValidationErrors from '../../../utils/getValidationErrors';
@@ -49,6 +48,7 @@ const Description: React.FC<DescriptionProps> = ({
 
         setDescription(data.description);
         setEditLoading(false);
+        setIsEdit(false);
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
