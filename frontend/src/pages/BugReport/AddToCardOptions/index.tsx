@@ -6,6 +6,7 @@ import api from '../../../services/api';
 
 import AddFileModal from './AddFileModal';
 import AddDeveloperModal from './AddDeveloperModal';
+import AddDateLimitModal from './AddDateLimitModal';
 
 import { Container } from './styles';
 
@@ -20,6 +21,7 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
 }) => {
   const [openFileModal, setOpenFileModal] = useState(false);
   const [openDeveloperModal, setOpenDeveloperModal] = useState(false);
+  const [openDateLimitModal, setOpenDateLimitModal] = useState(false);
 
   return (
     <Container>
@@ -40,7 +42,7 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
         Arquivo
       </button>
 
-      <button type="button">
+      <button type="button" onClick={() => setOpenDateLimitModal(true)}>
         <FaClock size={25} />
         Data de entrega
       </button>
@@ -63,6 +65,19 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
         openModal={openDeveloperModal}
         closeModal={async (action?: string) => {
           setOpenDeveloperModal(false);
+
+          if (action === 'reload') {
+            document.location.reload();
+          }
+        }}
+      />
+
+      <AddDateLimitModal
+        modalTitleText="Adicionar data limite de entrega"
+        bugId={bugId}
+        openModal={openDateLimitModal}
+        closeModal={async (action?: string) => {
+          setOpenDateLimitModal(false);
 
           if (action === 'reload') {
             document.location.reload();
