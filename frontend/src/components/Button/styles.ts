@@ -6,6 +6,9 @@ interface ButtonProps {
 }
 
 export const Container = styled.button<ButtonProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 25px;
   padding: 15px;
   height: 55px;
