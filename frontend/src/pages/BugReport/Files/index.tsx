@@ -63,7 +63,12 @@ const Files: React.FC<FilesProps> = ({ files: bugFiles }) => {
               font: '#fff',
             }}
           >
-            <a rel="noreferrer" href={file.filename_url} target="_blank">
+            <a
+              rel="noreferrer"
+              key={file.id}
+              href={file.filename_url}
+              target="_blank"
+            >
               {file.filename.match(/.(jpg|jpeg|png|gif)$/i) ? (
                 <img src={file.filename_url} alt={file.filename} />
               ) : (

@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { FiEye, FiX, FiTrash } from 'react-icons/fi';
-import Tooltip from 'little-react-tooltip';
 
 import api from '../../../services/api';
 import { useToast } from '../../../hooks/toast';
@@ -34,36 +33,36 @@ const Developers: React.FC<DeveloperProps> = ({
     return devs;
   });
   const [listDevelopersModal, setListDevelopersModal] = useState(false);
-  const [deleteLoading, setDeleteLoading] = useState('');
+  // const [deleteLoading, setDeleteLoading] = useState('');
 
-  const { addToast } = useToast();
+  // const { addToast } = useToast();
 
-  const handleFileDelete = useCallback(
-    async (id: string) => {
-      try {
-        setDeleteLoading(id);
+  // const handleFileDelete = useCallback(
+  //   async (id: string) => {
+  //     try {
+  //       setDeleteLoading(id);
 
-        await api.delete(`/bugs/files/${id}`);
+  //       await api.delete(`/bugs/files/${id}`);
 
-        const updatedDevelopers = developers.filter(file => file.id !== id);
+  //       const updatedDevelopers = developers.filter(file => file.id !== id);
 
-        setDevelopers(updatedDevelopers);
+  //       setDevelopers(updatedDevelopers);
 
-        addToast({
-          title: 'Desenvolvedor deletado!',
-          type: 'success',
-        });
-      } catch (err) {
-        addToast({
-          title: 'Erro ao deletar!',
-          description:
-            'Ocorreu um erro ao excluir o desenvolvedor, tente novamente mais tarde',
-          type: 'error',
-        });
-      }
-    },
-    [addToast, developers],
-  );
+  //       addToast({
+  //         title: 'Desenvolvedor deletado!',
+  //         type: 'success',
+  //       });
+  //     } catch (err) {
+  //       addToast({
+  //         title: 'Erro ao deletar!',
+  //         description:
+  //           'Ocorreu um erro ao excluir o desenvolvedor, tente novamente mais tarde',
+  //         type: 'error',
+  //       });
+  //     }
+  //   },
+  //   [addToast, developers],
+  // );
 
   return (
     <Container>
@@ -73,13 +72,13 @@ const Developers: React.FC<DeveloperProps> = ({
 
           <section>
             {developers.map(dev => (
-              <>
+              <div key={dev.id}>
                 {dev.avatar_url ? (
-                  <img src={dev.avatar_url} alt={dev.name} />
+                  <img key={dev.id} src={dev.avatar_url} alt={dev.name} />
                 ) : (
-                  <img src={avatarPlaceholder} alt={dev.name} />
+                  <img key={dev.id} src={avatarPlaceholder} alt={dev.name} />
                 )}
-              </>
+              </div>
             ))}
 
             <button type="button" onClick={() => setListDevelopersModal(true)}>
@@ -120,7 +119,7 @@ const Developers: React.FC<DeveloperProps> = ({
                   <p>{dev.email}</p>
                 </td>
 
-                <td className="td-delete">
+                {/* <td className="td-delete">
                   <button
                     type="button"
                     onClick={() => handleFileDelete(dev.id)}
@@ -131,7 +130,7 @@ const Developers: React.FC<DeveloperProps> = ({
                       <FiTrash size={15} color="#fff" />
                     )}
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))}
           </table>
