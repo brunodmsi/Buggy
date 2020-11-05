@@ -81,7 +81,6 @@ const AddDeveloperModal: React.FC<IAddDeveloperModalProps> = ({
 
         addToast({
           title: 'Erro ao adicionar desenvolvedor',
-          description: err.response.data.message || '',
           type: 'error',
         });
 
