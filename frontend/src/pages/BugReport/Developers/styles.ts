@@ -9,6 +9,7 @@ export const Modal = styled(ModalContainer)`
   position: relative;
   overflow-y: scroll;
   overflow-x: hidden;
+  margin-right: 40px;
 
   .close-button {
     position: absolute;

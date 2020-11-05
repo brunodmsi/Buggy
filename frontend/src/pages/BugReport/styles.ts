@@ -31,10 +31,6 @@ export const Information = styled.div`
     font-size: 20px;
     font-weight: 800;
     margin-bottom: 25px;
-
-    div + div {
-      margin-left: 40px;
-    }
   }
 
   > p {
