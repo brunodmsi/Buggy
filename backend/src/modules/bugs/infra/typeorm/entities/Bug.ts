@@ -35,6 +35,9 @@ class Bug {
   @Column('integer')
   status: number;
 
+  @Column('boolean')
+  delivered: boolean;
+
   @Column('timestamp with time zone')
   date_limit: Date;
 
