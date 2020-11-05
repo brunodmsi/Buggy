@@ -101,7 +101,7 @@ const AddDeveloperModal: React.FC<IAddDeveloperModalProps> = ({
         <FiX size={20} color="#fff" />
       </button>
 
-      <h1>Adicionar arquivo</h1>
+      <h1>Adicionar desenvolvedor</h1>
 
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input name="developer" placeholder="Adicionar por e-mail" />
