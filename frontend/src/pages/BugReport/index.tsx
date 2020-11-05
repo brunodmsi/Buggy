@@ -3,7 +3,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Form } from '@unform/web';
 import { useHistory, useParams } from 'react-router-dom';
 import { FiArrowLeft, FiPlus } from 'react-icons/fi';
-import { FaUserAlt, FaFile, FaClock, FaCheck } from 'react-icons/fa';
 
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
@@ -11,7 +10,6 @@ import { useAuth } from '../../hooks/auth';
 import {
   Container,
   Information,
-  Options,
   Developers,
   LimitDate,
   Description,
@@ -21,6 +19,7 @@ import {
 import Tag from '../../components/Tag';
 import Select from '../../components/Select';
 import Checkbox from '../../components/Checkbox';
+import AddToCardOptions from './AddToCardOptions';
 import Comments from './Comments';
 import { typeOptions, groupOptions } from '../../utils/getBugOptions';
 
@@ -33,6 +32,7 @@ export interface BugFileData {
 export interface BugDeveloperData {
   id: string;
   name: string;
+  email: string;
   avatar: string;
   avatar_url: string;
 }
@@ -59,7 +59,10 @@ interface BugData {
 }
 
 const BugReport: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { bugId, projectId } = useParams<{
+    projectId: string;
+    bugId: string;
+  }>();
   const history = useHistory();
 
   const { user } = useAuth();
@@ -68,11 +71,11 @@ const BugReport: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get(`/bugs/${id}`).then(response => {
+    api.get(`/bugs/${bugId}`).then(response => {
       setBug(response.data);
       setLoading(false);
     });
-  }, [id]);
+  }, [bugId]);
 
   const goBack = useCallback(() => {
     history.goBack();
@@ -157,30 +160,7 @@ const BugReport: React.FC = () => {
         </Information>
       )}
 
-      <Options>
-        <p>Adicionar ao card</p>
-
-        <button type="button">
-          <FaCheck size={25} />
-          Checklist
-        </button>
-        <button type="button">
-          <FaUserAlt size={25} />
-          Desenvolvedor
-        </button>
-        <button type="button">
-          <FaFile size={25} />
-          Arquivo
-        </button>
-        <button type="button">
-          <FaClock size={25} />
-          Data de entrega
-        </button>
-
-        <button className="bottom" type="button">
-          EXCLUIR CARD
-        </button>
-      </Options>
+      <AddToCardOptions projectId={projectId} bugId={bug.id} />
     </Container>
   );
 };
