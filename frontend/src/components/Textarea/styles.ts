@@ -44,8 +44,9 @@ export const Container = styled.div<ContainerProps>`
   textarea {
     flex: 1;
     border: none;
+    resize: vertical;
     background: transparent;
-    height: 200px;
+    min-height: 200px;
     font-size: 16px;
 
     &::placeholder {
