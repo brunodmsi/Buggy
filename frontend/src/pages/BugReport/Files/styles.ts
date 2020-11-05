@@ -34,10 +34,12 @@ export const Modal = styled(ModalContainer)`
     margin-top: 20px;
     border-spacing: 0;
     border-style: hidden;
+    width: 100%;
 
     tr {
       display: flex;
       flex-direction: row;
+      width: 100%;
       justify-content: space-between;
       margin-bottom: 20px;
 
