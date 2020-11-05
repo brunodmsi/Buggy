@@ -6,6 +6,7 @@ import { Container } from './styles';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
+  spinnerSize?: number;
   backgroundColor?: string;
 };
 
@@ -13,10 +14,11 @@ const Button: React.FC<ButtonProps> = ({
   children,
   loading,
   backgroundColor,
+  spinnerSize,
   ...rest
 }) => (
   <Container type="button" backgroundColor={backgroundColor} {...rest}>
-    {loading ? <Spinner /> : children}
+    {loading ? <Spinner size={spinnerSize} /> : children}
   </Container>
 );
 
