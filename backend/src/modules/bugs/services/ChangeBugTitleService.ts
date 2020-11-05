@@ -11,7 +11,7 @@ interface IRequest {
 }
 
 @injectable()
-class ChangeBugDescriptionService {
+class ChangeBugTitleService {
   constructor(
     @inject('BugsRepository')
     private bugsRepository: IBugsRepository,
@@ -24,7 +24,7 @@ class ChangeBugDescriptionService {
       throw new AppError('Bug not found');
     }
 
-    bug.description = title;
+    bug.title = title;
 
     await this.bugsRepository.save(bug);
 
@@ -32,4 +32,4 @@ class ChangeBugDescriptionService {
   }
 }
 
-export default ChangeBugDescriptionService;
+export default ChangeBugTitleService;
