@@ -43,38 +43,6 @@ export const Information = styled.div`
   }
 `;
 
-export const Developers = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  section {
-    display: flex;
-
-    img {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      margin-right: 4px;
-    }
-
-    button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #e5ecf8;
-      border: 0;
-      background-color: #5f30e2;
-      border-radius: 50%;
-      height: 35px;
-      width: 35px;
-
-      svg {
-        color: #fff;
-      }
-    }
-  }
-`;
-
 export const LimitDate = styled.div`
   display: flex;
   flex-direction: column;
@@ -87,9 +55,4 @@ export const LimitDate = styled.div`
       font-weight: 400;
     }
   }
-`;
-
-export const Description = styled.div`
-  margin-bottom: 25px;
-  font-size: 18px;
 `;

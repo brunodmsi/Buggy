@@ -2,25 +2,21 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { Form } from '@unform/web';
 import { useHistory, useParams } from 'react-router-dom';
-import { FiArrowLeft, FiPlus } from 'react-icons/fi';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 
-import {
-  Container,
-  Information,
-  Developers,
-  LimitDate,
-  Description,
-} from './styles';
+import { Container, Information, LimitDate } from './styles';
 
 import Tag from '../../components/Tag';
 import Select from '../../components/Select';
 import Checkbox from '../../components/Checkbox';
 
 import AddToCardOptions from './AddToCardOptions';
+import Developers from './Developers';
 import Comments from './Comments';
+import Description from './Description';
 import Files from './Files';
 
 import { typeOptions, groupOptions } from '../../utils/getBugOptions';
@@ -46,7 +42,7 @@ export interface BugCommentData {
   created_at: string;
 }
 
-interface BugData {
+export interface BugData {
   id: string;
   title: string;
   description: string;
@@ -55,7 +51,7 @@ interface BugData {
   type: string;
   date_limit: Date;
   project_id: string;
-  developers: BugDeveloperData[];
+  developers: Array<{ user: BugDeveloperData }>;
   comments: BugCommentData[];
   files: BugFileData[];
 }
@@ -111,20 +107,11 @@ const BugReport: React.FC = () => {
           <p>{bug.title}</p>
 
           <section>
-            <Developers>
-              <p>Desenvolvedores</p>
-
-              <section>
-                <img
-                  src="https://jooinn.com/images/photo-of-woman-11.jpg"
-                  alt="Profile"
-                />
-
-                <button type="button">
-                  <FiPlus size={30} />
-                </button>
-              </section>
-            </Developers>
+            <Developers
+              projectId={projectId}
+              bugId={bugId}
+              developers={bug.developers}
+            />
 
             {bug.date_limit && (
               <LimitDate>
@@ -138,11 +125,7 @@ const BugReport: React.FC = () => {
             )}
           </section>
 
-          <Description>
-            <h2>Descrição</h2>
-
-            <p>{bug.description}</p>
-          </Description>
+          <Description bugId={bug.id} description={bug.description} />
 
           <Files files={bug.files} />
 
