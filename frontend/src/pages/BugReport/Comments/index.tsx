@@ -79,6 +79,11 @@ const Comments: React.FC<CommentsProps> = ({ bugId, comments, user }) => {
       try {
         await api.delete(`/bugs/${bugId}/comments/${commentId}`);
 
+        const newComments = commentList.filter(
+          comment => comment.id !== commentId,
+        );
+        setCommentList(newComments);
+
         addToast({
           title: 'Comentário deletado com sucesso',
           type: 'success',
@@ -92,7 +97,7 @@ const Comments: React.FC<CommentsProps> = ({ bugId, comments, user }) => {
         });
       }
     },
-    [bugId, addToast],
+    [bugId, addToast, commentList],
   );
 
   return (
