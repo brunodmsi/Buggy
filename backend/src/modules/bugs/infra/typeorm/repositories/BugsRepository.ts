@@ -16,6 +16,7 @@ class FakeBugsRepository implements IBugsRepository {
       relations: [
         'project',
         'developers',
+        'developers.user',
         'files',
         'checklists',
         'comments',
