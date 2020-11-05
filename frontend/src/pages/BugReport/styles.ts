@@ -42,17 +42,3 @@ export const Information = styled.div`
     font-weight: 300;
   }
 `;
-
-export const LimitDate = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  section {
-    display: flex;
-    align-items: center;
-    p {
-      margin-left: 10px;
-      font-weight: 400;
-    }
-  }
-`;

@@ -7,7 +7,7 @@ import { FiArrowLeft } from 'react-icons/fi';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 
-import { Container, Information, LimitDate } from './styles';
+import { Container, Information } from './styles';
 
 import Tag from '../../components/Tag';
 import Select from '../../components/Select';
@@ -17,6 +17,8 @@ import AddToCardOptions from './AddToCardOptions';
 import Developers from './Developers';
 import Comments from './Comments';
 import Description from './Description';
+import Summary from './Summary';
+import LimitDate from './LimitDate';
 import Files from './Files';
 
 import { typeOptions, groupOptions } from '../../utils/getBugOptions';
@@ -49,7 +51,8 @@ export interface BugData {
   group: number;
   status: number;
   type: string;
-  date_limit: Date;
+  date_limit: string;
+  delivered: boolean;
   project_id: string;
   developers: Array<{ user: BugDeveloperData }>;
   comments: BugCommentData[];
@@ -104,7 +107,7 @@ const BugReport: React.FC = () => {
             </Form>
           </header>
 
-          <p>{bug.title}</p>
+          <Summary bugId={bug.id} title={bug.title} />
 
           <section>
             <Developers
@@ -113,16 +116,11 @@ const BugReport: React.FC = () => {
               developers={bug.developers}
             />
 
-            {bug.date_limit && (
-              <LimitDate>
-                <p>Data limite</p>
-
-                <section>
-                  <Checkbox />
-                  <p>5 de outubro às 11:59</p>
-                </section>
-              </LimitDate>
-            )}
+            <LimitDate
+              bugId={bug.id}
+              date={bug.date_limit}
+              delivered={bug.delivered}
+            />
           </section>
 
           <Description bugId={bug.id} description={bug.description} />
