@@ -38,7 +38,7 @@ const LimitDate: React.FC<LimitDateProps> = ({
       setDelivered(!delivered);
 
       addToast({
-        title: !delivered ? 'Desmarcado como entregue' : 'Atividade entregue!',
+        title: delivered ? 'Desmarcado como entregue' : 'Atividade entregue!',
         type: 'success',
       });
     } catch (err) {
