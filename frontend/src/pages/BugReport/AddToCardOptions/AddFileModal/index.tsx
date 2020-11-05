@@ -9,6 +9,7 @@ import { useToast } from '../../../../hooks/toast';
 import api from '../../../../services/api';
 import FileInput from '../../../../components/FileInput';
 import Button from '../../../../components/Button';
+import Spinner from '../../../../components/Spinner';
 
 import { Modal } from './styles';
 
@@ -31,7 +32,7 @@ const AddFileModal: React.FC<IAddFileModalProps> = ({
   const handleSubmit = useCallback(
     async data => {
       try {
-        setLoading(false);
+        setLoading(true);
 
         const schema = Yup.object().shape({
           file: Yup.string().required(),
@@ -75,7 +76,9 @@ const AddFileModal: React.FC<IAddFileModalProps> = ({
       <Form ref={formRef} onSubmit={handleSubmit}>
         <FileInput name="file" placeholder="Adicionar arquivo" />
 
-        <Button type="submit">{loading ? 'Carregando...' : 'Enviar'}</Button>
+        <Button type="submit" loading={loading}>
+          Enviar
+        </Button>
       </Form>
     </Modal>
   );

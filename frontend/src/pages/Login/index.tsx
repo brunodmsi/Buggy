@@ -94,8 +94,8 @@ const Login: React.FC = () => {
 
         <Link to="/forgot-password">Esqueci minha senha</Link>
 
-        <Button type="submit">
-          {loading ? 'Carregando...' : 'Entrar agora'}
+        <Button type="submit" loading={loading}>
+          Entrar agora
         </Button>
 
         <Link to="/register">

@@ -143,8 +143,8 @@ const CreateNewProjectModal: React.FC<CreateNewProjectModalProps> = ({
               Cancelar
             </Button>
 
-            <Button type="submit">
-              {loading ? 'Carregando...' : 'Criar projeto'}
+            <Button type="submit" loading={loading}>
+              Criar projeto
             </Button>
           </footer>
         </Form>

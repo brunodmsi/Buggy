@@ -106,7 +106,9 @@ const AddDeveloperModal: React.FC<IAddDeveloperModalProps> = ({
       <Form ref={formRef} onSubmit={handleSubmit}>
         <Input name="developer" placeholder="Adicionar por e-mail" />
 
-        <Button type="submit">{loading ? 'Carregando...' : 'Enviar'}</Button>
+        <Button type="submit" loading={loading}>
+          Enviar
+        </Button>
       </Form>
     </Modal>
   );
