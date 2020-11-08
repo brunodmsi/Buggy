@@ -9,7 +9,8 @@ import { useToast } from '../../../hooks/toast';
 import Button from '../../../components/Button';
 import getValidationErrors from '../../../utils/getValidationErrors';
 
-import { Container, ShowChecklist, Input, Checkbox } from './styles';
+import ChecklistItem from './ChecklistItem';
+import { Container, ShowChecklist, Input } from './styles';
 
 import { BugChecklistData } from '..';
 
@@ -23,15 +24,12 @@ const Checklists: React.FC<ChecklistProps> = ({
   checklists: propChecklists,
 }) => {
   const addNewItemFormRef = useRef<FormHandles>(null);
+
   const [checklists, setChecklists] = useState(propChecklists);
   const [editLoading, setEditLoading] = useState(false);
-  const [isAddingItem, setIsAddingItem] = useState(false);
+  const [isAddingItem, setIsAddingItem] = useState('');
 
   const { addToast } = useToast();
-
-  const handleItemDoneCheckbox = useCallback(data => {
-    console.log(data);
-  }, []);
 
   const handleAddChecklistItem = useCallback(
     async (data, checklist) => {
@@ -45,7 +43,7 @@ const Checklists: React.FC<ChecklistProps> = ({
 
         await schema.validate(data, { abortEarly: false });
 
-        const response = await api.patch(
+        const response = await api.post(
           `/bugs/checklists/${checklist.id}/items`,
           data,
         );
@@ -59,7 +57,7 @@ const Checklists: React.FC<ChecklistProps> = ({
         });
 
         setEditLoading(false);
-        setIsAddingItem(false);
+        setIsAddingItem('');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -94,6 +92,7 @@ const Checklists: React.FC<ChecklistProps> = ({
                 return (
                   <Form
                     ref={addNewItemFormRef}
+                    key={`${item.text}-${item.checklist_id}`}
                     onSubmit={data => handleAddChecklistItem(data, checklist)}
                   >
                     <Input name="text" placeholder="Atividade" />
@@ -103,19 +102,12 @@ const Checklists: React.FC<ChecklistProps> = ({
 
               return (
                 <div>
-                  <Form onSubmit={handleItemDoneCheckbox}>
-                    <Checkbox
-                      name="done"
-                      options={[
-                        { id: '1', label: item.text, value: item.done ? 1 : 0 },
-                      ]}
-                    />
-                  </Form>
+                  <ChecklistItem item={item} />
                 </div>
               );
             })}
 
-            {isAddingItem ? (
+            {isAddingItem === checklist.id ? (
               <div className="newItemOptions">
                 <Button
                   className="saveNewItem"
@@ -130,7 +122,7 @@ const Checklists: React.FC<ChecklistProps> = ({
                   onClick={() => {
                     checklist.items.pop();
 
-                    setIsAddingItem(false);
+                    setIsAddingItem('');
                   }}
                 >
                   Cancelar
@@ -140,12 +132,12 @@ const Checklists: React.FC<ChecklistProps> = ({
               <Button
                 onClick={() => {
                   checklist.items.push({
+                    id: 'Teste',
                     text: '',
                     done: false,
-                    checklist_id: checklist.id,
                   });
 
-                  setIsAddingItem(true);
+                  setIsAddingItem(checklist.id);
                 }}
               >
                 Adicionar item

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { darken } from 'polished';
 
 import InputComponent from '../../../components/Input';
-import CheckboxComponent from '../../../components/Checkbox';
 
 interface ContainerProps {
   show: boolean;
@@ -14,6 +13,14 @@ export const Container = styled.div<ContainerProps>`
 `;
 
 export const ShowChecklist = styled.div`
+  & + & {
+    margin-top: 20px;
+  }
+
+  .existingItems {
+    margin-top: 5px;
+  }
+
   span {
     font-size: 14px;
   }
@@ -63,10 +70,4 @@ export const ShowChecklist = styled.div`
 export const Input = styled(InputComponent)`
   padding: 8px;
   max-width: 40%;
-`;
-
-export const Checkbox = styled(CheckboxComponent)`
-  label {
-    margin-left: 5px;
-  }
 `;
