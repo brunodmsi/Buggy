@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import ModalContainer from '../../../components/Modal';
+import ModalContainer from '../../../components/ModalContainer';
 
 interface ContainerProps {
   show: boolean;

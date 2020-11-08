@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Form as WebForm } from '@unform/web';
-import ModalContainer from '../../../components/Modal';
+import ModalContainer from '../../../components/ModalContainer';
 
 export const Container = styled.div``;
 

@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { shade } from 'polished';
-import ModalComponent from '../../components/Modal';
 
 export const Container = styled.div`
   width: 100%;

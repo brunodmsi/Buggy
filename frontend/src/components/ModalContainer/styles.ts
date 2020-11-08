@@ -1,18 +1,6 @@
 import styled from 'styled-components';
-import ModalContainer from '../../../../components/ModalContainer';
 
-export const Modal = styled(ModalContainer)`
-  display: flex;
-  flex-direction: column;
-  max-width: 900px;
-  width: 900px;
-  position: relative;
-
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-
+export const Container = styled.div`
   .close-button {
     display: flex;
     align-items: center;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ModalContainer from '../../../../components/Modal';
+import ModalContainer from '../../../../components/ModalContainer';
 
 export const Modal = styled(ModalContainer)`
   display: flex;

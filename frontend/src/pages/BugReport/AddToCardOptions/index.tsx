@@ -1,12 +1,11 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 import { FaUserAlt, FaFile, FaClock, FaCheck } from 'react-icons/fa';
-
-import api from '../../../services/api';
 
 import AddFileModal from './AddFileModal';
 import AddDeveloperModal from './AddDeveloperModal';
 import AddDateLimitModal from './AddDateLimitModal';
+import AddChecklistModal from './AddChecklistModal';
 
 import { Container } from './styles';
 
@@ -22,12 +21,13 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
   const [openFileModal, setOpenFileModal] = useState(false);
   const [openDeveloperModal, setOpenDeveloperModal] = useState(false);
   const [openDateLimitModal, setOpenDateLimitModal] = useState(false);
+  const [openChecklistModal, setOpenChecklistModal] = useState(false);
 
   return (
     <Container>
       <p>Adicionar ao card</p>
 
-      <button type="button">
+      <button type="button" onClick={() => setOpenChecklistModal(true)}>
         <FaCheck size={25} />
         Checklist
       </button>
@@ -77,6 +77,18 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
         openModal={openDateLimitModal}
         closeModal={async (action?: string) => {
           setOpenDateLimitModal(false);
+
+          if (action === 'reload') {
+            document.location.reload();
+          }
+        }}
+      />
+
+      <AddChecklistModal
+        bugId={bugId}
+        openModal={openChecklistModal}
+        closeModal={async (action?: string) => {
+          setOpenChecklistModal(false);
 
           if (action === 'reload') {
             document.location.reload();

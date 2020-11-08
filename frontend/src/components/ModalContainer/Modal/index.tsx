@@ -2,16 +2,12 @@ import React from 'react';
 
 import { Container, Content } from './styles';
 
-interface ModalProps {
-  isOpen: boolean;
-}
-
-const Modal: React.FC<ModalProps & React.HTMLAttributes<HTMLDivElement>> = ({
-  isOpen,
+const Modal: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   children,
   className,
+  style,
 }) => (
-  <Container isOpen={isOpen}>
+  <Container style={style}>
     <Content className={className}>{children}</Content>
   </Container>
 );

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { shade } from 'polished';
-import ModalContainer from '../../../components/Modal';
+import ModalContainer from '../../../components/ModalContainer';
 
 export const Modal = styled(ModalContainer)`
   color: #27334d;

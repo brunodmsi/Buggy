@@ -1,10 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { animated } from 'react-spring';
 
-interface ContainerProps {
-  isOpen: boolean;
-}
-
-export const Container = styled.div<ContainerProps>`
+export const Container = styled(animated.div)`
   z-index: 400;
   position: fixed;
   right: 0;
@@ -12,17 +9,8 @@ export const Container = styled.div<ContainerProps>`
   left: 0;
   top: 0;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
+  /* background-color: rgba(255, 255, 255, 0.5); */
   border-radius: 10px;
-
-  ${({ isOpen }) =>
-    isOpen
-      ? css`
-          visibility: visible;
-        `
-      : css`
-          visibility: hidden;
-        `};
 `;
 
 export const Content = styled.div`
@@ -32,7 +20,6 @@ export const Content = styled.div`
   padding: 40px;
   border-radius: 10px;
   position: absolute;
-  /* width: 800px; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
