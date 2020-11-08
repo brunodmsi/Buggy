@@ -11,10 +11,11 @@ export const Container = styled.div`
     > div {
       display: flex;
       width: 100%;
-      justify-content: space-between;
 
       button {
-        width: 150px;
+        padding: 10px 11px;
+        font-size: 14px;
+        height: 40px;
         margin-top: 5px;
         margin-bottom: 25px;
 

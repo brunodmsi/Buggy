@@ -29,9 +29,10 @@ interface ProjectData {
 }
 
 export interface BugChecklistItemData {
+  id: string;
   text: string;
   done: boolean;
-  checklist_id: string;
+  checklist_id?: string;
 }
 
 export interface BugChecklistData {
