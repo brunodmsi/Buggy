@@ -18,16 +18,29 @@ import Developers from './Developers';
 import Comments from './Comments';
 import Description from './Description';
 import Summary from './Summary';
+import Checklist from './Checklist';
 import LimitDate from './LimitDate';
 import Files from './Files';
 
-import { typeOptions, groupOptions } from '../../utils/getBugOptions';
+import { typeOptions } from '../../utils/getBugOptions';
 
 interface ProjectData {
   id: string;
   name: string;
   logo: string;
   logo_url: string;
+}
+
+export interface BugChecklistItemData {
+  text: string;
+  done: boolean;
+  checklist_id: string;
+}
+
+export interface BugChecklistData {
+  id: string;
+  title: string;
+  items: BugChecklistItemData[];
 }
 
 export interface BugFileData {
@@ -63,6 +76,7 @@ export interface BugData {
   delivered: boolean;
   project_id: string;
   project: ProjectData;
+  checklists: BugChecklistData[];
   developers: Array<{ user: BugDeveloperData }>;
   comments: BugCommentData[];
   files: BugFileData[];
@@ -110,10 +124,6 @@ const BugReport: React.FC = () => {
                 typeOptions.find(option => option.value === 'web')?.backColor
               }
             />
-
-            {/* <Form onSubmit={handleStatusChange}>
-              <Select name="status" options={groupOptions} />
-            </Form> */}
           </header>
 
           <Summary bugId={bug.id} title={bug.title} />
@@ -133,6 +143,8 @@ const BugReport: React.FC = () => {
           </section>
 
           <Description bugId={bug.id} description={bug.description} />
+
+          <Checklist bugId={bugId} checklists={bug.checklists} />
 
           <Files files={bug.files} />
 
