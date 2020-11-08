@@ -7,26 +7,29 @@ import FakeUserProjectsRepository from '@modules/projects/repositories/fakes/Fak
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import FakeBugsRepository from '../repositories/fakes/FakeBugsRepository';
 import FakeBugChecklistsRepository from '../repositories/fakes/FakeBugChecklistsRepository';
-import AddChecklistToBugService from './AddChecklistToBugService';
+import FakeBugChecklistItemsRepository from '../repositories/fakes/FakeBugChecklistItemsRepository';
 import CreateBugService from './CreateBugService';
+import AddItemToBugChecklistService from './AddItemToBugChecklistService';
 
 let fakeBugsRepository: FakeBugsRepository;
 let fakeUsersRepository: FakeUsersRepository;
 let fakeProjectsRepository: FakeProjectsRepository;
 let fakeBugChecklistsRepository: FakeBugChecklistsRepository;
+let fakeBugChecklistItemsRepository: FakeBugChecklistItemsRepository;
 let fakeUserProjectsRepository: FakeUserProjectsRepository;
 let fakeStorageProvider: FakeStorageProvider;
-let addChecklistToBug: AddChecklistToBugService;
+let addItemToBugChecklist: AddItemToBugChecklistService;
 let createBug: CreateBugService;
 let createProject: CreateProjectService;
 
-describe('AddCommentToBug', () => {
+describe('AddItemToBugChecklist', () => {
   beforeEach(() => {
     fakeBugsRepository = new FakeBugsRepository();
     fakeUsersRepository = new FakeUsersRepository();
     fakeProjectsRepository = new FakeProjectsRepository();
     fakeBugChecklistsRepository = new FakeBugChecklistsRepository();
     fakeUserProjectsRepository = new FakeUserProjectsRepository();
+    fakeBugChecklistItemsRepository = new FakeBugChecklistItemsRepository();
     fakeStorageProvider = new FakeStorageProvider();
 
     createProject = new CreateProjectService(
@@ -41,9 +44,9 @@ describe('AddCommentToBug', () => {
       fakeProjectsRepository,
     );
 
-    addChecklistToBug = new AddChecklistToBugService(
-      fakeBugsRepository,
+    addItemToBugChecklist = new AddItemToBugChecklistService(
       fakeBugChecklistsRepository,
+      fakeBugChecklistItemsRepository,
     );
   });
 
@@ -71,19 +74,24 @@ describe('AddCommentToBug', () => {
       date_limit: new Date(2020, 8, 20, 11, 0),
     });
 
-    const bugChecklist = await addChecklistToBug.execute({
+    const bugChecklist = await fakeBugChecklistsRepository.create({
       bug_id: bug.id,
       title: 'Ajustes CSS',
     });
 
-    expect(bugChecklist).toHaveProperty('id');
+    await expect(
+      addItemToBugChecklist.execute({
+        checklist_id: bugChecklist.id,
+        text: 'Responsividade na dashboard',
+      }),
+    ).toHaveProperty('id');
   });
 
-  it('should not be able to add a checklist to a non-existing bug', async () => {
+  it('should not be able to add a checklist to a non-existing checklist', async () => {
     await expect(
-      addChecklistToBug.execute({
-        bug_id: 'non-existing-bug',
-        title: 'Ajustes CSS',
+      addItemToBugChecklist.execute({
+        checklist_id: 'non-existing-checklist',
+        text: 'Responsividade na dashboard',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
