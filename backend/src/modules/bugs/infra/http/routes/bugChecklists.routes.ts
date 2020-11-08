@@ -22,7 +22,7 @@ bugChecklistRouter.post(
   bugChecklistController.create,
 );
 
-bugChecklistRouter.patch(
+bugChecklistRouter.post(
   '/checklists/:checklist_id/items',
   celebrate({
     [Segments.BODY]: {
@@ -30,6 +30,19 @@ bugChecklistRouter.patch(
     },
     [Segments.PARAMS]: {
       checklist_id: Joi.string().uuid().required(),
+    },
+  }),
+  bugChecklistItemController.create,
+);
+
+bugChecklistRouter.patch(
+  '/checklists/items/:checklist_item_id',
+  celebrate({
+    [Segments.BODY]: {
+      status: Joi.boolean().required(),
+    },
+    [Segments.PARAMS]: {
+      checklist_item_id: Joi.string().uuid().required(),
     },
   }),
   bugChecklistItemController.update,

@@ -31,7 +31,7 @@ class BugChecklist {
     () => BugChecklistItem,
     bugChecklistItem => bugChecklistItem.checklist,
   )
-  checklistItems: BugChecklistItem[];
+  items: BugChecklistItem[];
 
   @CreateDateColumn()
   created_at: Date;

@@ -19,6 +19,7 @@ class FakeBugsRepository implements IBugsRepository {
         'developers.user',
         'files',
         'checklists',
+        'checklists.items',
         'comments',
         'comments.user',
       ],
