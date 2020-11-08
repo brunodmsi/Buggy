@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { Form } from '@unform/web';
 import { useHistory, useParams } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 
@@ -10,15 +9,13 @@ import { useAuth } from '../../hooks/auth';
 import { Container, Information } from './styles';
 
 import Tag from '../../components/Tag';
-import Select from '../../components/Select';
-import Checkbox from '../../components/Checkbox';
 
 import AddToCardOptions from './AddToCardOptions';
 import Developers from './Developers';
 import Comments from './Comments';
 import Description from './Description';
 import Summary from './Summary';
-import Checklist from './Checklist';
+import Checklists from './Checklists';
 import LimitDate from './LimitDate';
 import Files from './Files';
 
@@ -144,7 +141,7 @@ const BugReport: React.FC = () => {
 
           <Description bugId={bug.id} description={bug.description} />
 
-          <Checklist bugId={bugId} checklists={bug.checklists} />
+          <Checklists bugId={bugId} checklists={bug.checklists} />
 
           <Files files={bug.files} />
 
