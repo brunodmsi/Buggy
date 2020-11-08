@@ -7,12 +7,12 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   options: Array<{
     id: string;
-    value: string;
+    value: string | number;
     label: string;
   }>;
 }
 
-const Checkbox: React.FC<Props> = ({ name, options, ...rest }) => {
+const Checkbox: React.FC<Props> = ({ name, className, options, ...rest }) => {
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const { fieldName, registerField, defaultValue = [] } = useField(name);
 
@@ -39,7 +39,7 @@ const Checkbox: React.FC<Props> = ({ name, options, ...rest }) => {
   }, [defaultValue, registerField, fieldName]);
 
   return (
-    <Container>
+    <Container className={className}>
       {options.map((option, index) => (
         <>
           <input
