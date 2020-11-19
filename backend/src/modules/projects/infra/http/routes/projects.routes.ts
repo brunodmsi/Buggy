@@ -18,6 +18,9 @@ const projectsRouter = Router();
 projectsRouter.use('/', userProjectsRouter);
 
 projectsRouter.use(ensureAuthenticated);
+
+projectsRouter.get('/:projectId', projectsController.show);
+
 projectsRouter.post(
   '/',
   upload.single('logo'),
