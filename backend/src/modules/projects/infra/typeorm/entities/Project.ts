@@ -32,6 +32,9 @@ class Project {
   @Column()
   logo: string;
 
+  @Column()
+  listener_key: string;
+
   @OneToMany(() => Bug, bug => bug.project)
   bugs: Bug[];
 

@@ -14,6 +14,14 @@ class FakeProjectsRepository implements IProjectsRepository {
     return findProject;
   }
 
+  public async findByListenerKey(key: string): Promise<Project | undefined> {
+    const findProject = this.projects.find(
+      project => project.listener_key === key,
+    );
+
+    return findProject;
+  }
+
   public async findByIdWithBugs(id: string): Promise<Project | undefined> {
     const findProject = this.projects.find(project => project.id === id);
 
@@ -34,7 +42,7 @@ class FakeProjectsRepository implements IProjectsRepository {
   public async create(projectData: ICreateProjectDTO): Promise<Project> {
     const project = new Project();
 
-    Object.assign(project, { id: uuid() }, projectData);
+    Object.assign(project, { id: uuid(), listener_key: uuid() }, projectData);
 
     this.projects.push(project);
 

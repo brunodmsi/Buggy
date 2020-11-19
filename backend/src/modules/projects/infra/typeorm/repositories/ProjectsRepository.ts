@@ -18,6 +18,14 @@ class ProjectsRepository implements IProjectsRepository {
     return project;
   }
 
+  public async findByListenerKey(key: string): Promise<Project | undefined> {
+    const project = await this.ormRepository.findOne({
+      where: { listener_key: key },
+    });
+
+    return project;
+  }
+
   public async findByIdWithBugs(id: string): Promise<Project | undefined> {
     const project = await this.ormRepository.findOne(id, {
       relations: ['bugs', 'bugs.developers', 'bugs.developers.user'],

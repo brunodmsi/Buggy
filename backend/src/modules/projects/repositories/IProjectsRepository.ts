@@ -4,6 +4,7 @@ import ICreateProjectDTO from '../dtos/ICreateProjectDTO';
 
 export default interface IProjectsRepository {
   findById(id: string): Promise<Project | undefined>;
+  findByListenerKey(key: string): Promise<Project | undefined>;
   findByIdWithBugs(id: string): Promise<Project | undefined>;
   findByProjectAndOwnerId(
     projectId: string,
