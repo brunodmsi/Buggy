@@ -6,10 +6,12 @@ import {
   UpdateDateColumn,
   OneToMany,
   ManyToOne,
+  OneToOne,
   JoinColumn,
 } from 'typeorm';
 
 import Project from '@modules/projects/infra/typeorm/entities/Project';
+import ListenerReport from '@modules/listener_reports/infra/typeorm/entities/ListenerReport';
 import BugDeveloper from './BugDeveloper';
 import BugChecklist from './BugChecklist';
 import BugComment from './BugComment';
@@ -46,6 +48,12 @@ class Bug {
 
   @Column()
   project_id: string;
+
+  @Column()
+  listener_report_id: string;
+
+  @OneToOne(() => ListenerReport, listenerReport => listenerReport.bug_id)
+  listener_report: ListenerReport;
 
   @ManyToOne(() => Project)
   @JoinColumn({ name: 'project_id' })

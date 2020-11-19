@@ -6,4 +6,5 @@ export default interface ICreateBugDTO {
   status: number;
   date_limit?: Date;
   project_id: string;
+  listener_report_id?: string;
 }
