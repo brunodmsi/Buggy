@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 
 import api from '../../services/api';
+import { useAuth } from '../../hooks/auth';
 
 import CreateNewBugModal from './CreateNewBugModal';
 import DragNDrop from './DragNDrop';
@@ -13,6 +14,7 @@ interface IProjectDataProps {
   id: string;
   name: string;
   logo_url: string;
+  owner_id: string;
 }
 
 interface IDeveloperData {
@@ -37,9 +39,11 @@ export interface IDragAndDropDataProps {
   };
 }
 
-const Bugs: React.FC = () => {
+const ProjectBugs: React.FC = () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
+
+  const { user } = useAuth();
 
   const [project, setProject] = useState<IProjectDataProps>(
     {} as IProjectDataProps,
@@ -80,6 +84,10 @@ const Bugs: React.FC = () => {
           </button>
           <h1>{project.name}</h1>
         </section>
+
+        {project.owner_id === user.id && (
+          <Link to={`/projects/${id}/config`}>Configurações</Link>
+        )}
       </header>
 
       <DragNDrop
@@ -100,4 +108,4 @@ const Bugs: React.FC = () => {
   );
 };
 
-export default Bugs;
+export default ProjectBugs;

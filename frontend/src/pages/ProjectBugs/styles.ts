@@ -7,6 +7,20 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
 
+    > a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+      font-size: 14px;
+      background-color: #5f30e2;
+      color: #fff;
+      border-radius: 5px;
+      border: none;
+      margin-right: 50px;
+      text-decoration: none;
+    }
+
     section {
       display: flex;
       align-items: center;
