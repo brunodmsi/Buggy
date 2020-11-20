@@ -1,0 +1,17 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "DB_PASS",
+  "database": "DB_NAME",
+  "entities": [
+    "./<FOLDER>/modules/**/infra/typeorm/entities/*.ts"
+  ],
+  "migrations": [
+    "./<FOLDER>/shared/infra/typeorm/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "./<FOLDER>/shared/infra/typeorm/migrations"
+  }
+}

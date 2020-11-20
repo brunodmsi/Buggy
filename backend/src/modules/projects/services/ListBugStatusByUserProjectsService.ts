@@ -16,7 +16,7 @@ interface IRequest {
 }
 
 @injectable()
-class ListBugByUserProjectsService {
+class ListBugStatusByUserProjectsService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -50,4 +50,4 @@ class ListBugByUserProjectsService {
   }
 }
 
-export default ListBugByUserProjectsService;
+export default ListBugStatusByUserProjectsService;
