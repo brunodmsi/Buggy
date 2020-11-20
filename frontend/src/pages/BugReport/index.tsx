@@ -71,6 +71,7 @@ export interface BugData {
   type: string;
   priority: string;
   date_limit: string;
+  listener_report_id?: string;
   delivered: boolean;
   project_id: string;
   project: ProjectData;
@@ -140,7 +141,11 @@ const BugReport: React.FC = () => {
             />
           </section>
 
-          <Description bugId={bug.id} description={bug.description} />
+          <Description
+            bugId={bug.id}
+            isFromListenerReport={!!bug.listener_report_id}
+            description={bug.description}
+          />
 
           <Checklists bugId={bugId} checklists={bug.checklists} />
 

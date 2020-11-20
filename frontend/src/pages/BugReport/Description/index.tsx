@@ -15,11 +15,13 @@ import { Container } from './styles';
 interface DescriptionProps {
   description: string;
   bugId: string;
+  isFromListenerReport?: boolean;
 }
 
 const Description: React.FC<DescriptionProps> = ({
   bugId,
   description: propDescription,
+  isFromListenerReport,
 }) => {
   const formRef = useRef<FormHandles>(null);
   const [description, setDescription] = useState(propDescription);
@@ -70,6 +72,10 @@ const Description: React.FC<DescriptionProps> = ({
   return (
     <Container onClick={() => !isEdit && setIsEdit(true)}>
       <h2>Descrição</h2>
+
+      {isFromListenerReport && (
+        <span>Este bug foi enviado pelo Buggy Listener</span>
+      )}
 
       {isEdit ? (
         <Form ref={formRef} onSubmit={handleEditSubmit}>

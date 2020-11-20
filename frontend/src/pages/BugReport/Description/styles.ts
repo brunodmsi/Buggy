@@ -4,6 +4,14 @@ export const Container = styled.div`
   margin-bottom: 25px;
   font-size: 18px;
 
+  span {
+    font-size: 12px;
+  }
+
+  p {
+    white-space: pre-line;
+  }
+
   form {
     display: flex;
     flex-direction: column;
