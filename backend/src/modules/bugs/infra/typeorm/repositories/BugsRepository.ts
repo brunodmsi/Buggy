@@ -4,7 +4,7 @@ import ICreateBugDTO from '@modules/bugs/dtos/ICreateBugDTO';
 import Bug from '@modules/bugs/infra/typeorm/entities/Bug';
 import IBugsRepository from '@modules/bugs/repositories/IBugsRepository';
 
-class FakeBugsRepository implements IBugsRepository {
+class BugsRepository implements IBugsRepository {
   private ormRepository: Repository<Bug>;
 
   constructor() {
@@ -47,6 +47,10 @@ class FakeBugsRepository implements IBugsRepository {
   public async save(bug: Bug): Promise<Bug> {
     return this.ormRepository.save(bug);
   }
+
+  public async deleteById(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
+  }
 }
 
-export default FakeBugsRepository;
+export default BugsRepository;

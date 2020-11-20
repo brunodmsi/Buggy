@@ -8,4 +8,6 @@ export default interface IBugsRepository {
 
   create(data: ICreateBugDTO): Promise<Bug>;
   save(bug: Bug): Promise<Bug>;
+
+  deleteById(id: string): Promise<void>;
 }

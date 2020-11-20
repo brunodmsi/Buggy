@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 
-import BugController from '../controllers/BugsController';
+import BugsController from '../controllers/BugsController';
 import BugDateController from '../controllers/BugDateController';
 import BugGroupController from '../controllers/BugGroupController';
 import BugDescriptionController from '../controllers/BugDescriptionController';
@@ -11,7 +11,7 @@ import ListBugController from '../controllers/ListBugController';
 
 const bugsRouter = Router();
 
-const bugController = new BugController();
+const bugController = new BugsController();
 const bugDateController = new BugDateController();
 const listBugController = new ListBugController();
 const bugGroupController = new BugGroupController();
@@ -34,6 +34,16 @@ bugsRouter.post(
     },
   }),
   bugController.create,
+);
+
+bugsRouter.delete(
+  '/:bug_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      bug_id: Joi.string().uuid().required(),
+    },
+  }),
+  bugController.destroy,
 );
 
 bugsRouter.patch(

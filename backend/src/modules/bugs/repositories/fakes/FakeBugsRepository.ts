@@ -36,6 +36,12 @@ class FakeBugsRepository implements IBugsRepository {
 
     return bug;
   }
+
+  public async deleteById(id: string): Promise<void> {
+    const findIndex = this.bugs.findIndex(findBug => findBug.id === id);
+
+    this.bugs.splice(findIndex, 0);
+  }
 }
 
 export default FakeBugsRepository;
