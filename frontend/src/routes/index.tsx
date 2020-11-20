@@ -10,6 +10,7 @@ import Dashboard from '../pages/Dashboard';
 import AllProjects from '../pages/AllProjects';
 import ProjectBugs from '../pages/ProjectBugs';
 import BugReport from '../pages/BugReport';
+import ProjectConfigs from '../pages/ProjectConfigs';
 
 import Route from './Route';
 
@@ -23,6 +24,12 @@ const Routes: React.FC = () => (
     <Route path="/" exact component={Dashboard} isPrivate />
     <Route path="/projects" exact component={AllProjects} isPrivate />
     <Route path="/projects/:id" exact component={ProjectBugs} isPrivate />
+    <Route
+      path="/projects/:id/config"
+      exact
+      component={ProjectConfigs}
+      isPrivate
+    />
     <Route
       path="/projects/:projectId/bugs/:bugId"
       component={BugReport}
