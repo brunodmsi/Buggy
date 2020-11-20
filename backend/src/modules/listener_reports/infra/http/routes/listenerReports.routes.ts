@@ -17,6 +17,7 @@ listenerReportsRouter.post(
       stack_line: Joi.string().required(),
       stack_where: Joi.string().required(),
       listener_key: Joi.string().uuid().required(),
+      query: Joi.string(),
     },
   }),
   bugListenerReportController.create,

@@ -3,4 +3,5 @@ export default interface ICreateListenerReportDTO {
   message: string;
   stack_where: string;
   stack_line: string;
+  query?: string;
 }

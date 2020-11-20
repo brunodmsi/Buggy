@@ -27,6 +27,9 @@ class ListenerReport {
   stack_line: string;
 
   @Column()
+  query: string;
+
+  @Column()
   bug_id: string;
 
   @OneToOne(() => Bug, bug => bug.id)
