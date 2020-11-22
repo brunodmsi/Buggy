@@ -33,7 +33,11 @@ const Sidebar: React.FC = props => {
       </div>
 
       <footer>
-        <button type="button" onClick={() => signOut()}>
+        <Link className="profile-config" to="/profile">
+          Meu perfil
+        </Link>
+
+        <button className="user-logout" type="button" onClick={() => signOut()}>
           Sair
         </button>
       </footer>

@@ -80,16 +80,33 @@ export const Container = styled.nav`
 
   footer {
     display: flex;
+    flex-direction: column;
     margin-bottom: 40px;
     padding: 20px;
     justify-content: center;
 
-    button {
-      width: 100%;
+    .profile-config {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background-color: #5f30e2;
+    }
+
+    .user-logout {
       background-color: #ff3333;
+    }
+
+    button,
+    .profile-config {
+      width: 100%;
       color: #fff;
       border: 0;
       border-radius: 5px;
+
+      & + button {
+        margin-top: 10px;
+      }
     }
   }
 `;

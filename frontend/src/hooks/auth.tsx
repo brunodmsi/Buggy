@@ -34,6 +34,7 @@ interface AuthContextData {
   signUp(data: SignUpData): Promise<void>;
   signOut(): void;
   isSigned: boolean;
+  updateUser(user: UserData): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -72,11 +73,23 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState);
   }, []);
 
+  const updateUser = useCallback(
+    (user: UserData) => {
+      localStorage.setItem('@Buggy:user', JSON.stringify(user));
+
+      setData({
+        token: data.token,
+        user,
+      });
+    },
+    [data.token],
+  );
+
   const isSigned = !!data.user;
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, signIn, signOut, signUp, isSigned }}
+      value={{ user: data.user, signIn, signOut, signUp, isSigned, updateUser }}
     >
       {children}
     </AuthContext.Provider>
