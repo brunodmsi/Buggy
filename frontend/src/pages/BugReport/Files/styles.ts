@@ -123,7 +123,7 @@ export const Container = styled.div<ContainerProps>`
       justify-content: center;
       align-items: center;
       height: 100px;
-      width: 100px;
+      width: 200px;
       background-color: #27334d;
       color: #fff;
       text-decoration: none;
@@ -133,7 +133,8 @@ export const Container = styled.div<ContainerProps>`
       }
 
       img {
-        height: 100px;
+        height: inherit;
+        max-width: inherit;
       }
     }
   }
