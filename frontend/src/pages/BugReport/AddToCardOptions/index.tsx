@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { FaUserAlt, FaFile, FaClock, FaCheck } from 'react-icons/fa';
 
@@ -6,6 +7,7 @@ import AddFileModal from './AddFileModal';
 import AddDeveloperModal from './AddDeveloperModal';
 import AddDateLimitModal from './AddDateLimitModal';
 import AddChecklistModal from './AddChecklistModal';
+import AddCardDeleteModal from './AddCardDeleteModal';
 
 import { Container } from './styles';
 
@@ -18,10 +20,13 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
   bugId,
   projectId,
 }) => {
+  const history = useHistory();
+
   const [openFileModal, setOpenFileModal] = useState(false);
   const [openDeveloperModal, setOpenDeveloperModal] = useState(false);
   const [openDateLimitModal, setOpenDateLimitModal] = useState(false);
   const [openChecklistModal, setOpenChecklistModal] = useState(false);
+  const [openCardDeleteModal, setOpenCardDeleteModal] = useState(false);
 
   return (
     <Container>
@@ -96,7 +101,23 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
         }}
       />
 
-      <button className="bottom" type="button">
+      <AddCardDeleteModal
+        bugId={bugId}
+        openModal={openCardDeleteModal}
+        closeModal={async (action?: string) => {
+          setOpenCardDeleteModal(false);
+
+          if (action === 'reload') {
+            history.goBack();
+          }
+        }}
+      />
+
+      <button
+        className="bottom"
+        type="button"
+        onClick={() => setOpenCardDeleteModal(true)}
+      >
         EXCLUIR CARD
       </button>
     </Container>
