@@ -2188,10 +2188,10 @@ buffer@^5.5.0:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
 
-buggy-listener-express@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/buggy-listener-express/-/buggy-listener-express-1.0.1.tgz#e67b09f69bf5faec3ad3db1ba2a6869926b36bf4"
-  integrity sha512-Ff6nj9s/zbmMHWYl0AwOgQXCLuPxBShrCo+VNViUNO6/lJ1jSn7uo3vsEk8cw3Xm/xvqAQ49NbPSa3m9zpArNA==
+buggy-listener-express@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/buggy-listener-express/-/buggy-listener-express-1.0.4.tgz#46a4146fcd236c9841041736056e3ada24ee44a9"
+  integrity sha512-jjaiWYX/g6QD7xqBGHShtCXt5oIP/W3oBZUKb/VmE6N6Ky+fOAA2hDSiq6iPYtIOmOZQcGwyrWISjyik07y+dQ==
   dependencies:
     axios "^0.21.0"
 
@@ -4785,11 +4785,6 @@ lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
-
-little-react-tooltip@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/little-react-tooltip/-/little-react-tooltip-1.0.1.tgz#950cff8f99f5216e2c2aeb239a27a679ed1e7cbd"
-  integrity sha512-tyyw9UMK4Dz7+OzB0i4gO7ZNhsm0M3ueITNZKVNWZKBhNF3EIaTQ5TjTFX2GU4/HHsXyfj9sqMav7NcfLryFOQ==
 
 load-json-file@^1.0.0:
   version "1.1.0"

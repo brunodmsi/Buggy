@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useAuth } from '../../hooks/auth';
+import { useToast } from '../../hooks/toast';
 
 import api from '../../services/api';
 import { groupOptions, typeOptions } from '../../utils/getBugOptions';
@@ -33,43 +34,59 @@ const statusColors = ['#4882FF', '#39ff14', '#eead2d', '#FF3333'];
 const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState({} as IDashboardDataProps);
-  const { user } = useAuth();
+
+  const { user, signOut } = useAuth();
+  const { addToast } = useToast();
 
   useEffect(() => {
-    api.get('/users/dashboard').then(response => {
-      const { statuses, types, assignedToUser } = response.data;
+    api
+      .get('/users/dashboard')
+      .then(response => {
+        const { statuses, types, assignedToUser } = response.data;
 
-      const statusKeys = Object.keys(statuses);
-      const parseStatus = groupOptions.map(group => {
-        const status = statuses[statusKeys[Number(group.value)]];
+        const statusKeys = Object.keys(statuses);
+        const parseStatus = groupOptions.map(group => {
+          const status = statuses[statusKeys[Number(group.value)]];
 
-        return {
-          name: group.label,
-          value: status ? status.bugs.length : 0,
-          color: statusColors[Number(group.value)],
-        };
+          return {
+            name: group.label,
+            value: status ? status.bugs.length : 0,
+            color: statusColors[Number(group.value)],
+          };
+        });
+
+        const typesKeys = Object.keys(types);
+        const parseTypes = typeOptions.map((type, index) => {
+          const currType = types[typesKeys[index]];
+
+          return {
+            name: type.label,
+            value: currType ? currType.bugs.length : 0,
+            color: type.backColor ? type.backColor : '#000',
+          };
+        });
+
+        setDashboardData({
+          status: parseStatus,
+          types: parseTypes,
+          userBugs: assignedToUser,
+        });
+
+        setLoading(false);
+      })
+      .catch((err: { message: string }) => {
+        if (err.message.endsWith('401')) {
+          addToast({
+            title: 'Sessão expirada',
+            description:
+              'A sua sessão expirou, vamos te redirecionar para o login',
+            type: 'error',
+          });
+
+          signOut();
+        }
       });
-
-      const typesKeys = Object.keys(types);
-      const parseTypes = typeOptions.map((type, index) => {
-        const currType = types[typesKeys[index]];
-
-        return {
-          name: type.label,
-          value: currType ? currType.bugs.length : 0,
-          color: type.backColor ? type.backColor : '#000',
-        };
-      });
-
-      setDashboardData({
-        status: parseStatus,
-        types: parseTypes,
-        userBugs: assignedToUser,
-      });
-
-      setLoading(false);
-    });
-  }, []);
+  }, [addToast, signOut]);
 
   return (
     <Container>
