@@ -20,9 +20,7 @@ import '@shared/container';
 
 const app = express();
 
-buggyListener.init({
-  dsn: 'ec8f8440-3d8e-4a75-ad66-5a62782f2caf',
-});
+buggyListener.init();
 
 app.use(cors());
 app.use(express.json());
