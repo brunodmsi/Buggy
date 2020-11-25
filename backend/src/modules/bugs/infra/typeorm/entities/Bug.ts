@@ -31,6 +31,9 @@ class Bug {
   @Column()
   type: string;
 
+  @Column()
+  priority: string;
+
   @Column('integer')
   group: number;
 
@@ -39,9 +42,6 @@ class Bug {
 
   @Column('boolean')
   delivered: boolean;
-
-  @Column('varchar')
-  priority: string;
 
   @Column('timestamp with time zone')
   date_limit: Date;

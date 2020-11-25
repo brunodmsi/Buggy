@@ -7,7 +7,10 @@ import api from '../../../services/api';
 
 import { useToast } from '../../../hooks/toast';
 import getValidationErrors from '../../../utils/getValidationErrors';
-import { allTypeWithoutColors } from '../../../utils/getBugOptions';
+import {
+  allTypeWithoutColors,
+  allPriorityWithoutColors,
+} from '../../../utils/getBugOptions';
 
 import Input from '../../../components/Input';
 import Textarea from '../../../components/Textarea';
@@ -51,6 +54,12 @@ const CreateNewBugModal: React.FC<CreateNewBugModalProps> = ({
               'Tipo selecionado inválido',
             )
             .required('É obrigatório selecionar uma opção'),
+          priority: Yup.string()
+            .oneOf(
+              ['baixa', 'media', 'alta'],
+              'Prioridade selecionada inválida',
+            )
+            .required('É obrigatório selecionar uma opção'),
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -60,6 +69,7 @@ const CreateNewBugModal: React.FC<CreateNewBugModalProps> = ({
           description: data.description,
           type: data.type,
           group: bugGroup,
+          priority: data.priority,
           status: 0,
           project_id: project.id,
         });
@@ -98,14 +108,18 @@ const CreateNewBugModal: React.FC<CreateNewBugModalProps> = ({
             Tipo de bug
             <Select
               name="type"
-              placeholder="Selecione"
+              placeholder="Selecione um tipo"
               options={allTypeWithoutColors}
             />
           </label>
 
           <label>
-            Prioridade
-            {/* <Select name="bug" options={priorityOptions} /> */}
+            Tipo de bug
+            <Select
+              name="priority"
+              placeholder="Qual a prioridade?"
+              options={allPriorityWithoutColors}
+            />
           </label>
         </div>
 

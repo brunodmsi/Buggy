@@ -11,7 +11,7 @@ import { FiPlus } from 'react-icons/fi';
 
 import api from '../../../services/api';
 
-import { typeOptions } from '../../../utils/getBugOptions';
+import { typeOptions, priorityOptions } from '../../../utils/getBugOptions';
 
 import { Container, GroupWrapper, Group, Item, Footer } from './styles';
 
@@ -113,56 +113,66 @@ const DragNDrop: React.FC<DragNDropProps> = ({ data, openModal }) => {
                       draggableId={item.id}
                       index={index}
                     >
-                      {(providedDrag, snapshotDrag) => (
-                        <Item
-                          {...providedDrag.draggableProps}
-                          {...providedDrag.dragHandleProps}
-                          ref={providedDrag.innerRef}
-                          isDragging={snapshotDrag.isDragging}
-                          draggableStyle={providedDrag.draggableProps.style}
-                          onClick={() => handleItemClick(item.id)}
-                        >
-                          <Tag
-                            name={
-                              typeOptions.find(
-                                option => option.value === item.type,
-                              )?.value
-                            }
-                            backgroundColor={
-                              typeOptions.find(
-                                option => option.value === item.type,
-                              )?.backColor
-                            }
-                          />
+                      {(providedDrag, snapshotDrag) => {
+                        const priority = priorityOptions.find(
+                          option => option.value === item.priority,
+                        );
 
-                          <p>{item.title}</p>
+                        return (
+                          <Item
+                            {...providedDrag.draggableProps}
+                            {...providedDrag.dragHandleProps}
+                            ref={providedDrag.innerRef}
+                            isDragging={snapshotDrag.isDragging}
+                            draggableStyle={providedDrag.draggableProps.style}
+                            onClick={() => handleItemClick(item.id)}
+                          >
+                            <Tag
+                              name={
+                                typeOptions.find(
+                                  option => option.value === item.type,
+                                )?.value
+                              }
+                              backgroundColor={
+                                typeOptions.find(
+                                  option => option.value === item.type,
+                                )?.backColor
+                              }
+                            />
 
-                          <Footer priorityBackColor="#c34343">
-                            <div>
-                              {item.developers.map(({ user: developer }) => {
-                                if (!developer.avatar)
+                            <p>{item.title}</p>
+
+                            <Footer
+                              priorityBackColor={
+                                priority?.backColor || '#bc9400'
+                              }
+                            >
+                              <div>
+                                {item.developers.map(({ user: developer }) => {
+                                  if (!developer.avatar)
+                                    return (
+                                      <img
+                                        src={avatarPlaceholder}
+                                        alt={developer.id}
+                                      />
+                                    );
+
                                   return (
                                     <img
-                                      src={avatarPlaceholder}
+                                      src={developer.avatar_url}
                                       alt={developer.id}
                                     />
                                   );
+                                })}
+                              </div>
 
-                                return (
-                                  <img
-                                    src={developer.avatar_url}
-                                    alt={developer.id}
-                                  />
-                                );
-                              })}
-                            </div>
-
-                            <p>
-                              <strong>ALTA</strong>
-                            </p>
-                          </Footer>
-                        </Item>
-                      )}
+                              <p>
+                                <strong>{priority?.label || 'NDA'}</strong>
+                              </p>
+                            </Footer>
+                          </Item>
+                        );
+                      }}
                     </Draggable>
                   ))}
                   {providedDrop.placeholder}

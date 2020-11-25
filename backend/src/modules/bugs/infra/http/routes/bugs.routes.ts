@@ -28,6 +28,7 @@ bugsRouter.post(
       title: Joi.string().required(),
       description: Joi.string().required(),
       type: Joi.string().required(),
+      priority: Joi.string().required(),
       group: Joi.number().required(),
       status: Joi.number().required(),
       project_id: Joi.string().uuid().required(),

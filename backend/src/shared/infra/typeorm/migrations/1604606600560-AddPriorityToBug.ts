@@ -14,6 +14,6 @@ export default class AddPriorityToBug1604606600560
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropColumn('delivered', 'done');
+    await queryRunner.dropColumn('bugs', 'columns');
   }
 }

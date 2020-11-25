@@ -27,6 +27,7 @@ interface IBugData {
   id: string;
   title: string;
   type: string;
+  priority: string;
   group: number;
   status: number;
   developers: Array<{ user: IDeveloperData }>;

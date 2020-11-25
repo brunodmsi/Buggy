@@ -10,6 +10,7 @@ interface IRequest {
   title: string;
   description: string;
   type: string;
+  priority: string;
   group: number;
   status: number;
   date_limit?: Date;
@@ -29,6 +30,7 @@ class CreateBugService {
     title,
     description,
     type,
+    priority,
     date_limit,
     group,
     status,
@@ -48,6 +50,7 @@ class CreateBugService {
       status,
       date_limit,
       project_id,
+      priority,
     });
 
     return bug;
