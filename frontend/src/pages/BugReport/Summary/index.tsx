@@ -15,9 +15,14 @@ import { Container } from './styles';
 interface SummaryProps {
   title: string;
   bugId: string;
+  isFromListenerReport?: boolean;
 }
 
-const Summary: React.FC<SummaryProps> = ({ bugId, title: propTitle }) => {
+const Summary: React.FC<SummaryProps> = ({
+  bugId,
+  title: propTitle,
+  isFromListenerReport = false,
+}) => {
   const formRef = useRef<FormHandles>(null);
   const [title, setTitle] = useState(propTitle);
   const [isEdit, setIsEdit] = useState(false);
@@ -67,6 +72,10 @@ const Summary: React.FC<SummaryProps> = ({ bugId, title: propTitle }) => {
   return (
     <Container onClick={() => !isEdit && setIsEdit(true)}>
       <h3>Sumário</h3>
+
+      {isFromListenerReport && (
+        <span>Este report foi enviado pelo Listener Report</span>
+      )}
 
       {isEdit ? (
         <Form ref={formRef} onSubmit={handleEditSubmit}>

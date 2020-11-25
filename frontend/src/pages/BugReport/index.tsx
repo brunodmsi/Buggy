@@ -125,7 +125,11 @@ const BugReport: React.FC = () => {
             />
           </header>
 
-          <Summary bugId={bug.id} title={bug.title} />
+          <Summary
+            bugId={bug.id}
+            title={bug.title}
+            isFromListenerReport={!!bug.listener_report_id}
+          />
 
           <section>
             <Developers
@@ -141,11 +145,7 @@ const BugReport: React.FC = () => {
             />
           </section>
 
-          <Description
-            bugId={bug.id}
-            isFromListenerReport={!!bug.listener_report_id}
-            description={bug.description}
-          />
+          <Description bugId={bug.id} description={bug.description} />
 
           <Checklists bugId={bugId} checklists={bug.checklists} />
 

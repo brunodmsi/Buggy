@@ -4,6 +4,12 @@ export const Container = styled.div`
   margin-bottom: 25px;
   font-size: 18px;
 
+  span {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-top: 0px;
+  }
+
   p {
     font-size: 30px;
     font-weight: 300;
