@@ -17,6 +17,7 @@ export default class CreateListenerReport1605817433387
           {
             name: 'bug_id',
             type: 'uuid',
+            isNullable: true,
           },
           {
             name: 'name',
@@ -32,6 +33,40 @@ export default class CreateListenerReport1605817433387
           },
           {
             name: 'stack_line',
+            type: 'varchar',
+          },
+          {
+            name: 'error_query',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'request_body',
+            type: 'varchar',
+            isNullable: true,
+          },
+          {
+            name: 'request_method',
+            type: 'varchar',
+          },
+          {
+            name: 'request_url',
+            type: 'varchar',
+          },
+          {
+            name: 'request_url_path',
+            type: 'varchar',
+          },
+          {
+            name: 'request_headers',
+            type: 'varchar',
+          },
+          {
+            name: 'request_query',
+            type: 'varchar',
+          },
+          {
+            name: 'request_params',
             type: 'varchar',
           },
           {

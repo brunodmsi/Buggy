@@ -5,15 +5,19 @@ import CreateBugWithListenerReportService from '@modules/listener_reports/servic
 
 class BugListenerReportController {
   async create(request: Request, response: Response): Promise<Response> {
-    const bugListenerReportData = request.body;
+    const { name, message, type, listener_key, ...data } = request.body;
 
     const createBugWithListenerReport = container.resolve(
       CreateBugWithListenerReportService,
     );
 
-    const bugWithListenerReport = await createBugWithListenerReport.execute(
-      bugListenerReportData,
-    );
+    const bugWithListenerReport = await createBugWithListenerReport.execute({
+      name,
+      message,
+      type,
+      listener_key,
+      data,
+    });
 
     return response.json(bugWithListenerReport);
   }

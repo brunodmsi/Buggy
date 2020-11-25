@@ -27,7 +27,28 @@ class ListenerReport {
   stack_line: string;
 
   @Column()
-  query: string;
+  error_query: string;
+
+  @Column()
+  request_body: string;
+
+  @Column()
+  request_method: string;
+
+  @Column()
+  request_url: string;
+
+  @Column()
+  request_url_path: string;
+
+  @Column()
+  request_headers: string;
+
+  @Column()
+  request_query: string;
+
+  @Column()
+  request_params: string;
 
   @Column()
   bug_id: string;

@@ -7,14 +7,25 @@ import IListenerReportsRepository from '../repositories/IListenerReportsReposito
 
 import ListenerReport from '../infra/typeorm/entities/ListenerReport';
 
-interface IRequest {
-  listener_key: string;
-  type: string;
-  name: string;
-  message: string;
+interface IListenerReportData {
   stack_where: string;
   stack_line: string;
-  query?: string;
+  request_body: string | undefined;
+  request_method: string;
+  request_url: string;
+  request_url_path: string;
+  request_headers: string;
+  request_query: string;
+  request_params: string;
+  error_query: string;
+}
+
+interface IRequest {
+  name: string;
+  message: string;
+  type: string;
+  listener_key: string;
+  data: IListenerReportData;
 }
 
 @injectable()
@@ -31,11 +42,9 @@ class CreateListenerReportService {
   public async execute({
     name,
     message,
-    stack_where,
-    stack_line,
-    listener_key,
-    query,
     type,
+    listener_key,
+    data,
   }: IRequest): Promise<ListenerReport> {
     const project = await this.projectsRepository.findByListenerKey(
       listener_key,
@@ -45,26 +54,21 @@ class CreateListenerReportService {
       throw new AppError('Project not found with Listener key');
     }
 
-    const listenerReport = await this.listenerReportsRepository.create({
+    const listenerData = {
       name,
       message,
-      stack_line,
-      stack_where,
-      query,
-    });
+      ...data,
+    };
+
+    const listenerReport = await this.listenerReportsRepository.create(
+      listenerData,
+    );
 
     const bugTitle = `${name}: ${message}`;
-    const bugDescription = [
-      `Qual tipo de erro? ${listenerReport.name}\n\n`,
-      `Qual foi o erro? ${listenerReport.message}\n\n`,
-      `Onde? ${listenerReport.stack_where}\n`,
-      `Na linha ${listenerReport.stack_line}\n\n`,
-      `${query && `Query: ${listenerReport.query}`}`,
-    ].join('');
 
     const bug = await this.bugsRepository.create({
       title: bugTitle,
-      description: bugDescription,
+      description: 'Sem descrição...',
       type,
       group: 0,
       status: 0,

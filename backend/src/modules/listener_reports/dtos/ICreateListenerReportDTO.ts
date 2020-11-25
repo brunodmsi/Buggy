@@ -3,5 +3,12 @@ export default interface ICreateListenerReportDTO {
   message: string;
   stack_where: string;
   stack_line: string;
-  query?: string;
+  request_body: string | undefined;
+  request_method: string;
+  request_url: string;
+  request_url_path: string;
+  request_headers: string;
+  request_query: string;
+  request_params: string;
+  error_query: string;
 }
