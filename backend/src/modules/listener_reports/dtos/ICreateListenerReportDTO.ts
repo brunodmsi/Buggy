@@ -6,6 +6,7 @@ export default interface ICreateListenerReportDTO {
   request_body: string | undefined;
   request_method: string;
   request_url: string;
+  request_url_protocol: string;
   request_url_path: string;
   request_headers: string;
   request_query: string;

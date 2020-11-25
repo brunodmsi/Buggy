@@ -19,6 +19,7 @@ listenerReportsRouter.post(
       stack_where: Joi.string().required(),
       request_body: Joi.any(),
       request_method: Joi.string().required(),
+      request_url_protocol: Joi.string().required(),
       request_url: Joi.string().required(),
       request_url_path: Joi.string().required(),
       request_headers: Joi.string().required(),

@@ -2,6 +2,7 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 import Bug from '@modules/bugs/infra/typeorm/entities/Bug';
+import IListenerReportsRepository from '@modules/listener_reports/repositories/IListenerReportsRepository';
 import IBugsRepository from '../repositories/IBugsRepository';
 
 interface IRequest {
@@ -13,6 +14,8 @@ class ListBugService {
   constructor(
     @inject('BugsRepository')
     private bugsRepository: IBugsRepository,
+    @inject('ListenerReportsRepository')
+    private listenerReportsRepository: IListenerReportsRepository,
   ) {}
 
   public async execute({ bug_id }: IRequest): Promise<Bug> {
@@ -20,6 +23,14 @@ class ListBugService {
 
     if (!bug) {
       throw new AppError('Bug not found');
+    }
+
+    const listenerReport = await this.listenerReportsRepository.findById(
+      bug.listener_report_id,
+    );
+
+    if (listenerReport) {
+      bug.listener_report = listenerReport;
     }
 
     bug.comments = bug.comments.sort(
