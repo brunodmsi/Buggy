@@ -52,7 +52,7 @@ const ListenerReport: React.FC<ListenerReportProps> = ({ data }) => {
               </td>
             </tr>
             <tr>
-              <span>Requisição</span>
+              <th>Requisição</th>
               <td className="td-heading" />
             </tr>
             <tr>

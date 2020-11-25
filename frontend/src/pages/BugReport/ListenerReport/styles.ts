@@ -13,14 +13,40 @@ export const Container = styled.div`
   }
 
   table {
-    &,
+    display: table;
+    /* padding: 10px; */
+    border-spacing: 0;
+    border-style: hidden;
+    border: 3px solid #5f30e2;
+    background-color: #e2e2e2;
+    border-radius: 5px;
+
+    tr {
+      display: table-row;
+      vertical-align: inherit;
+      border-color: inherit;
+    }
+
+    tr:first-child {
+      th,
+      td {
+        border-top: none;
+      }
+    }
+
     th,
     td {
-      border: 1px solid black;
+      display: table-cell;
       border-collapse: collapse;
     }
 
+    th,
+    td {
+      border-top: 1px solid #5f30e2;
+    }
+
     th {
+      font-weight: bold;
       background-color: #e2e2e2;
     }
 
@@ -28,22 +54,14 @@ export const Container = styled.div`
       background-color: #fff;
     }
 
-    span {
-      display: flex;
-      padding: 5px;
-      font-weight: 600;
-      background-color: #e2e2e2;
-      width: 100%;
-    }
-
     .td-heading {
       background-color: #e2e2e2;
-      border: none;
+      border-top: 1px solid #5f30e2;
     }
 
     th,
     td {
-      padding: 5px;
+      padding: 10px;
       text-align: left;
     }
   }
