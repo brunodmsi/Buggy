@@ -30,7 +30,6 @@ export const Information = styled.div`
     display: flex;
     font-size: 20px;
     font-weight: 800;
-    margin-bottom: 25px;
 
     div + div {
       margin-left: 20px;

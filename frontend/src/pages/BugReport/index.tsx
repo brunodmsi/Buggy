@@ -16,6 +16,7 @@ import Comments from './Comments';
 import Description from './Description';
 import Summary from './Summary';
 import Checklists from './Checklists';
+import ListenerReport from './ListenerReport';
 import LimitDate from './LimitDate';
 import Files from './Files';
 
@@ -62,6 +63,23 @@ export interface BugCommentData {
   created_at: string;
 }
 
+export interface BugListenerReport {
+  name: string;
+  message: string;
+  stack_where: string;
+  stack_line: string;
+  error_query: string | null;
+  request_body: string | null;
+  request_method: string;
+  request_url_protocol: string;
+  request_url: string;
+  request_url_path: string;
+  request_headers: string;
+  request_query: string;
+  request_params: string;
+  created_at: Date;
+}
+
 export interface BugData {
   id: string;
   title: string;
@@ -72,6 +90,7 @@ export interface BugData {
   priority: string;
   date_limit: string;
   listener_report_id?: string;
+  listener_report: BugListenerReport;
   delivered: boolean;
   project_id: string;
   project: ProjectData;
@@ -95,6 +114,7 @@ const BugReport: React.FC = () => {
 
   useEffect(() => {
     api.get(`/bugs/${bugId}`).then(response => {
+      console.log(response.data);
       setBug(response.data);
       setLoading(false);
     });
@@ -128,7 +148,7 @@ const BugReport: React.FC = () => {
           <Summary
             bugId={bug.id}
             title={bug.title}
-            isFromListenerReport={!!bug.listener_report_id}
+            isFromListenerReport={!!bug.listener_report}
           />
 
           <section>
@@ -144,6 +164,8 @@ const BugReport: React.FC = () => {
               delivered={bug.delivered}
             />
           </section>
+
+          <ListenerReport data={bug.listener_report} />
 
           <Description bugId={bug.id} description={bug.description} />
 

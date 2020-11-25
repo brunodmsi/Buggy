@@ -74,7 +74,7 @@ const Summary: React.FC<SummaryProps> = ({
       <h3>Sumário</h3>
 
       {isFromListenerReport && (
-        <span>Este report foi enviado pelo Listener Report</span>
+        <span>Este erro foi enviado pelo BuggyListener</span>
       )}
 
       {isEdit ? (
