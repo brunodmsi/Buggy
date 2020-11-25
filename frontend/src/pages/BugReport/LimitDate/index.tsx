@@ -56,36 +56,38 @@ const LimitDate: React.FC<LimitDateProps> = ({
   }, [addToast, bugId, delivered]);
 
   return (
-    <Container>
+    <>
       {date && (
-        <>
-          <h4>Data limite</h4>
+        <Container>
+          <>
+            <h4>Data limite</h4>
 
-          <section>
-            <Form ref={formRef} onSubmit={handleEditSubmit}>
-              <Checkbox
-                name="limit_date"
-                defaultChecked={delivered}
-                options={[
-                  {
-                    id: bugId,
-                    label: format(
-                      parseISO(date),
-                      "dd 'de' MMMM 'de' yyyy 'às' HH:mm'h'",
-                      {
-                        locale: ptBR,
-                      },
-                    ),
-                    value: 'delivered',
-                  },
-                ]}
-                onClick={() => formRef.current?.submitForm()}
-              />
-            </Form>
-          </section>
-        </>
+            <section>
+              <Form ref={formRef} onSubmit={handleEditSubmit}>
+                <Checkbox
+                  name="limit_date"
+                  defaultChecked={delivered}
+                  options={[
+                    {
+                      id: bugId,
+                      label: format(
+                        parseISO(date),
+                        "dd 'de' MMMM 'de' yyyy 'às' HH:mm'h'",
+                        {
+                          locale: ptBR,
+                        },
+                      ),
+                      value: 'delivered',
+                    },
+                  ]}
+                  onClick={() => formRef.current?.submitForm()}
+                />
+              </Form>
+            </section>
+          </>
+        </Container>
       )}
-    </Container>
+    </>
   );
 };
 
