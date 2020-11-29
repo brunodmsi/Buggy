@@ -48,7 +48,7 @@
   "dependencies": {
     "aws-sdk": "^2.785.0",
     "bcryptjs": "^2.4.3",
-    "buggy-listener-express": "^1.2.2",
+    "buggy-listener-express": "^1.2.6",
     "celebrate": "^13.0.3",
     "class-transformer": "^0.3.1",
     "cors": "^2.8.5",
