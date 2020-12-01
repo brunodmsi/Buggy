@@ -53,6 +53,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
       name: fieldName,
       ref: datepickerRef.current,
       path: 'props.selected',
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       clearValue: (ref: any) => {
         ref.clear();
       },

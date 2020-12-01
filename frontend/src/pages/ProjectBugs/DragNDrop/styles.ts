@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import { DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd';
-import { Link } from 'react-router-dom';
 
 interface FooterProps {
   priorityBackColor: string;

@@ -114,7 +114,6 @@ const BugReport: React.FC = () => {
 
   useEffect(() => {
     api.get(`/bugs/${bugId}`).then(response => {
-      console.log(response.data);
       setBug(response.data);
       setLoading(false);
     });
@@ -123,8 +122,6 @@ const BugReport: React.FC = () => {
   const goBack = useCallback(() => {
     history.goBack();
   }, [history]);
-
-  const handleStatusChange = useCallback(data => console.log(data), []);
 
   return (
     <Container>

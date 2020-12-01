@@ -1,10 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { FiEye, FiX, FiTrash } from 'react-icons/fi';
-
-import api from '../../../services/api';
-import { useToast } from '../../../hooks/toast';
-
-import Spinner from '../../../components/Spinner';
+import React, { useState } from 'react';
+import { FiEye, FiX } from 'react-icons/fi';
 
 import { Container, Modal } from './styles';
 
@@ -33,36 +28,6 @@ const Developers: React.FC<DeveloperProps> = ({
     return devs;
   });
   const [listDevelopersModal, setListDevelopersModal] = useState(false);
-  // const [deleteLoading, setDeleteLoading] = useState('');
-
-  // const { addToast } = useToast();
-
-  // const handleFileDelete = useCallback(
-  //   async (id: string) => {
-  //     try {
-  //       setDeleteLoading(id);
-
-  //       await api.delete(`/bugs/files/${id}`);
-
-  //       const updatedDevelopers = developers.filter(file => file.id !== id);
-
-  //       setDevelopers(updatedDevelopers);
-
-  //       addToast({
-  //         title: 'Desenvolvedor deletado!',
-  //         type: 'success',
-  //       });
-  //     } catch (err) {
-  //       addToast({
-  //         title: 'Erro ao deletar!',
-  //         description:
-  //           'Ocorreu um erro ao excluir o desenvolvedor, tente novamente mais tarde',
-  //         type: 'error',
-  //       });
-  //     }
-  //   },
-  //   [addToast, developers],
-  // );
 
   return (
     <>
@@ -127,19 +92,6 @@ const Developers: React.FC<DeveloperProps> = ({
                     <td className="td-dev-email">
                       <p>{dev.email}</p>
                     </td>
-
-                    {/* <td className="td-delete">
-                    <button
-                      type="button"
-                      onClick={() => handleFileDelete(dev.id)}
-                    >
-                      {deleteLoading === dev.id ? (
-                        <Spinner size={20} />
-                      ) : (
-                        <FiTrash size={15} color="#fff" />
-                      )}
-                    </button>
-                  </td> */}
                   </tr>
                 ))}
               </table>

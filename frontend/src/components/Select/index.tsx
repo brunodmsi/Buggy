@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactSelect, {
   OptionTypeBase,
   Props as SelectProps,
@@ -19,6 +19,7 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       getValue: (ref: any) => {
         if (rest.isMulti) {
           if (!ref.state.value) {

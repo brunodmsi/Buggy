@@ -1,5 +1,4 @@
 import React, { useCallback, useRef, useState } from 'react';
-import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { FiX } from 'react-icons/fi';
@@ -7,9 +6,7 @@ import { FiX } from 'react-icons/fi';
 import { useToast } from '../../../../hooks/toast';
 
 import api from '../../../../services/api';
-import getValidationErrors from '../../../../utils/getValidationErrors';
 
-import Input from '../../../../components/Input';
 import Button from '../../../../components/Button';
 
 import { Modal } from './styles';
