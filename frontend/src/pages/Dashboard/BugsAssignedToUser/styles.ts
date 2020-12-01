@@ -3,60 +3,57 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 370px;
-  width: 370px;
+  max-width: 500px;
+  width: 500px;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
 
   table {
-    display: inline-block;
-    max-height: 80%;
-    margin-top: 20px;
+    display: table;
+    padding: 10px;
     border-spacing: 0;
     border-style: hidden;
-    width: 100%;
 
     tr {
+      display: table-row;
+      vertical-align: bottom;
+      border-color: inherit;
+    }
+
+    th,
+    td {
+      display: table-cell;
+      border-collapse: collapse;
+      padding: 5px;
+      text-align: left;
+    }
+
+    td img {
       display: flex;
+      justify-content: center;
       align-items: center;
-      flex-direction: row;
-      width: 100%;
-      justify-content: space-between;
-      margin-bottom: 20px;
+      max-height: 40px;
+      max-width: 40px;
+      color: #fff;
+      font-size: 14px;
+      margin-right: 5px;
+    }
 
-      td img {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        max-height: 60px;
-        max-width: 60px;
-        color: #fff;
-        font-size: 14px;
-        margin-right: 5px;
-      }
-
-      .td-file-link {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
-
-        a {
-          display: flex;
-          align-items: center;
-          width: 100%;
-          height: 100%;
-          max-width: 650px;
-          text-decoration: none;
-          font-size: 14px;
-          margin: 0 5px 0 5px;
-          cursor: pointer;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
+    td {
+      border: 1px solid black;
+    }
+    tr:first-child td {
+      border-top: 0;
+    }
+    tr td:first-child {
+      border-left: 0;
+    }
+    tr:last-child td {
+      border-bottom: 0;
+    }
+    tr td:last-child {
+      border-right: 0;
     }
   }
 `;
