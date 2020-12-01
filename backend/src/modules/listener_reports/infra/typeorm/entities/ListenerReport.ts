@@ -34,7 +34,7 @@ class ListenerReport {
 
   @Column()
   request_method: string;
-  
+
   @Column()
   request_url_protocol: string;
 

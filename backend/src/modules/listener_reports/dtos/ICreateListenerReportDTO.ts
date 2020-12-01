@@ -11,5 +11,5 @@ export default interface ICreateListenerReportDTO {
   request_headers: string;
   request_query: string;
   request_params: string;
-  error_query: string;
+  error_query: string | undefined;
 }
