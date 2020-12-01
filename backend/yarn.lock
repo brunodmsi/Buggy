@@ -2188,10 +2188,17 @@ buffer@^5.5.0:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
 
+<<<<<<< HEAD
 buggy-listener-express@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/buggy-listener-express/-/buggy-listener-express-1.2.5.tgz#4f9427efb640d75e1b1dcaa4b706904cb67a81ae"
   integrity sha512-XKdF6TXfT8hbJ34UiWI42CPF8skp9YFYTsuyzj8of/Fc/AmgN5RSeD3lnat6N3lC2/HCfUguLXwS9wEnsUCYmA==
+=======
+buggy-listener-express@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/buggy-listener-express/-/buggy-listener-express-1.2.6.tgz#149baf3927146c5627333eea927d5f429f743437"
+  integrity sha512-lQNUdfM5SB2PP2eSbZJWd0m/xD2iggi4INYJFbhLMTkYZTjbbMQOPLq8hoD+vC+EZizQjRKflK3PvTsxqwRgaQ==
+>>>>>>> 9fe9ba4f186c640093ee079bfe2964bd95804a4b
   dependencies:
     axios "^0.21.0"
     dotenv "^8.2.0"
