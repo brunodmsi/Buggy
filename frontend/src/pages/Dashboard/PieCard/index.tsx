@@ -26,30 +26,36 @@ const PieCard: React.FC<PieCardProps> = ({
       <h2>{title}</h2>
       <span>{description}</span>
 
-      <PieChart
-        data={pieChartData}
-        lineWidth={15}
-        rounded
-        style={{
-          height: '200px',
-        }}
-        label={({ dataEntry }) => dataEntry.value}
-        labelStyle={index => ({
-          fontSize: '7px',
-          fontFamily: 'sans-serif',
-          fill: pieChartData[index].color,
-        })}
-        labelPosition={60}
-      />
+      {pieChartData.length > 0 ? (
+        <>
+          <PieChart
+            data={pieChartData}
+            lineWidth={15}
+            rounded
+            style={{
+              height: '200px',
+            }}
+            label={({ dataEntry }) => dataEntry.value}
+            labelStyle={index => ({
+              fontSize: '7px',
+              fontFamily: 'sans-serif',
+              fill: pieChartData[index].color,
+            })}
+            labelPosition={60}
+          />
 
-      <footer>
-        {pieChartData.map(data => (
-          <div key={data.name}>
-            <FiSquare color={data.color} fill={data.color} size={10} />
-            <p>{data.name}</p>
-          </div>
-        ))}
-      </footer>
+          <footer>
+            {pieChartData.map(data => (
+              <div key={data.name}>
+                <FiSquare color={data.color} fill={data.color} size={10} />
+                <p>{data.name}</p>
+              </div>
+            ))}
+          </footer>
+        </>
+      ) : (
+        <p>Você ainda não está registrado(a) em nenhum projeto</p>
+      )}
     </Container>
   );
 };
