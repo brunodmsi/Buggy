@@ -1,11 +1,13 @@
 import React from 'react';
 
 import { Container } from './styles';
+import avatarPlaceholder from '../../../assets/avatar_placeholder.png';
 
 interface UserData {
   id: string;
   name: string;
-  avatar_url: string;
+  avatar_url: string | undefined;
+  counter: number;
 }
 
 interface BugFixersCardProps {
@@ -26,7 +28,11 @@ const BugFixersCard: React.FC<BugFixersCardProps> = ({
 
       {bugFixers.map(user => (
         <div key={user.id}>
-          <img src={user.avatar_url} alt={user.name} />
+          {user.avatar_url ? (
+            <img src={user.avatar_url} alt={user.name} />
+          ) : (
+            <img src={avatarPlaceholder} alt={user.name} />
+          )}
           <p>{user.name}</p>
         </div>
       ))}

@@ -26,7 +26,7 @@ class UserProjectsRepository implements IUserProjectsRepository {
   public async findUserProjectsById(user_id: string): Promise<UserProject[]> {
     const projects = await this.ormRepository.find({
       where: { user_id },
-      relations: ['project', 'project.bugs'],
+      relations: ['project', 'project.bugs', 'project.bugs.developers', 'project.bugs.developers.user'],
     });
 
     return projects;

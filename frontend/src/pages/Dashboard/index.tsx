@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { parse } from 'path';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
@@ -12,7 +13,7 @@ import BugsAssignedToUser from './BugsAssignedToUser';
 
 import { Container } from './styles';
 
-import { BugData } from '../BugReport';
+import { BugData, BugDeveloperData } from '../BugReport';
 
 const avatar_url =
   'https://buggy-demasi.s3.us-east-2.amazonaws.com/2f5ca41d38871de68d75-imagem.jpg';
@@ -23,10 +24,18 @@ interface IParseData {
   color: string;
 }
 
+interface BugFixerData {
+  id: string;
+  name: string;
+  avatar_url: string | undefined;
+  counter: number;
+}
+
 interface IDashboardDataProps {
   status: IParseData[];
   types: IParseData[];
   userBugs: BugData[];
+  bugFixers: BugFixerData[];
 }
 
 const Dashboard: React.FC = () => {
@@ -40,7 +49,7 @@ const Dashboard: React.FC = () => {
     api
       .get('/users/dashboard')
       .then(response => {
-        const { statuses, types, assignedToUser } = response.data;
+        const { statuses, types, assignedToUser, projects } = response.data;
 
         const parseStatus = groupOptions.map(group => {
           const currStatus = statuses[group.value];
@@ -62,10 +71,40 @@ const Dashboard: React.FC = () => {
           };
         });
 
+        const userWithBugCounter: {
+          [key: string]: BugFixerData;
+        } = {};
+        projects.forEach(({ project }: any) => {
+          project.bugs.forEach((bug: any) => {
+            bug.developers.forEach(({ user: dev }: any) => {
+              if (userWithBugCounter[dev.id]) {
+                userWithBugCounter[dev.id] = {
+                  ...userWithBugCounter[dev.id],
+                  counter: userWithBugCounter[dev.id].counter + 1,
+                };
+              } else {
+                userWithBugCounter[dev.id] = {
+                  id: dev.id,
+                  name: dev.name,
+                  avatar_url: dev.avatar ? dev.avatar_url : null,
+                  counter: 1,
+                };
+              }
+            });
+          });
+        });
+
+        const parseProjects = Object.values(userWithBugCounter)
+          .sort((a, b) => a.counter - b.counter)
+          .reverse();
+
+        console.log(parseProjects);
+
         setDashboardData({
           status: parseStatus,
           types: parseTypes,
           userBugs: assignedToUser,
+          bugFixers: parseProjects,
         });
 
         setLoading(false);
@@ -109,13 +148,7 @@ const Dashboard: React.FC = () => {
             <BugFixersCard
               title="Top 5 bug fixers"
               description="Os 5 que mais consertaram bugs das aplicações"
-              bugFixers={[
-                { id: '1', name: 'Bruno De Masi', avatar_url },
-                { id: '2', name: 'Renato Aquino', avatar_url },
-                { id: '3', name: 'João Tomé', avatar_url },
-                { id: '4', name: 'Bolo', avatar_url },
-                { id: '5', name: 'Anne', avatar_url },
-              ]}
+              bugFixers={dashboardData.bugFixers}
             />
 
             <BugsAssignedToUser

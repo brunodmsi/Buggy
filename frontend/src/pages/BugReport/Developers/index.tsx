@@ -38,19 +38,21 @@ const Developers: React.FC<DeveloperProps> = ({
               <p>Desenvolvedores</p>
 
               <section>
-                {developers.map(dev => (
-                  <div key={dev.id}>
-                    {dev.avatar_url ? (
-                      <img key={dev.id} src={dev.avatar_url} alt={dev.name} />
-                    ) : (
-                      <img
-                        key={dev.id}
-                        src={avatarPlaceholder}
-                        alt={dev.name}
-                      />
-                    )}
-                  </div>
-                ))}
+                <div>
+                  {developers.map(dev => (
+                    <>
+                      {dev.avatar_url ? (
+                        <img key={dev.id} src={dev.avatar_url} alt={dev.name} />
+                      ) : (
+                        <img
+                          key={dev.id}
+                          src={avatarPlaceholder}
+                          alt={dev.name}
+                        />
+                      )}
+                    </>
+                  ))}
+                </div>
 
                 <button
                   type="button"

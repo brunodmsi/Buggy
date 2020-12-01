@@ -17,6 +17,15 @@ export const Container = styled.div`
   div {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    & + div {
+      margin-top: 6px;
+    }
+
+    p {
+      font-weight: 800;
+    }
 
     & + div {
       margin-bottom: 4px;

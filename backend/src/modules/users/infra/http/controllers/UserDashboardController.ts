@@ -4,6 +4,7 @@ import { classToClass } from 'class-transformer';
 
 import ListBugStatusByUserProjectsService from '@modules/projects/services/ListBugStatusByUserProjectsService';
 import ListBugTypeByUserProjectsService from '@modules/projects/services/ListBugTypeByUserProjectsService';
+import ListUserProjectsService from '@modules/projects/services/ListUserProjectsService';
 import ListDeveloperBugsService from '@modules/bugs/services/ListDeveloperBugsService';
 
 class UserDashboardController {
@@ -17,6 +18,7 @@ class UserDashboardController {
       ListBugTypeByUserProjectsService,
     );
     const listDeveloperBugs = container.resolve(ListDeveloperBugsService);
+    const listUserProjects = container.resolve(ListUserProjectsService);
 
     const statuses = await listBugStatusByUserProjects.execute({
       user_id,
@@ -30,12 +32,15 @@ class UserDashboardController {
       user_id,
     });
 
+    const projects = await listUserProjects.execute({ user_id });
+
     const bugs = assignedToUser.map(assign => assign.bug);
 
     return response.json({
       statuses,
       types,
       assignedToUser: classToClass(bugs),
+      projects: classToClass(projects)
     });
   }
 }
