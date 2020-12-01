@@ -29,8 +29,6 @@ interface IDashboardDataProps {
   userBugs: BugData[];
 }
 
-const statusColors = ['#4882FF', '#39ff14', '#eead2d', '#FF3333'];
-
 const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState({} as IDashboardDataProps);
@@ -44,20 +42,18 @@ const Dashboard: React.FC = () => {
       .then(response => {
         const { statuses, types, assignedToUser } = response.data;
 
-        const statusKeys = Object.keys(statuses);
         const parseStatus = groupOptions.map(group => {
-          const status = statuses[statusKeys[Number(group.value)]];
+          const currStatus = statuses[group.value];
 
           return {
             name: group.label,
-            value: status ? status.bugs.length : 0,
-            color: statusColors[Number(group.value)],
+            value: currStatus ? currStatus.bugs.length : 0,
+            color: group.backColor ? group.backColor : '#000',
           };
         });
 
-        const typesKeys = Object.keys(types);
-        const parseTypes = typeOptions.map((type, index) => {
-          const currType = types[typesKeys[index]];
+        const parseTypes = typeOptions.map(type => {
+          const currType = types[type.value];
 
           return {
             name: type.label,

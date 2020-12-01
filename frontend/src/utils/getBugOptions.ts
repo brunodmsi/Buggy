@@ -10,18 +10,22 @@ export const groupOptions: Array<IOption> = [
   {
     label: 'Aberto',
     value: 0,
+    backColor: '#4882FF',
   },
   {
     label: 'Em progresso',
     value: 1,
+    backColor: '#39ff14',
   },
   {
     label: 'Em teste',
     value: 2,
+    backColor: '#eead2d',
   },
   {
     label: 'Fechado',
     value: 3,
+    backColor: '#FF3333',
   },
 ];
 

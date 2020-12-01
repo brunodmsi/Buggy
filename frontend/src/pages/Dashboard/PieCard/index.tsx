@@ -40,6 +40,7 @@ const PieCard: React.FC<PieCardProps> = ({
               fontSize: '7px',
               fontFamily: 'sans-serif',
               fill: pieChartData[index].color,
+              fontWeight: 800,
             })}
             labelPosition={60}
           />
