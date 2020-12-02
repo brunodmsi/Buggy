@@ -8,6 +8,7 @@ import BugDescriptionController from '../controllers/BugDescriptionController';
 import BugTitleController from '../controllers/BugTitleController';
 import BugDeliveredController from '../controllers/BugDeliveredController';
 import ListBugController from '../controllers/ListBugController';
+import BugArchiveController from '../controllers/BugArchiveController';
 
 const bugsRouter = Router();
 
@@ -18,6 +19,7 @@ const bugGroupController = new BugGroupController();
 const bugDescriptionController = new BugDescriptionController();
 const bugTitleController = new BugTitleController();
 const bugDeliveredController = new BugDeliveredController();
+const bugArchiveController = new BugArchiveController();
 
 bugsRouter.get('/:bug_id', listBugController.index);
 
@@ -110,6 +112,16 @@ bugsRouter.patch(
     },
   }),
   bugDeliveredController.update,
+);
+
+bugsRouter.patch(
+  '/:bug_id/archive',
+  celebrate({
+    [Segments.PARAMS]: {
+      bug_id: Joi.string().uuid().required(),
+    },
+  }),
+  bugArchiveController.update,
 );
 
 export default bugsRouter;

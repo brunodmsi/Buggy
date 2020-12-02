@@ -43,6 +43,9 @@ class Bug {
   @Column('boolean')
   delivered: boolean;
 
+  @Column('boolean')
+  archived: boolean;
+
   @Column('timestamp with time zone')
   date_limit: Date;
 

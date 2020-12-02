@@ -33,7 +33,9 @@ class ListProjectBugsService {
       throw new AppError('Project not found');
     }
 
-    const bugs = sortProjectBugsForKanban(project.bugs);
+    const unarchivedBugs = project.bugs.filter(bug => !bug.archived);
+
+    const bugs = sortProjectBugsForKanban(unarchivedBugs);
 
     return { project, bugs };
   }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { FaUserAlt, FaFile, FaClock, FaCheck } from 'react-icons/fa';
@@ -8,6 +8,9 @@ import AddDeveloperModal from './AddDeveloperModal';
 import AddDateLimitModal from './AddDateLimitModal';
 import AddChecklistModal from './AddChecklistModal';
 import AddCardDeleteModal from './AddCardDeleteModal';
+
+import { useToast } from '../../../hooks/toast';
+import api from '../../../services/api';
 
 import { Container } from './styles';
 
@@ -21,12 +24,26 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
   projectId,
 }) => {
   const history = useHistory();
+  const { addToast } = useToast();
 
   const [openFileModal, setOpenFileModal] = useState(false);
   const [openDeveloperModal, setOpenDeveloperModal] = useState(false);
   const [openDateLimitModal, setOpenDateLimitModal] = useState(false);
   const [openChecklistModal, setOpenChecklistModal] = useState(false);
   const [openCardDeleteModal, setOpenCardDeleteModal] = useState(false);
+
+  const archiveBug = useCallback(async () => {
+    try {
+      await api.patch(`/bugs/${bugId}/archive`);
+
+      window.location.href = `/projects/${projectId}`;
+    } catch (err) {
+      addToast({
+        title: 'Erro ao arquivar o bug',
+        type: 'error',
+      });
+    }
+  }, [addToast, projectId, bugId]);
 
   return (
     <Container>
@@ -114,7 +131,15 @@ const AddToCardOptions: React.FC<IAddToCardOptionsProps> = ({
       />
 
       <button
-        className="bottom"
+        className="bottom archive-button"
+        type="button"
+        onClick={archiveBug}
+      >
+        RESOLVIDO
+      </button>
+
+      <button
+        className="bottom delete-button"
         type="button"
         onClick={() => setOpenCardDeleteModal(true)}
       >

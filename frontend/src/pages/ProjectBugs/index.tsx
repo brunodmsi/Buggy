@@ -30,6 +30,7 @@ interface IBugData {
   priority: string;
   group: number;
   status: number;
+  archived: boolean;
   developers: Array<{ user: IDeveloperData }>;
 }
 

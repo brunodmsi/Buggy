@@ -42,7 +42,17 @@ export const Container = styled.div`
     color: #fff;
     align-items: center;
     justify-content: center;
-    margin-top: 40px;
+  }
+
+  .delete-button {
+    padding: 5px;
+    font-size: 15px;
+  }
+
+  .archive-button {
+    margin: 20px 0 10px 0;
+    font-size: 20px;
+    background-color: #2a60e4;
   }
 
   &::before {
