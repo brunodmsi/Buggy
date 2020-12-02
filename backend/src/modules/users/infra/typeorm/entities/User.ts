@@ -4,8 +4,15 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
+
+import UserProject from '@modules/projects/infra/typeorm/entities/UserProject';
+import Project from '@modules/projects/infra/typeorm/entities/Project';
+
+import BugDeveloper from '@modules/bugs/infra/typeorm/entities/BugDeveloper';
+import Bug from '@modules/bugs/infra/typeorm/entities/Bug';
 
 import uploadConfig from '@config/upload';
 
@@ -32,6 +39,28 @@ class User {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @OneToMany(() => UserProject, userProject => userProject.user)
+  userProjects: UserProject[];
+
+  @Expose({ name: 'projects' })
+  getUserProjects(): Project[] {
+    if (!this.userProjects) return [];
+
+    const projects = this.userProjects.map(userProject => userProject.project);
+    return projects;
+  }
+
+  @OneToMany(() => BugDeveloper, bugDeveloper => bugDeveloper.user)
+  bugDevelopers: BugDeveloper[];
+
+  @Expose({ name: 'bugs' })
+  getUserBugs(): Bug[] {
+    if (!this.bugDevelopers) return [];
+
+    const bugs = this.bugDevelopers.map(bugDeveloper => bugDeveloper.bug);
+    return bugs;
+  }
 
   @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {

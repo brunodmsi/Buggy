@@ -91,39 +91,35 @@ export const Members = styled.div`
   }
 
   table {
-    display: inline-block;
-    max-height: 80%;
-    width: 30%;
-    margin-top: 20px;
+    display: table;
+    padding: 10px;
     border-spacing: 0;
     border-style: hidden;
 
     tr {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin-bottom: 20px;
+      display: table-row;
+      vertical-align: center;
+      border-color: inherit;
 
-      th {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
+      td img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
       }
 
-      .td-dev-email {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
+      th,
+      td {
+        display: table-cell;
+        border-collapse: collapse;
+        padding: 5px;
+        margin: 0 auto;
+        text-align: left;
       }
 
-      .td-dev-name {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        width: 100%;
-        margin-left: 10px;
+      .bugs-assigned {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
       }
     }
   }

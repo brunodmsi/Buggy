@@ -7,6 +7,7 @@ import api from '../../services/api';
 import AddMember from './AddMember';
 
 import { Container, Description, ListenerKey, Members } from './styles';
+import avatarPlaceholder from '../../assets/avatar_placeholder.png';
 
 interface IProjectDataProps {
   id: string;
@@ -17,8 +18,12 @@ interface IProjectDataProps {
 }
 
 interface IMembersData {
+  id: string;
   name: string;
   email: string;
+  avatar: string;
+  avatar_url: string;
+  bugs: [];
 }
 
 const ProjectConfigs: React.FC = () => {
@@ -115,14 +120,24 @@ const ProjectConfigs: React.FC = () => {
 
             <table>
               <tr>
+                <th>Avatar</th>
                 <th>Nome</th>
                 <th>E-mail</th>
+                <th>Bug Designados</th>
               </tr>
 
               {projectMembers.map(member => (
-                <tr>
-                  <td className="td-dev-name">{member.name}</td>
-                  <td className="td-dev-email">{member.email}</td>
+                <tr key={member.id}>
+                  <td>
+                    {member.avatar ? (
+                      <img src={member.avatar_url} alt={member.name} />
+                    ) : (
+                      <img src={avatarPlaceholder} alt={member.name} />
+                    )}
+                  </td>
+                  <td>{member.name}</td>
+                  <td>{member.email}</td>
+                  <td className="bugs-assigned">{member.bugs.length}</td>
                 </tr>
               ))}
             </table>
