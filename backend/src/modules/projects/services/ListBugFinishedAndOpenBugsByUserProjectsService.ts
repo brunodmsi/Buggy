@@ -67,7 +67,6 @@ class ListBugFinishedAndOpenBugsByUserProjectsService {
       }
 
       const isClosed = bug.archived || bug.group === 3;
-      console.log(isClosed);
 
       if (isClosed) parsedBugs[month].closed += 1;
       if (!isClosed) parsedBugs[month].open += 1;
