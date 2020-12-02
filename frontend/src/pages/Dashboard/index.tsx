@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { parse } from 'path';
 import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
 
@@ -10,13 +9,11 @@ import { groupOptions, typeOptions } from '../../utils/getBugOptions';
 import PieCard from './PieCard';
 import BugFixersCard from './BugFixersCard';
 import BugsAssignedToUser from './BugsAssignedToUser';
+import BugGraphs from './BugGraphs';
 
-import { Container } from './styles';
+import { Container, Row } from './styles';
 
-import { BugData, BugDeveloperData } from '../BugReport';
-
-const avatar_url =
-  'https://buggy-demasi.s3.us-east-2.amazonaws.com/2f5ca41d38871de68d75-imagem.jpg';
+import { BugData } from '../BugReport';
 
 interface IParseData {
   name: string;
@@ -133,28 +130,34 @@ const Dashboard: React.FC = () => {
           </header>
 
           <div>
-            <PieCard
-              title="Bug status"
-              description="Status atual dos bugs das aplicações"
-              pieChartData={dashboardData.status}
-            />
+            <Row>
+              <PieCard
+                title="Bug status"
+                description="Status atual dos bugs das aplicações"
+                pieChartData={dashboardData.status}
+              />
 
-            <PieCard
-              title="Bug ativos por tipos"
-              description="Veja quais são os tipos que tem bugs ativos"
-              pieChartData={dashboardData.types}
-            />
+              <PieCard
+                title="Bug ativos por tipos"
+                description="Veja quais são os tipos que tem bugs ativos"
+                pieChartData={dashboardData.types}
+              />
 
-            <BugFixersCard
-              title="Top 5 bug fixers"
-              description="Os 5 que mais consertaram bugs das aplicações"
-              bugFixers={dashboardData.bugFixers}
-            />
+              <BugFixersCard
+                title="Top 5 bug fixers"
+                description="Os 5 que mais consertaram bugs das aplicações"
+                bugFixers={dashboardData.bugFixers}
+              />
+            </Row>
 
-            <BugsAssignedToUser
-              title="Bugs designados a mim"
-              bugs={dashboardData.userBugs}
-            />
+            <Row>
+              <BugGraphs />
+
+              <BugsAssignedToUser
+                title="Bugs designados a mim"
+                bugs={dashboardData.userBugs}
+              />
+            </Row>
           </div>
         </>
       )}

@@ -6,8 +6,15 @@ export const Container = styled.div`
   width: 100%;
 
   > div {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-row-gap: 50px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 35px 0;
 `;

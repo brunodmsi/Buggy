@@ -40,7 +40,7 @@ class UserDashboardController {
       statuses,
       types,
       assignedToUser: classToClass(bugs),
-      projects: classToClass(projects)
+      projects: classToClass(projects),
     });
   }
 }
