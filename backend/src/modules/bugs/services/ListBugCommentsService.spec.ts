@@ -77,6 +77,7 @@ describe('ListBugComments', () => {
       group: 0,
       status: 0,
       date_limit: new Date(2020, 8, 20, 11, 0),
+      priority: 'baixa',
     });
 
     const user = await fakeUsersRepository.create({

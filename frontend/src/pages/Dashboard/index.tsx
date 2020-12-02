@@ -33,6 +33,12 @@ interface IDashboardDataProps {
   types: IParseData[];
   userBugs: BugData[];
   bugFixers: BugFixerData[];
+  graphData: {
+    [key: string]: {
+      open: number;
+      closed: number;
+    };
+  };
 }
 
 const Dashboard: React.FC = () => {
@@ -46,7 +52,13 @@ const Dashboard: React.FC = () => {
     api
       .get('/users/dashboard')
       .then(response => {
-        const { statuses, types, assignedToUser, projects } = response.data;
+        const {
+          statuses,
+          types,
+          assignedToUser,
+          projects,
+          graph,
+        } = response.data;
 
         const parseStatus = groupOptions.map(group => {
           const currStatus = statuses[group.value];
@@ -102,6 +114,7 @@ const Dashboard: React.FC = () => {
           types: parseTypes,
           userBugs: assignedToUser,
           bugFixers: parseProjects,
+          graphData: graph,
         });
 
         setLoading(false);
@@ -151,7 +164,7 @@ const Dashboard: React.FC = () => {
             </Row>
 
             <Row>
-              <BugGraphs />
+              <BugGraphs data={dashboardData.graphData} />
 
               <BugsAssignedToUser
                 title="Bugs designados a mim"

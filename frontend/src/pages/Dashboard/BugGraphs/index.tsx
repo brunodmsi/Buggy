@@ -15,37 +15,43 @@ interface ChartDataProps {
   datasets: Array<DatasetChartDataProps>;
 }
 
-const BugGraphs: React.FC = () => {
+interface BugGraphsProps {
+  data: {
+    [key: string]: {
+      open: number;
+      closed: number;
+    };
+  };
+}
+
+const BugGraphs: React.FC<BugGraphsProps> = ({ data }) => {
   const [chartData, setChartData] = useState<ChartData<ChartDataProps>>();
 
   useEffect(() => {
     setChartData({
-      labels: ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'],
+      labels: Object.keys(data),
       datasets: [
         {
-          label: 'Instagram',
-          data: [32, 45, 12, 76, 69],
-          borderColor: ['#d72b72'],
-          fill: false,
-          borderWidth: 4,
-        },
-        {
-          label: 'Whatsapp',
-          data: [50, 10, 70, 10, 12],
+          label: 'Abertos',
+          data: Object.values(data).map(month => {
+            return month.open;
+          }),
           borderColor: ['#43D954'],
           fill: false,
           borderWidth: 4,
         },
         {
-          label: 'Website',
-          data: [15, 6, 86, 3, 83],
+          label: 'Fechados',
+          data: Object.values(data).map(month => {
+            return month.closed;
+          }),
+          borderColor: ['#d72b72'],
           fill: false,
-          borderColor: ['#516EF7'],
           borderWidth: 4,
         },
       ],
     });
-  }, []);
+  }, [data]);
 
   return (
     <div style={{ width: 1000, height: 300 }}>

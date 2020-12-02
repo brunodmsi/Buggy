@@ -4,6 +4,7 @@ import { classToClass } from 'class-transformer';
 
 import ListBugStatusByUserProjectsService from '@modules/projects/services/ListBugStatusByUserProjectsService';
 import ListBugTypeByUserProjectsService from '@modules/projects/services/ListBugTypeByUserProjectsService';
+import ListBugFinishedAndOpenBugsByUserProjectsService from '@modules/projects/services/ListBugFinishedAndOpenBugsByUserProjectsService';
 import ListUserProjectsService from '@modules/projects/services/ListUserProjectsService';
 import ListDeveloperBugsService from '@modules/bugs/services/ListDeveloperBugsService';
 
@@ -19,6 +20,13 @@ class UserDashboardController {
     );
     const listDeveloperBugs = container.resolve(ListDeveloperBugsService);
     const listUserProjects = container.resolve(ListUserProjectsService);
+    const listBugFinishedAndOpenBugsByUserProjects = container.resolve(
+      ListBugFinishedAndOpenBugsByUserProjectsService,
+    );
+
+    const graphData = await listBugFinishedAndOpenBugsByUserProjects.execute({
+      user_id,
+    });
 
     const statuses = await listBugStatusByUserProjects.execute({
       user_id,
@@ -41,6 +49,7 @@ class UserDashboardController {
       types,
       assignedToUser: classToClass(bugs),
       projects: classToClass(projects),
+      graph: graphData,
     });
   }
 }
