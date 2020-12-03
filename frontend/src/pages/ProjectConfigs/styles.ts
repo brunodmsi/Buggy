@@ -47,9 +47,8 @@ export const ListenerKey = styled.div`
   div {
     margin-top: 0;
     display: flex;
-    max-width: 360px;
+    width: fit-content;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     background-color: #f0f0f0;
     border-radius: 5px;
@@ -63,6 +62,7 @@ export const ListenerKey = styled.div`
     button {
       background: none;
       border: none;
+      margin-left: 10px;
     }
   }
 `;
