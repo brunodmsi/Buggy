@@ -2,6 +2,9 @@ import React from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
+import Tag from '../../../components/Tag';
+import { priorityOptions } from '../../../utils/getBugOptions';
+
 import { Container } from './styles';
 import avatarPlaceholder from '../../../assets/avatar_placeholder.png';
 
@@ -54,7 +57,20 @@ const BugsAssignedToUser: React.FC<BugsAssignedToUserProps> = ({
               </td>
 
               <td>
-                <p>{bug.priority}</p>
+                <p>
+                  <Tag
+                    name={
+                      priorityOptions.find(
+                        option => option.value === bug.priority,
+                      )?.value
+                    }
+                    backgroundColor={
+                      priorityOptions.find(
+                        option => option.value === bug.priority,
+                      )?.backColor
+                    }
+                  />
+                </p>
               </td>
             </tr>
           ))}
