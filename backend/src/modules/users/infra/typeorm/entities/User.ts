@@ -27,6 +27,9 @@ class User {
   @Column()
   email: string;
 
+  @Column('boolean')
+  active: boolean;
+
   @Column()
   @Exclude()
   password: string;

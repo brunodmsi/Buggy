@@ -1,46 +1,32 @@
 import { injectable, inject } from 'tsyringe';
 import path from 'path';
 
-import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import AppError from '@shared/errors/AppError';
+import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
-import IHashProvider from '../providers/HashProvider/models/IHashProvider';
-
-import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
-  name: string;
-  email: string;
-  password: string;
+  user_id: string;
 }
 
 @injectable()
-class CreateUserService {
+class ResendConfirmUserEmailService {
   constructor(
     @inject('UsersRepository') private usersRepository: IUsersRepository,
-    @inject('HashProvider') private hashProvider: IHashProvider,
     @inject('MailProvider') private mailProvider: IMailProvider,
     @inject('UserTokensRepository')
     private userTokensRepository: IUserTokensRepository,
   ) {}
 
-  public async execute({ name, email, password }: IRequest): Promise<User> {
-    const checkUserExists = await this.usersRepository.findByEmail(email);
+  public async execute({ user_id }: IRequest): Promise<void> {
+    const user = await this.usersRepository.findById(user_id);
 
-    if (checkUserExists) {
-      throw new AppError('E-mail address already in use');
+    if (!user) {
+      throw new AppError('User not found');
     }
 
-    const hashedPassword = await this.hashProvider.generateHash(password);
-
-    const user = await this.usersRepository.create({
-      name,
-      email,
-      password: hashedPassword,
-    });
-
-    const { token } = await this.userTokensRepository.generate(user.id);
+    const { token } = await this.userTokensRepository.generate(user_id);
 
     const confirmEmailTemplate = path.resolve(
       __dirname,
@@ -63,9 +49,7 @@ class CreateUserService {
         },
       },
     });
-
-    return user;
   }
 }
 
-export default CreateUserService;
+export default ResendConfirmUserEmailService;

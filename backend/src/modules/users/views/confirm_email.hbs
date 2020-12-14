@@ -9,16 +9,24 @@
     font-size: 18px;
     line-height: 21px;
   }
+
+  .it-was-not-you {
+    font-size: 12px;
+  }
 </style>
 
 <div class="message-content">
   <p>Olá, {{name}}</p>
-  <p>Parece que uma troca de senha para sua conta foi solicitada</p>
-  <p>Se foi você, então clique no link abaixo para escolher uma nova senha:</p>
+  <p>Vimos que você criou uma conta nova no Buggy, seja bem-vindo!</p>
+  <p>Clique na url abaixo para confirmar o seu e-mail:</p>
   <p>
-    <a href="{{link}}">Resetar minha senha</a>
+    <a href="{{confirm_link}}">Confirmar e-mail</a>
   </p>
-  <p>Se não foi você, então descarte esse email!</p>
+
+  <div class="it-was-not-you">
+    <p>Se não foi você, não se preocupe, o seu e-mail não foi enviado para ninguém, nem este link foi enviado para terceiros.</p>
+  </div>
+
   <p>Obrigado!</p>
   <strong>Equipe Buggy</strong>
 </div> --}}
@@ -365,7 +373,7 @@ ul.social li{
 	      </tr><!-- end tr -->
 	      <tr>
           {{!-- <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
-            <img src="images/email.png" alt="" style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
+            <img src={{email_image}} alt="" style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
           </td> --}}
 	      </tr><!-- end tr -->
 				<tr>
@@ -374,10 +382,12 @@ ul.social li{
             	<tr>
             		<td>
             			<div class="text" style="padding: 0 2.5em; text-align: center;">
-            				<h2>Esqueceu sua senha?</h2>
-            				<h3>Faça uma senha nova para você agora mesmo, clique no botão abaixo</h3>
-            				<p><a href={{link}} class="btn btn-primary">Resetar senha</a></p>
+            				<h2>Confirme seu e-mail!</h2>
+            				<h3>Confirme agora o seu e-mail, e aproveite todas as vantagens do Buggy.</h3>
+            				<p><a href={{confirm_link}} class="btn btn-primary">Confirmar agora</a></p>
             			</div>
+
+                  <p>Se você não criou essa conta, desconsidere esse e-mail. Seus dados não foram compartilhados com ninguém, e este e-mail não foi enviado para terceiros</p>
             		</td>
             	</tr>
             </table>
