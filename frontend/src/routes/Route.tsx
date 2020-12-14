@@ -13,15 +13,20 @@ import AuthLayout from '../pages/_layouts/Auth';
 
 interface RouteProps extends ReactDOMRouteProps {
   isPrivate?: boolean;
+  isHybrid?: boolean;
   component: React.ComponentType;
 }
 
 const RouteWrapper: React.FC<RouteProps> = ({
   component: Component,
   isPrivate = false,
+  isHybrid = false,
   ...rest
 }) => {
   const { isSigned } = useAuth();
+
+  if (isHybrid)
+    return <ReactDOMRoute {...rest} render={props => <Component />} />;
 
   if (!isSigned && isPrivate) return <Redirect to="/login" />;
 
