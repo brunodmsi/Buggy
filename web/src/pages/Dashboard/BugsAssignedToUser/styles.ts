@@ -29,21 +29,13 @@ export const Container = styled.div`
       text-align: left;
     }
 
-    td {
-      vertical-align: middle;
-    }
-
     td img {
       display: flex;
-      justify-content: center;
-      align-items: center;
+      vertical-align: left;
       max-height: 40px;
       max-width: 40px;
       margin: 0 auto;
-      text-align: left;
       color: #fff;
-      font-size: 14px;
-      margin-right: 5px;
     }
   }
 `;
