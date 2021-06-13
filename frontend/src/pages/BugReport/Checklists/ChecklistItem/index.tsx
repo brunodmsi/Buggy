@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
@@ -15,7 +15,7 @@ interface ChecklistItemProps {
 
 const ChecklistItem: React.FC<ChecklistItemProps> = ({ item: propItem }) => {
   const changeItemStatusRef = useRef<FormHandles>(null);
-  const [item, setItem] = useState(propItem as BugChecklistItemData);
+  const item = propItem as BugChecklistItemData;
 
   const { addToast } = useToast();
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Line, ChartData } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 
 interface DatasetChartDataProps {
   label: string;
@@ -7,7 +7,7 @@ interface DatasetChartDataProps {
   fill: boolean;
   borderColor: Array<string>;
   borderWidth: number;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface ChartDataProps {
@@ -25,7 +25,9 @@ interface BugGraphsProps {
 }
 
 const BugGraphs: React.FC<BugGraphsProps> = ({ data }) => {
-  const [chartData, setChartData] = useState<ChartData<ChartDataProps>>();
+  const [chartData, setChartData] = useState<ChartDataProps>(
+    {} as ChartDataProps,
+  );
 
   useEffect(() => {
     setChartData({
@@ -56,6 +58,7 @@ const BugGraphs: React.FC<BugGraphsProps> = ({ data }) => {
   return (
     <div style={{ width: 1000, height: 300 }}>
       <Line
+        type={{}}
         width={1000}
         height={300}
         data={chartData}

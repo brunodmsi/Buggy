@@ -25,8 +25,7 @@ const RouteWrapper: React.FC<RouteProps> = ({
 }) => {
   const { isSigned } = useAuth();
 
-  if (isHybrid)
-    return <ReactDOMRoute {...rest} render={props => <Component />} />;
+  if (isHybrid) return <ReactDOMRoute {...rest} render={() => <Component />} />;
 
   if (!isSigned && isPrivate) return <Redirect to="/login" />;
 
@@ -37,7 +36,7 @@ const RouteWrapper: React.FC<RouteProps> = ({
   return (
     <ReactDOMRoute
       {...rest}
-      render={props => (
+      render={() => (
         <Layout>
           <Component />
         </Layout>

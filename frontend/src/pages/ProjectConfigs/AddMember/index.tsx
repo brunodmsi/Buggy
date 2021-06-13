@@ -55,8 +55,6 @@ const AddMember: React.FC<IAddMemberProps> = ({
           formRef.current?.setErrors(errors);
         }
 
-        console.log();
-
         addToast({
           title: 'Erro ao adicionar usuário',
           type: 'error',

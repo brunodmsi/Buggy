@@ -1,12 +1,17 @@
 import React from 'react';
+import { SpringValue } from 'react-spring';
 
 import { Container, Content } from './styles';
 
-const Modal: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
-  children,
-  className,
-  style,
-}) => (
+interface ModalProps {
+  className: string | undefined;
+  style: {
+    opacity: SpringValue<number>;
+    transform: SpringValue<string>;
+  };
+}
+
+const Modal: React.FC<ModalProps> = ({ children, className, style }) => (
   <Container style={style}>
     <Content className={className}>{children}</Content>
   </Container>

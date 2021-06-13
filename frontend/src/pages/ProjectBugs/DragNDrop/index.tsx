@@ -47,7 +47,7 @@ const DragNDrop: React.FC<DragNDropProps> = ({ data, openModal }) => {
       if (!result.destination) return;
 
       const { source, destination } = result;
-      const dest = (destination as unknown) as DraggableLocation;
+      const dest = destination as DraggableLocation;
 
       if (source.droppableId !== destination.droppableId) {
         const sourceColumn = list[source.droppableId];

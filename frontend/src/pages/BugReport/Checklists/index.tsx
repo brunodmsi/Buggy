@@ -20,12 +20,13 @@ interface ChecklistProps {
 }
 
 const Checklists: React.FC<ChecklistProps> = ({
-  bugId,
+  // bugId,
   checklists: propChecklists,
 }) => {
   const addNewItemFormRef = useRef<FormHandles>(null);
 
-  const [checklists, setChecklists] = useState(propChecklists);
+  const checklists = propChecklists;
+  // const [checklists, setChecklists]   = useState(propChecklists);
   const [editLoading, setEditLoading] = useState(false);
   const [isAddingItem, setIsAddingItem] = useState('');
 

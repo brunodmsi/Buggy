@@ -18,15 +18,16 @@ interface DeveloperProps {
 }
 
 const Developers: React.FC<DeveloperProps> = ({
-  bugId,
-  projectId,
+  // bugId,
+  // projectId,
   developers: devRelations,
 }) => {
-  const [developers, setDevelopers] = useState(() => {
-    const devs = devRelations.map(dev => dev.user);
+  const developers = devRelations.map(dev => dev.user);
+  // const [developers, setDevelopers] = useState(() => {
+  //   const devs = devRelations.map(dev => dev.user);
 
-    return devs;
-  });
+  //   return devs;
+  // });
   const [listDevelopersModal, setListDevelopersModal] = useState(false);
 
   return (

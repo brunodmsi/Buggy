@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 
 import { useAuth } from '../../hooks/auth';
@@ -52,13 +53,8 @@ const Dashboard: React.FC = () => {
     api
       .get('/users/dashboard')
       .then(response => {
-        const {
-          statuses,
-          types,
-          assignedToUser,
-          projects,
-          graph,
-        } = response.data;
+        const { statuses, types, assignedToUser, projects, graph } =
+          response.data;
 
         const parseStatus = groupOptions.map(group => {
           const currStatus = statuses[group.value];
@@ -106,8 +102,6 @@ const Dashboard: React.FC = () => {
         const parseProjects = Object.values(userWithBugCounter)
           .sort((a, b) => a.counter - b.counter)
           .reverse();
-
-        console.log(parseProjects);
 
         setDashboardData({
           status: parseStatus,
