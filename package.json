@@ -5,6 +5,16 @@
   "repository": "https://github.com/brunodmsi/Buggy.git",
   "author": "Bruno De Masi <brunodemasi1@gmail.com>",
   "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "web",
+      "server"
+    ],
+    "nohoist": [
+      "**"
+    ]
+  },
   "devDependencies": {
     "cz-conventional-changelog": "3.3.0",
     "husky": "^6.0.0"
